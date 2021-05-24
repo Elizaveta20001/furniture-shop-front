@@ -31,12 +31,12 @@ const CartItem: React.FC<{ item: any }> = ({item}) => {
                 <h5>{item.title}</h5>
             </div>
             <div className="cart-item-quantity">
-                <button className="button_fro_cart_items" onClick={handleIncreaseClick}/>
+                <i className="material-icons dp48 icon-styles" onClick={handleIncreaseClick}>expand_less</i>
                 <h5>{item.quantity}</h5>
-                <button className="button_fro_cart_items" onClick={handleDecreaseClick}/>
+                <i className="material-icons dp48 icon-styles" onClick={handleDecreaseClick}>expand_more</i>
             </div>
             <div>
-                <button onClick={handleDeleteClick}>Delete</button>
+                <i className="material-icons dp48 icon-styles cart-item-delete" onClick={handleDeleteClick}>clear</i>
             </div>
         </div>
     )

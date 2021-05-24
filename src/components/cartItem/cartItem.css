@@ -4,6 +4,7 @@
     height: 250px;
     grid-template-columns: 1.25fr 1.25fr 1.25fr 1.25fr;
     grid-column-gap: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .image-container {
@@ -22,4 +23,11 @@
 .button_fro_cart_items {
     height: 40px;
     width: 40px;
+}
+.icon-styles{
+    cursor: pointer;
+}
+
+.cart-item-delete{
+
 }

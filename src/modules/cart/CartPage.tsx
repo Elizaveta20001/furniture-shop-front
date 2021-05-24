@@ -1,6 +1,7 @@
 import {useSelector} from "react-redux";
 
 import CartItem from "../../components/cartItem/CartItem";
+import EmptyCart from "../../components/emptyCart/EmptyCart";
 
 import './cartPage.css';
 
@@ -10,7 +11,7 @@ export const CartPage: React.FC = () => {
     return (
         <div className="cart-page">
             {
-                data.length === 0 ? <h1>Empty page</h1>
+                data.length === 0 ? <EmptyCart/>
                     : data.map(element => <CartItem item={element} key={element.title}/>)
             }
         </div>

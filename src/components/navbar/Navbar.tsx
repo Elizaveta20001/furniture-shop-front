@@ -50,7 +50,7 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
         <div className="navbar-fixed">
             <nav>
                 <div className="nav-wrapper">
-                    <span className="brand-logo"><NavLink to="/home">Furniture shop</NavLink></span>
+                    <span className="brand-logo"><NavLink to="/home">FURNITURE SHOP</NavLink></span>
                     <SearchBar/>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><NavLink to="/catalog">CATALOG</NavLink></li>

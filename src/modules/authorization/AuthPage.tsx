@@ -5,6 +5,8 @@ import { useMessage } from '../../hooks/message.hook';
 import { apiLogin, apiReg } from './constants';
 import { fetchLogin, enter, fetchRegin, clearMessage } from './store/actions';
 
+import "./authPage.css";
+
 
 export const AuthPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -49,7 +51,7 @@ export const AuthPage: React.FC = () => {
         <div className="row">
             <div className="col s6 offset-s3">
                 <h1>Authorization</h1>
-                <div className="card blue darken-1">
+                <div className="card form-background">
                     <div className="card-content white-text">
                         <div>
                             <div className="input-field">
@@ -83,19 +85,17 @@ export const AuthPage: React.FC = () => {
 
                     <div className="card-action">
                         <button 
-                            className="btn yellow darken-4" 
-                            style={{marginRight:10}} 
-                            // disabled={loading}
+                            className="waves-effect waves-light btn login-button"
+                            style={{marginRight:10}}
                             onClick={login}
                         >
-                            log in
+                            Sign in
                         </button>
                         <button 
-                            className="btn grey darken-2"
+                            className="waves-effect waves-light btn reg-button"
                             onClick={registaration}
-                            // disabled={loading}
                         >
-                            reg in
+                            Sign up
                         </button>
                     </div>
                 </div>

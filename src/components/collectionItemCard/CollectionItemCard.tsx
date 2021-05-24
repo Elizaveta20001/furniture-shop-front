@@ -40,7 +40,7 @@ const CollectionItemCard = ({title, description, price, url, id}: CatalogItem) =
                     <div className="option">
                         {
                             isAuthenticated ? <h6 className="option">You need to login</h6>
-                                : <button className='waves-effect waves-light btn blue custom-button'
+                                : <button className='waves-effect waves-light btn button-collection-item-card'
                                           onClick={handleClick}> Add to cart</button>
                         }
                     </div>

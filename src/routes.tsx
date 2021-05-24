@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import { AuthPage } from './modules/authorization/AuthPage';
-import { BasketPage } from './modules/basket/BasketPage';
+import { CartPage } from './modules/cart/CartPage';
 import { ContactsPage } from './modules/contacts/ContactsPage';
 import { HomePage } from './modules/home/HomePage';
 import { CatalogPage } from './modules/catalog/mainPage/CatalogPage';
@@ -59,8 +59,8 @@ export const useRoutes = (isAuthenticated: boolean) => {
             </Route>
             {
                 isAuthenticated && 
-                    <Route path="/basket">
-                        <BasketPage />
+                    <Route path="/cart">
+                        <CartPage />
                     </Route>
             }
             {

@@ -33,6 +33,16 @@ export interface CatalogItem {
 }
 
 
+export interface CartItemInterface extends CatalogItem{
+    quantity: number
+}
+
+
+export interface CartState {
+    items : CartItemInterface[]
+}
+
+
 export interface LoginState {
     token: string;
     userId: string;
@@ -81,6 +91,7 @@ export interface CatalogState {
 declare global {
     interface Store {
         loginReducer: LoginState;
-        catalogReducer: CatalogState
+        catalogReducer: CatalogState;
+        cartReducer: CartState;
     }
 }

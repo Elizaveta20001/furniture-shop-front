@@ -27,15 +27,15 @@ export const SearchBar: React.FC = () => {
                         type="search" 
                         value={form.field}
                         onChange={e => setForm({field: e.target.value})}
-                        required 
+                        required
                     />
                     <label className="label-icon"><i className="material-icons">s</i></label>
                     
                     <i className="material-icons">x</i>
                 </div>
             </form>
-            <button 
-                className="waves-effect waves-light btn-small" 
+            <button
+                className="search-button waves-effect waves-light btn-small"
                 onClick={request}
             >find</button>
         </>

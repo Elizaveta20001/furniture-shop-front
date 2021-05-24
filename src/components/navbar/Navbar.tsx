@@ -49,15 +49,15 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     return (
         <div className="navbar-fixed">
             <nav>
-                <div className="nav-wrapper blue darken-1">
-                    <span className="brand-logo"><NavLink to="/home">furniture shop</NavLink></span>
+                <div className="nav-wrapper">
+                    <span className="brand-logo"><NavLink to="/home">Furniture shop</NavLink></span>
                     <SearchBar/>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><NavLink to="/catalog">catalog</NavLink></li>
-                        <li><NavLink to="/contacts">contacts</NavLink></li>
-                        {isAuthenticated && <li><NavLink to="/cart">cart</NavLink></li>}
-                        {isAuthenticated && <li><NavLink onClick={logoutHandler} to="/home">logout</NavLink></li>}
-                        {!isAuthenticated && <li><NavLink onClick={enterHandler} to="/auth">login</NavLink></li>}
+                        <li><NavLink to="/catalog">CATALOG</NavLink></li>
+                        <li><NavLink to="/contacts">CONTACTS</NavLink></li>
+                        {isAuthenticated && <li><NavLink to="/cart">CART</NavLink></li>}
+                        {isAuthenticated && <li><NavLink onClick={logoutHandler} to="/home">LOGOUT</NavLink></li>}
+                        {!isAuthenticated && <li><NavLink onClick={enterHandler} to="/auth">LOGIN</NavLink></li>}
                     </ul>
                 </div>
             </nav>

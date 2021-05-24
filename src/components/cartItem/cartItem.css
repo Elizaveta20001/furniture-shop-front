@@ -1,0 +1,23 @@
+.cart-item{
+   display: grid;
+    width: 1000px;
+    height: 250px;
+    grid-template-columns: 1.25fr 1.25fr 1.25fr 1.25fr;
+    grid-column-gap: 10px;
+}
+
+.image-container{
+    background-size: cover;
+}
+
+.cart-item-title{
+    text-align: center;
+}
+.cart-item-quantity{
+    justify-items: center;
+    text-align: center;
+}
+.button_fro_cart_items{
+    height: 40px;
+    width: 40px;
+}

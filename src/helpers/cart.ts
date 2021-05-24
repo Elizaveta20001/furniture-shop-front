@@ -1,6 +1,6 @@
-import {CartItem} from "../interfaces/interfaces";
+import {CartItemInterface} from "../interfaces/interfaces";
 
-export const addItem = (oldArray: CartItem[], itemToAdd: CartItem): CartItem[] => {
+export const addItem = (oldArray: CartItemInterface[], itemToAdd: CartItemInterface): CartItemInterface[] => {
     const filteredArray = oldArray.filter(item => item.id === itemToAdd.id && item.title === itemToAdd.title);
 
     if (filteredArray.length === 0) {
@@ -14,4 +14,9 @@ export const addItem = (oldArray: CartItem[], itemToAdd: CartItem): CartItem[] =
             return item;
         })
     }
+}
+
+
+export const removeOneItem = (oldArray: CartItemInterface[], itemToDelete: CartItemInterface): CartItemInterface[] =>{
+    return oldArray.filter(element => element.id !== itemToDelete.id && element.title !== itemToDelete.title);
 }

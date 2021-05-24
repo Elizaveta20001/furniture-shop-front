@@ -1,0 +1,5 @@
+.cart-page{
+    display: grid;
+    grid-template-columns: 1000px;
+    grid-row-gap: 10px;
+}

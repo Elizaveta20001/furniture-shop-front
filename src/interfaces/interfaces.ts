@@ -33,13 +33,13 @@ export interface CatalogItem {
 }
 
 
-export interface CartItem extends CatalogItem{
+export interface CartItemInterface extends CatalogItem{
     quantity: number
 }
 
 
 export interface CartState {
-    items : CartItem[]
+    items : CartItemInterface[]
 }
 
 

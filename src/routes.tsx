@@ -59,7 +59,7 @@ export const useRoutes = (isAuthenticated: boolean) => {
             </Route>
             {
                 isAuthenticated && 
-                    <Route path="/basket">
+                    <Route path="/cart">
                         <CartPage />
                     </Route>
             }

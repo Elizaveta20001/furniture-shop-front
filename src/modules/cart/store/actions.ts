@@ -1,5 +1,5 @@
 import {CartActionTypes} from "./actionTypes";
-import {CatalogItem} from "../../../interfaces/interfaces";
+import {CartItemInterface, CatalogItem} from "../../../interfaces/interfaces";
 
 
 export const addItemToTheCart = (item: CatalogItem) => {
@@ -10,12 +10,18 @@ export const addItemToTheCart = (item: CatalogItem) => {
 }
 
 
-// export const decreaseItem = (element: CatalogItem) =>{
-//     return({
-//         type: CartActionTypes.DECREASE_ITEM,
-//         payload: element
-//     })
-// }
+export const decreaseItemFromTheCart = (item: CartItemInterface) =>{
+    if(item.quantity === 1){
+        return ({
+            type: CartActionTypes.REMOVE_ONE_ITEM_FROM_THE_CART,
+            payload: item
+        })
+    }
+    return({
+        type: CartActionTypes.DECREASE_ITEM,
+        payload: item
+    })
+}
 
 
 export const removeAllItems = () => {

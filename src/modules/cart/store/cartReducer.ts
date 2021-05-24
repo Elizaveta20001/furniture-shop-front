@@ -1,6 +1,6 @@
 import {CartActionTypes} from "./actionTypes";
 import {CartState} from "../../../interfaces/interfaces";
-import {addItem, removeOneItem} from "../../../helpers/cart";
+import {addItem, decreaseItem, removeOneItem} from "../../../helpers/cart";
 
 
 const INITIAL_STATE: CartState = {
@@ -24,6 +24,11 @@ export const cartReducer = (state = INITIAL_STATE, action: any) => {
             return ({
                 ...state,
                 items: []
+            });
+        case CartActionTypes.DECREASE_ITEM:
+            return ({
+                ...state,
+                items: decreaseItem(state.items, action.payload)
             });
         default:
             return state;

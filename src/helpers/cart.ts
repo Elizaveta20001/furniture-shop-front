@@ -9,11 +9,21 @@ export const addItem = (oldArray: CartItemInterface[], itemToAdd: CartItemInterf
     } else {
         return oldArray.map(item => {
             if (item.id === itemToAdd.id && item.title === itemToAdd.title) {
-                return {...item, quantity: item.quantity + 1}
+                return {...item, quantity: item.quantity + 1};
             }
             return item;
         })
     }
+}
+
+
+export const decreaseItem = (oldArray: CartItemInterface[], itemToDecrease: CartItemInterface): CartItemInterface[] =>{
+    return oldArray.map(item => {
+        if (item.id === itemToDecrease.id && item.title === itemToDecrease.title) {
+            return {...item, quantity: item.quantity - 1};
+        }
+        return item;
+    })
 }
 
 

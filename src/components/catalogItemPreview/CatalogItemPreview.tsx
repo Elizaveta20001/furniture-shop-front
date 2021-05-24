@@ -1,5 +1,7 @@
 import {Link} from 'react-router-dom';
 
+import './catalogItemPreview.css';
+
 
 const CatalogItemPreview = ({title,url} : {title: string, url: string}): JSX.Element =>{
     return(
@@ -11,7 +13,7 @@ const CatalogItemPreview = ({title,url} : {title: string, url: string}): JSX.Ele
             <div className='card-action'>
                 <Link 
                     to={title.toLowerCase()} 
-                    className='waves-effect waves-light btn blue'
+                    className='waves-effect waves-light btn custom-button'
                 > Show more</Link>
             </div>
         </div>

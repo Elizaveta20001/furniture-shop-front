@@ -12,6 +12,7 @@ import { catalogWatcher } from '../modules/catalog/mainPage/store/catalogSaga';
 import {collectionItemWatcher} from "../modules/catalog/collectionItemPage/store/collectionItemSaga";
 import { searchWatcher } from '../modules/searchField/store/saga';
 import { searchResultsReducer } from '../modules/searchField/store/reducer';
+import {cartReducer} from "../modules/cart/store/cartReducer";
 
 
 function* rootWatcher() {
@@ -23,7 +24,8 @@ const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
     loginReducer,
     catalogReducer,
-    searchResultsReducer
+    searchResultsReducer,
+    cartReducer
 });
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));

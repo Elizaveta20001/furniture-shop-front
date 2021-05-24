@@ -1,13 +1,25 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {CatalogItem} from "../../interfaces/interfaces";
+import {addItemToTheCart} from "../../modules/cart/store/actions";
 
 import "./colectionItemCard.css";
 
 
-const CollectionItemCard = ({title, description, price, url}: CatalogItem) => {
+const CollectionItemCard = ({title, description, price, url, id}: CatalogItem) => {
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(addItemToTheCart({
+            title,
+            description,
+            price,
+            url,
+            id
+        }))
+    }
 
     return (
         <div className='collection_item_container'>
@@ -28,8 +40,8 @@ const CollectionItemCard = ({title, description, price, url}: CatalogItem) => {
                     <div className="option">
                         {
                             isAuthenticated ? <h6 className="option">You need to login</h6>
-                                : <button className='waves-effect waves-light btn blue custom-button'> Add to
-                                    cart</button>
+                                : <button className='waves-effect waves-light btn blue custom-button'
+                                          onClick={handleClick}> Add to cart</button>
                         }
                     </div>
                 </div>

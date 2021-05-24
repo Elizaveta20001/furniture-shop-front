@@ -27,8 +27,11 @@ const CartItem: React.FC<{ item: any }> = ({item}) => {
             <div className="image-container">
                 <img alt={item.title} src={item.url}/>
             </div>
-            <div className="cart-item-title">
+            <div className="cart-item-data">
                 <h5>{item.title}</h5>
+            </div>
+            <div className="cart-item-data">
+                <h5>{item.price}$</h5>
             </div>
             <div className="cart-item-quantity">
                 <i className="material-icons dp48 icon-styles" onClick={handleIncreaseClick}>expand_less</i>

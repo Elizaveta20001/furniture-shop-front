@@ -17,7 +17,7 @@ export const addItem = (oldArray: CartItemInterface[], itemToAdd: CartItemInterf
 }
 
 
-export const decreaseItem = (oldArray: CartItemInterface[], itemToDecrease: CartItemInterface): CartItemInterface[] =>{
+export const decreaseItem = (oldArray: CartItemInterface[], itemToDecrease: CartItemInterface): CartItemInterface[] => {
     return oldArray.map(item => {
         if (item.id === itemToDecrease.id && item.title === itemToDecrease.title) {
             return {...item, quantity: item.quantity - 1};
@@ -27,6 +27,11 @@ export const decreaseItem = (oldArray: CartItemInterface[], itemToDecrease: Cart
 }
 
 
-export const removeOneItem = (oldArray: CartItemInterface[], itemToDelete: CartItemInterface): CartItemInterface[] =>{
+export const removeOneItem = (oldArray: CartItemInterface[], itemToDelete: CartItemInterface): CartItemInterface[] => {
     return oldArray.filter(element => element.id !== itemToDelete.id && element.title !== itemToDelete.title);
+}
+
+
+export const getTotalPrice = (items: CartItemInterface[]): number => {
+    return items.reduce((accumulator, item) => accumulator + (item.quantity * item.price),0);
 }

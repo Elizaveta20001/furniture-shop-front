@@ -1,6 +1,8 @@
 import {all} from 'redux-saga/effects';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 import {loginWatcher} from '../modules/authorization/store/loginSaga';
 import {reginWatcher} from '../modules/authorization/store/reginSaga';
@@ -20,6 +22,7 @@ function* rootWatcher() {
     yield all([loginWatcher(), reginWatcher(), catalogWatcher(), collectionWatcher(), collectionItemWatcher(), searchWatcher(), cartWatcher()]);
 }
 
+
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
@@ -29,6 +32,14 @@ const rootReducer = combineReducers({
     cartReducer
 });
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+const persistConfig = {
+    key: 'root',
+    storage
+}
+
+const persistedReducer = persistReducer(persistConfig,rootReducer);
+
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+export const persistedStore = persistStore(store);
 
 sagaMiddleware.run(rootWatcher);

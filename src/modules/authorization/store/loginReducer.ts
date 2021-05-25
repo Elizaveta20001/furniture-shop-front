@@ -41,7 +41,7 @@ const defaultState: LoginState = {
     token: '',
     userId: '',
     message: '',
-    isEnter: true
+    isEnter: false
 }
 
 export default function loginReducer(state = defaultState, action: Action) {

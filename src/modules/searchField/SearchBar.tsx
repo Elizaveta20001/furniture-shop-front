@@ -35,7 +35,7 @@ export const SearchBar: React.FC = () => {
                 </div>
             </form>
             <button
-                className="search-button waves-effect waves-light btn-small"
+                className="search-button waves-effect waves-light btn-small custom-button"
                 onClick={request}
             >find</button>
         </>

@@ -19,5 +19,6 @@ body {
     height: 100%;
 }
 
-
-
+.custom-button{
+    background-color: #e7746f!important;
+}

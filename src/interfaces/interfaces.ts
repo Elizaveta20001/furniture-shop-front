@@ -9,6 +9,11 @@ export interface RouterProps {
 export interface CollectionProps extends RouteComponentProps<RouterProps> {
 }
 
+export interface CommentFormProps extends RouteComponentProps<RouterProps> {
+    url: string
+}
+
+
 export interface CollectionItemProps extends RouteComponentProps<RouterProps> {
     price: number,
     title: string,
@@ -30,6 +35,17 @@ export interface CatalogItem {
     url: string,
     description: string,
     id: number
+}
+
+export interface CatalogItemPage extends CatalogItem{
+    comments: Comment[]
+}
+
+export interface Comment{
+    email: string,
+    text: string,
+    createdAt: Date,
+    id: string
 }
 
 
@@ -79,6 +95,7 @@ export interface CollectionItemState {
     description: string,
     title: string,
     error: string,
+    comments: Comment[],
     isFetched: boolean
 }
 

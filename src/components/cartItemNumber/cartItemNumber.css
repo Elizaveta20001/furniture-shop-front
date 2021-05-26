@@ -1,0 +1,12 @@
+.cart-item-number-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 5px;
+    right: 115px;
+    border-radius: 15px;
+    background-color: #e7746f;
+}

@@ -5,7 +5,7 @@ export const addItem = (oldArray: CartItemInterface[], itemToAdd: CartItemInterf
 
     if (filteredArray.length === 0) {
         oldArray.push(itemToAdd);
-        return oldArray;
+        return new Array(...oldArray);
     } else {
         return oldArray.map(item => {
             if (item.id === itemToAdd.id && item.title === itemToAdd.title) {
@@ -34,4 +34,9 @@ export const removeOneItem = (oldArray: CartItemInterface[], itemToDelete: CartI
 
 export const getTotalPrice = (items: CartItemInterface[]): number => {
     return items.reduce((accumulator, item) => accumulator + (item.quantity * item.price),0);
+}
+
+
+export const getTotalQuantity = (items: CartItemInterface[]): number => {
+    return items.reduce((accumulator, item) => accumulator + item.quantity,0);
 }

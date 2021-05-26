@@ -1,7 +1,5 @@
 import {Link} from 'react-router-dom';
 
-import './catalogItemPreview.css';
-
 
 const CatalogItemPreview = ({title,url} : {title: string, url: string}): JSX.Element =>{
     return(

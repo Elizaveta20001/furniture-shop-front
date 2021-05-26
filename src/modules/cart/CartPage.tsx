@@ -48,7 +48,7 @@ export const CartPage: React.FC = () => {
                                 stripeKey='pk_test_51IuwMwCxpYbk6oLag4BCocz2g5iWFB9pFWdks8nlVGGBcJ9ChqYjlLCfjZw6SEG8LX23NqFr6Bmddv2mgLKzUlw100RdGAAI3x'
                                 amount={totalPrice * 100}
                             >
-                                <button className='waves-effect waves-light btn'>Pay now</button>
+                                <button className='waves-effect waves-light btn custom-button'>Pay now</button>
                             </StripeCheckout>
                         </div>
                 }

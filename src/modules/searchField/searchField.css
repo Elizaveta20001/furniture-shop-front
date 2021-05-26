@@ -1,16 +1,15 @@
 .search-field {
-    display: inline-flex;
+    display: inline-block;
+    width: 30%;
     justify-content: space-between;
-    width: 40%;
-    margin-left: 25%;
-    margin-right: 0%;
-    height: 80%;
+    margin-left: 15%;
+    height: 95%;
 }
 .search-button{
     background-color: #e7746f!important;
+    margin-left: 1%;
 }
 
 .search-input{
     width: 400px;
 }
-

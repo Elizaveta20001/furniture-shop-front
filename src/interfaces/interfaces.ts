@@ -1,6 +1,5 @@
 import {RouteComponentProps} from "react-router-dom";
 
-
 export interface RouterProps {
     path: string
 }
@@ -88,10 +87,15 @@ export interface CatalogState {
     collectionItemReducer: CollectionItemState
 }
 
+export interface SearchResultsState {
+    results: any[],
+}
+
 declare global {
     interface Store {
         loginReducer: LoginState;
         catalogReducer: CatalogState;
         cartReducer: CartState;
+        searchResultsReducer: SearchResultsState;
     }
 }

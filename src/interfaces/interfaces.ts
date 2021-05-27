@@ -20,6 +20,7 @@ export interface CollectionItemProps extends RouteComponentProps<RouterProps> {
     url: string,
     description: string,
     id: number
+    collectionName : string
 }
 
 export interface CatalogInterface {

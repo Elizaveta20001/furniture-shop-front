@@ -4,10 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {CollectionItemProps} from "../../interfaces/interfaces";
 import {addItemToTheCart} from "../../modules/cart/store/actions";
 
-import "./collectionItem.css";
+import "./searchResultsItem.css";
 
 
-const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, description, collectionName,history}) => {
+const SearchResultsItem: React.FC<CollectionItemProps> = ({title, price, url, id, description, history, collectionName}) => {
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
     const dispatch = useDispatch();
 
@@ -22,9 +22,13 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
     }
 
     return (
-        <div className="collection_item">
+        <div className="search-results-item">
             <div className="background_image">
-                <img alt={title} src={url} onClick={() => history.push(`${collectionName}/${id}`)}/>
+                <img
+                    alt={title}
+                    src={url}
+                    onClick={() => history.push(`${collectionName}/${id}`)}
+                />
             </div>
             <div className="data_container">
                 <h6>{title}</h6>
@@ -40,4 +44,4 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
 };
 
 
-export default withRouter(CollectionItem);
+export default withRouter(SearchResultsItem);

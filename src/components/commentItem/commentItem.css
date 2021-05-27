@@ -1,0 +1,37 @@
+.comment {
+    width: 1000px;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    grid-column-gap: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+.icon {
+    font-size: 100px;
+    margin-top: 20px;
+}
+
+.comment-data-container {
+    display: grid;
+    grid-template-rows: 2fr 4fr 1fr;
+    height: fit-content;
+    width: 800px;
+    padding: 30px;
+}
+
+.comment-email {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.comment-text {
+    text-align: left;
+    word-wrap: anywhere;
+}
+
+.comment-date {
+    text-align: left;
+}

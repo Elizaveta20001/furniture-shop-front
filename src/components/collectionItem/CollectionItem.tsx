@@ -7,8 +7,7 @@ import {addItemToTheCart} from "../../modules/cart/store/actions";
 import "./collectionItem.css";
 
 
-const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, description, history}) => {
-    const path = history.location.pathname;
+const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, description, collectionName,history}) => {
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
     const dispatch = useDispatch();
 
@@ -25,7 +24,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
     return (
         <div className="collection_item">
             <div className="background_image">
-                <img alt={title} src={url} onClick={() => history.push(`${path}/${id}`)}/>
+                <img alt={title} src={url} onClick={() => history.push(`${collectionName}/${id}`)}/>
             </div>
             <div className="data_container">
                 <h6>{title}</h6>

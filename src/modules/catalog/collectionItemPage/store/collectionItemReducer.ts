@@ -6,6 +6,7 @@ const INITIAL_STATE: CollectionItemState = {
     url: "",
     description: "",
     title: "",
+    comments: [],
     error: "",
     isFetched: false
 }
@@ -19,6 +20,7 @@ export const collectionItemReducer = (state=INITIAL_STATE, action: any)=>{
                 url: action.payload.url,
                 description: action.payload.description,
                 title: action.payload.title,
+                comments: action.payload.comments,
                 error: "",
                 isFetched: true
             }
@@ -29,6 +31,7 @@ export const collectionItemReducer = (state=INITIAL_STATE, action: any)=>{
                 url: "",
                 description: "",
                 title: "",
+                comments: [],
                 error: action.payload,
                 isFetched: false
             }
@@ -40,6 +43,7 @@ export const collectionItemReducer = (state=INITIAL_STATE, action: any)=>{
                 description: "",
                 title: "",
                 error: "",
+                comments: [],
                 isFetched: false
             }
         default:

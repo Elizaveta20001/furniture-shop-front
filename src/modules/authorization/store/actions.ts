@@ -1,18 +1,18 @@
 import {ENTER, ERROR, FETCH_LOGIN, FETCH_REGIN, LOGOUT, SET_LOGIN, CLEAR_MESSAGE} from './keys';
 
 interface Form {
-    email: String;
-    password: String;
+    email: string;
+    password: string;
 }
 
 interface Payload {
-    token: String;
-    userId: String;
+    token: string;
+    userId: string;
 }
 
 interface Headers {
-    token?: String;
-    userId?: String;
+    token?: string;
+    userId?: string;
 }
 
 export const setLogin = (payload: Payload) => ({type: SET_LOGIN, payload});
@@ -22,7 +22,7 @@ export const logout = () => ({type: LOGOUT});
 export const error = (payload: Payload) => ({type: ERROR, payload});
 
 
-export const fetchLogin = (url: String, method: String, form: Form, headers: Headers) => {
+export const fetchLogin = (url: string, method: string, form: Form, headers: Headers) => {
     return {
         type: FETCH_LOGIN,
         url,
@@ -32,7 +32,7 @@ export const fetchLogin = (url: String, method: String, form: Form, headers: Hea
     }
 };
 
-export const fetchRegin = (url: String, method: String, form: Form, headers: Headers) => {
+export const fetchRegin = (url: string, method: string, form: Form, headers: Headers) => {
     return {
         type: FETCH_REGIN,
         url,

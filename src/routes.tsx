@@ -7,6 +7,7 @@ import { HomePage } from './modules/home/HomePage';
 import { CatalogPage } from './modules/catalog/mainPage/CatalogPage';
 import CollectionPage from "./modules/catalog/collection/CollectionPage";
 import CollectionItemPage from "./modules/catalog/collectionItemPage/CollectionItemPage";
+import SearchResultsPage from "./modules/searchField/SearchResultsPage";
 
 
 interface LoginState {
@@ -33,6 +34,9 @@ export const useRoutes = (isAuthenticated: boolean) => {
             <Route exact path="/catalog">
                 <CatalogPage />
             </Route>
+            <Route exact path="/search-results">
+                <SearchResultsPage />
+            </Route>
             <Route exact path="/tables">
                 <CollectionPage/>
             </Route>
@@ -58,13 +62,13 @@ export const useRoutes = (isAuthenticated: boolean) => {
                 <CollectionItemPage/>
             </Route>
             {
-                isAuthenticated && 
+                isAuthenticated &&
                     <Route path="/cart">
                         <CartPage />
                     </Route>
             }
             {
-                !isAuthenticated && !isEnter ? 
+                !isAuthenticated && !isEnter ?
                     <Route path="/auth">
                         <AuthPage />
                     </Route> : null

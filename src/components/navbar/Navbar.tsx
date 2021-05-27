@@ -1,7 +1,10 @@
 import {useCallback, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+
 import {SearchBar} from '../../modules/searchField/SearchBar';
+import CartItemNumber from "../cartItemNumber/CartItemNumber";
+
 import {clearMessage, enter, logout} from '../../modules/authorization/store/actions';
 import {useMessage} from '../../hooks/message.hook';
 
@@ -56,6 +59,7 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
                         <li><NavLink to="/catalog">CATALOG</NavLink></li>
                         <li><NavLink to="/contacts">CONTACTS</NavLink></li>
                         {isAuthenticated && <li><NavLink to="/cart">CART</NavLink></li>}
+                        {isAuthenticated && <CartItemNumber/>}
                         {isAuthenticated && <li><NavLink onClick={logoutHandler} to="/home">LOGOUT</NavLink></li>}
                         {!isAuthenticated && <li><NavLink onClick={enterHandler} to="/auth">LOGIN</NavLink></li>}
                     </ul>

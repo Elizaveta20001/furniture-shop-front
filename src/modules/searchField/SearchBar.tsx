@@ -78,6 +78,7 @@ export const SearchBar: React.FC = () => {
                     find
                 </button>
             }
+
         </>
     )
 }

@@ -1,13 +1,15 @@
 .search-field {
-    display: inline-flex;
-    justify-content: space-between;
+    display: inline-block;
     width: 40%;
-    margin-left: 25%;
-    margin-right: 0%;
-    height: 80%;
+    justify-content: space-between;
+    margin-left: 15%;
+    height: 95%;
 }
 
 .search-input{
     width: 400px;
 }
 
+.input{
+    color: white;
+}

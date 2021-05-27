@@ -13,7 +13,8 @@ export interface CollectionItemProps extends RouteComponentProps<RouterProps> {
     title: string,
     url: string,
     description: string,
-    id: number
+    id: number,
+    collectionName?: string
 }
 
 export interface CatalogInterface {
@@ -89,6 +90,7 @@ export interface CatalogState {
 
 export interface SearchResultsState {
     results: any[],
+    isFetching: boolean
 }
 
 declare global {

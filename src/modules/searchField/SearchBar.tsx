@@ -20,26 +20,22 @@ export const SearchBar: React.FC = () => {
     }
 
     const handleSubmit = () => {
-        history.push("/search-results");
         dispatch(fetchSearchItems(uriForSearch, 'POST', form, {}));
-    }
-
-    const request = () => {
-        dispatch(fetchSearchItems(uriForSearch, 'POST', form, {}))
         resetInputField();
+        history.push(`/search-results?${form.field}`);
     }
 
     return (
         <>
-            <form className="search-field" onSubmit={handleSubmit}>
+            <form className="search-field">
                 <div className="input-field">
                     <input
+                        className="input"
                         id="search"
                         placeholder="search"
                         type="search"
                         value={form.field}
                         onChange={e => setForm({field: e.target.value})}
-                        onBlur={resetInputField}
                         required
                     />
                     <label className="label-icon" htmlFor="search">
@@ -53,6 +49,12 @@ export const SearchBar: React.FC = () => {
                     </i>
                 </div>
             </form>
+            <button
+                className="search-button waves-effect waves-light btn-small custom-button"
+                onClick={handleSubmit}
+            >
+                find
+            </button>
         </>
     )
 }

@@ -4,8 +4,8 @@ import {withRouter} from "react-router-dom";
 
 import {Loader} from "../../../components/loader/Loader";
 import CollectionItemCard from "../../../components/collectionItemCard/CollectionItemCard";
-import CommentItem from "../../../components/commentItem/CommentItem";
 import CommentForm from "../../../components/commentForm/CommentForm";
+import CommentSection from "../../../components/commentSection/CommentSection";
 
 import {fetchCollectionItem} from "./store/actions";
 import {CollectionProps} from "../../../interfaces/interfaces";
@@ -45,15 +45,7 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
             <div className='collection_page collection-item-comment'>
                 <CommentForm url={path}/>
                 {
-                    data.isFetched || data.comments.length !== 0 ?
-                        data.comments.map(element => <CommentItem
-                            id={element.id}
-                            text={element.text}
-                            createdAt={element.createdAt}
-                            email={element.email}
-                            key={element.id}
-                        />)
-                        : <h3>Not comment</h3>
+                    data.isFetched && <CommentSection comments={data.comments}/>
                 }
             </div>
         </div>

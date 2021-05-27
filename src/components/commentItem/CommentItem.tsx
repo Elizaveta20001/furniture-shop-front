@@ -8,9 +8,14 @@ import './commentItem.css';
 const CommentItem: React.FC<Comment> = ({email, text, createdAt}) => {
     return(
         <div className="comment">
-            <h5>{email}</h5>
-            <h5>{text}</h5>
-            <h5>{createdAt}</h5>
+            <div>
+                <i className="material-icons dp48 icon">person</i>
+            </div>
+            <div className='comment-data-container'>
+                <h6 className='comment-email'>{email}</h6>
+                <h6 className='comment-text'>{text}</h6>
+                <h6 className='comment-date'>Created at: {createdAt}</h6>
+            </div>
         </div>
     )
 };

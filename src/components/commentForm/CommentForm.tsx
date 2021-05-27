@@ -18,11 +18,7 @@ const CommentForm: React.FC<CommentFormProps> = ({history, url}) => {
             user,
             createdAt: Date()
         }
-        try{
-            await fetchComment(url, data);
-        }catch (error) {
-            alert(error);
-        }
+        await fetchComment(url, data);
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

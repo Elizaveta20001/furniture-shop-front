@@ -1,4 +1,4 @@
-export const fetchComment = (url:string,data : object) => {
+export const fetchComment = (url: string, data: object) => {
     return fetch(url,
         {
             method: 'POST',
@@ -6,5 +6,5 @@ export const fetchComment = (url:string,data : object) => {
             headers: {
                 'Content-Type': 'application/json',
             }
-        })
+        });
 }

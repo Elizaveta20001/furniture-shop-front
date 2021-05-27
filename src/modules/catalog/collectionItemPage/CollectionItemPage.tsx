@@ -15,8 +15,10 @@ import "./collectionItemPage.css";
 
 
 const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
+
     const dispatch = useDispatch();
     const data = useSelector((state: Store) => state.catalogReducer.collectionItemReducer);
+
     let arrayPath = history.location.pathname.split("/");
     const id = +arrayPath[arrayPath.length - 1];
     const path = `${uriForCollection}/${arrayPath[1]}/comment/${id}`;
@@ -41,9 +43,7 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
                 }
             </div>
             <div className='collection_page collection-item-comment'>
-                <CommentForm
-                    url={path}
-                />
+                <CommentForm url={path}/>
                 {
                     data.isFetched || data.comments.length !== 0 ?
                         data.comments.map(element => <CommentItem

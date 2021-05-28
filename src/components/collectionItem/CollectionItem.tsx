@@ -7,7 +7,15 @@ import {addItemToTheCart} from "../../modules/cart/store/actions";
 import "./collectionItem.css";
 
 
-const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, description, collectionName,history}) => {
+const CollectionItem: React.FC<CollectionItemProps> = ({
+                                                           title,
+                                                           price,
+                                                           url,
+                                                           id,
+                                                           description,
+                                                           collectionName,
+                                                           history
+                                                       }) => {
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
     const dispatch = useDispatch();
 

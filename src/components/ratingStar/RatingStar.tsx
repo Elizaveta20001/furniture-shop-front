@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 import {templateFetch} from "../../helpers/templatePost";
 
@@ -11,8 +11,7 @@ const RatingStar: React.FC<{ url: string, value: number }> = ({url, value}) => {
 
 
     const handleClick = async () => {
-        await templateFetch(url, {value: value, userId: userId})
-
+        await templateFetch(url, {value: value, userId: userId});
     }
 
     return (

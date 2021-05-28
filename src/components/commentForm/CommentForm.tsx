@@ -4,10 +4,10 @@ import {useSelector} from "react-redux";
 import {CommentFormProps} from "../../interfaces/interfaces";
 
 import './commentForm.css';
-import { templateFetch } from "../../helpers/templatePost";
+import {templateFetch} from "../../helpers/templatePost";
 
 
-const CommentForm: React.FC<CommentFormProps> = ({ url}) => {
+const CommentForm: React.FC<CommentFormProps> = ({url}) => {
     const [text, setText] = useState("");
     const user = useSelector((state: Store) => state.loginReducer.userId);
 

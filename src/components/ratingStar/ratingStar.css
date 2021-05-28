@@ -4,10 +4,13 @@
     -o-transition: all .5s ease-out;
     -webkit-transition: all .5s ease-out;
     cursor: pointer;
+    border: none;
+    background: none;
 }
 
 .star:hover {
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -o-transform: scale(1.1);
+    background-color: #e7746f;
 }

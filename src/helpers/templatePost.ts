@@ -1,4 +1,4 @@
-export const templateFetch = (url: string, data: object| number) => {
+export const templateFetch = (url: string, data: object) => {
     return fetch(url,
         {
             method: 'POST',

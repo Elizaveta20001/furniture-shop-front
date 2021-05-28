@@ -1,13 +1,14 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {CatalogItem} from "../../interfaces/interfaces";
+import {CollectionItemCardInterface} from "../../interfaces/interfaces";
 import {addItemToTheCart} from "../../modules/cart/store/actions";
+import {getRating} from "../../helpers/rating";
 
 import "./colectionItemCard.css";
 
 
-const CollectionItemCard = ({title, description, price, url, id}: CatalogItem) => {
+const CollectionItemCard = ({title, description, price, url, id, rating}: CollectionItemCardInterface) => {
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
     const dispatch = useDispatch();
 
@@ -33,9 +34,12 @@ const CollectionItemCard = ({title, description, price, url, id}: CatalogItem) =
                 <div className="text">
                     <h6>{description}</h6>
                 </div>
+                <div className='rating'>
+                    <h4>Rating: {getRating(rating)}</h4>
+                </div>
                 <div className="container_for_price">
                     <div className="option">
-                        <h4>Price: {price}$</h4>
+                        <h4 >Price: {price}$</h4>
                     </div>
                     <div className="option">
                         {

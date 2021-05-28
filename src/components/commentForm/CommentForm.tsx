@@ -1,14 +1,13 @@
 import React, {useState} from "react";
-import {withRouter} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 import {CommentFormProps} from "../../interfaces/interfaces";
-import {fetchComment} from "../../helpers/commentPost";
 
 import './commentForm.css';
+import { templateFetch } from "../../helpers/templatePost";
 
 
-const CommentForm: React.FC<CommentFormProps> = ({history, url}) => {
+const CommentForm: React.FC<CommentFormProps> = ({ url}) => {
     const [text, setText] = useState("");
     const user = useSelector((state: Store) => state.loginReducer.userId);
 
@@ -18,7 +17,7 @@ const CommentForm: React.FC<CommentFormProps> = ({history, url}) => {
             user,
             createdAt: Date()
         }
-        await fetchComment(url, data);
+        await templateFetch(url, data);
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -38,4 +37,4 @@ const CommentForm: React.FC<CommentFormProps> = ({history, url}) => {
 };
 
 
-export default withRouter(CommentForm);
+export default CommentForm;

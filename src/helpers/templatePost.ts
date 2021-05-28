@@ -1,4 +1,4 @@
-export const fetchComment = (url: string, data: object) => {
+export const templateFetch = (url: string, data: object| number) => {
     return fetch(url,
         {
             method: 'POST',

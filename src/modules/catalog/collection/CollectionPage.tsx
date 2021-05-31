@@ -37,7 +37,6 @@ const CollectionPage: React.FC<CollectionProps> = ({history}): JSX.Element => {
                     price={element.price}
                     description={element.description}
                     key={element.id}
-                    collectionName={title}
                     />
                 )
             }

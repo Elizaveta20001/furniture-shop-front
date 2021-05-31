@@ -4,11 +4,13 @@ import { ActionTypes } from "./actionTypes";
 interface SearchResultsInterface {
     results: any[],
     isFetching: boolean,
+    error: string
 };
 
 const INITIAL_STATE: SearchResultsInterface = {
     results : [],
     isFetching: false,
+    error: ''
 };
 
 export const searchResultsReducer = (state = INITIAL_STATE, action: any) => {

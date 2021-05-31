@@ -9,6 +9,7 @@ import {ActionTypes} from './actionTypes';
 
 interface Form {
     field: string;
+    collectionName: string;
 }
 
 export const fetchSearchItems = (url: string, method: string, form: Form, headers: any) => {

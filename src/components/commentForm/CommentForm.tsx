@@ -17,7 +17,13 @@ const CommentForm: React.FC<CommentFormProps> = ({url}) => {
             user,
             createdAt: Date()
         }
-        await templateFetch(url, data);
+        try{
+            await templateFetch(url, data);
+            alert('Your comment has been successfully recorded.')
+        }
+        catch (error) {
+           alert('Error');
+        }
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

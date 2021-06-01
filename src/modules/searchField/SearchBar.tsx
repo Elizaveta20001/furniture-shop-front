@@ -1,37 +1,43 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {NavLink, useHistory} from "react-router-dom";
+import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {NavLink, useHistory, useLocation} from "react-router-dom";
 
 import { uriForSearch } from './constants';
 import { fetchSearchItems } from './store/actions';
+import {fetchCatalog} from "../catalog/mainPage/store/actions";
 
 import './searchField.css';
 
 export const SearchBar: React.FC = () => {
-    const [form, setForm] = useState({
-        field: ''
-    });
+    const [query, setQuery] = useState('');
     const [isToggled, setToggled] = useState(false);
 
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
+
+    const {titles} = useSelector((state: Store) => state.catalogReducer.mainPageReducer);
+
+    useEffect(() => {
+        titles.length === 0 && dispatch(fetchCatalog());
+        !!query ? toggleButton(true) : toggleButton(false);
+    }, [dispatch, titles, query]);
 
     const toggleButton = (toggled: boolean) => {
         setToggled(toggled);
     }
 
     const resetInputField = () => {
-        setForm({field: ''});
+        setQuery('');
         toggleButton(false);
     }
 
     const handleBlur = () => {
-        !!form.field ? toggleButton(true) : toggleButton(false);
+        !!query ? toggleButton(true) : toggleButton(false);
     }
 
     const handleChange = (event: any) => {
-        setForm({field: event.target.value});
-        !!form.field ? toggleButton(true) : toggleButton(false);
+        setQuery(event.target.value);
     }
 
     const handleFocus = () => {
@@ -39,9 +45,16 @@ export const SearchBar: React.FC = () => {
     }
 
     const handleSubmit = () => {
-        dispatch(fetchSearchItems(uriForSearch, 'POST', form, {}));
+        let collectionName = '';
+        titles.forEach(title => {
+                if (!collectionName) {
+                    if (location.pathname.includes(title.toLowerCase())) collectionName = title;
+                }
+                return title;
+            });
+        dispatch(fetchSearchItems(uriForSearch, 'GET', {field: query, collectionName}, {}));
         resetInputField();
-        history.push(`/search-results?${form.field}`);
+        history.push(`/search-results?${collectionName.toLowerCase()}`);
     }
 
     return (
@@ -53,7 +66,7 @@ export const SearchBar: React.FC = () => {
                         id="search"
                         placeholder="search"
                         type="search"
-                        value={form.field}
+                        value={query}
                         onChange={handleChange}
                         onFocus={handleFocus}
                         onBlur={handleBlur}

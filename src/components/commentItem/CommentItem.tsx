@@ -6,6 +6,7 @@ import './commentItem.css';
 
 
 const CommentItem: React.FC<Comment> = ({email, text, createdAt}) => {
+    const date = new Date(createdAt);
 
     return (
         <div className="comment">
@@ -15,7 +16,7 @@ const CommentItem: React.FC<Comment> = ({email, text, createdAt}) => {
             <div className='comment-data-container'>
                 <h6 className='comment-email'>{email}</h6>
                 <h6 className='comment-text'>{text}</h6>
-                <h6 className='comment-date'>Created at: {createdAt}</h6>
+                <h6 className='comment-date'>Created at: {date.toLocaleString()}</h6>
             </div>
         </div>
     )

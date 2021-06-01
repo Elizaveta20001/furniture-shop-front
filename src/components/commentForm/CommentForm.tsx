@@ -1,8 +1,10 @@
-import React, {useState} from "react";
-import {useSelector} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 import {CommentFormProps} from "../../interfaces/interfaces";
 import {templateFetch} from "../../helpers/templatePost";
+import {fetchCollectionItem} from "../../modules/catalog/collectionItemPage/store/actions";
 
 import './commentForm.css';
 
@@ -10,20 +12,23 @@ import './commentForm.css';
 const CommentForm: React.FC<CommentFormProps> = ({url}) => {
     const [text, setText] = useState("");
     const user = useSelector((state: Store) => state.loginReducer.userId);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    const handleSubmit = async () => {
+    const refreshData = () => {
+        dispatch(fetchCollectionItem(history.location.pathname));
+    }
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         const data = {
             text,
             user,
             createdAt: Date()
         };
-        try {
-            await templateFetch(url, data);
-            alert('Your comment has been successfully recorded.');
-        } catch (error) {
-            alert('Error');
-        }
+        templateFetch(url, data, refreshData);
     }
+
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setText(event.target.value);

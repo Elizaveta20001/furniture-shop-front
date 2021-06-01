@@ -11,11 +11,10 @@ const RatingStar: React.FC<{ url: string, value: number }> = ({url, value}) => {
 
 
     const handleClick = async () => {
-        try{
+        try {
             await templateFetch(url, {value: value, userId: userId});
             alert('You have successfully rated the product.');
-        }
-        catch (error) {
+        } catch (error) {
             alert('Error - You cannot rate the product more than once.');
         }
     }

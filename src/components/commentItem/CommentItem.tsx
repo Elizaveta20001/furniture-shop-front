@@ -6,7 +6,8 @@ import './commentItem.css';
 
 
 const CommentItem: React.FC<Comment> = ({email, text, createdAt}) => {
-    return(
+
+    return (
         <div className="comment">
             <div>
                 <i className="material-icons dp48 icon">person</i>

@@ -1,9 +1,9 @@
 import React from "react";
+import {useSelector} from "react-redux";
 
 import RatingStar from "../ratingStar/RatingStar";
 
 import './ratingForm.css';
-import {useSelector} from "react-redux";
 
 
 const RatingItemForm: React.FC<{url: string}> = ({url}) => {
@@ -12,7 +12,7 @@ const RatingItemForm: React.FC<{url: string}> = ({url}) => {
     const makeStars = () => {
         let stars = [];
         for (let i = 1; i <= 5; i++) {
-            stars.push(<RatingStar key={i} value={i} url={url}/>)
+            stars.push(<RatingStar key={i} value={i} url={url}/>);
         }
         return stars;
     }

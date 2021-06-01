@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {useSelector} from "react-redux";
 
 import {CommentFormProps} from "../../interfaces/interfaces";
+import {templateFetch} from "../../helpers/templatePost";
 
 import './commentForm.css';
-import {templateFetch} from "../../helpers/templatePost";
 
 
 const CommentForm: React.FC<CommentFormProps> = ({url}) => {
@@ -16,13 +16,12 @@ const CommentForm: React.FC<CommentFormProps> = ({url}) => {
             text,
             user,
             createdAt: Date()
-        }
-        try{
+        };
+        try {
             await templateFetch(url, data);
-            alert('Your comment has been successfully recorded.')
-        }
-        catch (error) {
-           alert('Error');
+            alert('Your comment has been successfully recorded.');
+        } catch (error) {
+            alert('Error');
         }
     }
 

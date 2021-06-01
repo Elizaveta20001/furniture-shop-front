@@ -7,6 +7,7 @@ const INITIAL_STATE: CollectionItemState = {
     description: "",
     title: "",
     comments: [],
+    rating: [],
     error: "",
     isFetched: false
 }
@@ -21,6 +22,7 @@ export const collectionItemReducer = (state=INITIAL_STATE, action: any)=>{
                 description: action.payload.description,
                 title: action.payload.title,
                 comments: action.payload.comments,
+                rating: action.payload.rating,
                 error: "",
                 isFetched: true
             }
@@ -32,6 +34,7 @@ export const collectionItemReducer = (state=INITIAL_STATE, action: any)=>{
                 description: "",
                 title: "",
                 comments: [],
+                rating: [],
                 error: action.payload,
                 isFetched: false
             }
@@ -44,6 +47,7 @@ export const collectionItemReducer = (state=INITIAL_STATE, action: any)=>{
                 title: "",
                 error: "",
                 comments: [],
+                rating: [],
                 isFetched: false
             }
         default:

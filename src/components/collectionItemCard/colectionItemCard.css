@@ -17,7 +17,7 @@
     height: 500px;
     display: grid;
     grid-template-columns: 500px;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows:  1fr 3fr 1fr 1fr;
     grid-row-gap: 10px;
 }
 
@@ -34,4 +34,9 @@
 .option {
     text-align: center;
     justify-content: center;
+}
+
+.rating{
+    text-align: left;
+    padding-left: 30px;
 }

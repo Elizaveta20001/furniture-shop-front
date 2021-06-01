@@ -1,0 +1,11 @@
+.rating-form{
+    width: 1000px;
+    height: 200px;
+    font-size: 20px;
+    align-items: center;
+}
+.rating-form-stars{
+    display: inline-flex;
+    justify-content: space-between;
+    flex-direction: row;
+}

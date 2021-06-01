@@ -6,6 +6,7 @@ import {Loader} from "../../../components/loader/Loader";
 import CollectionItemCard from "../../../components/collectionItemCard/CollectionItemCard";
 import CommentForm from "../../../components/commentForm/CommentForm";
 import CommentSection from "../../../components/commentSection/CommentSection";
+import RatingItemForm from "../../../components/ratingForm/RatingItemForm";
 
 import {fetchCollectionItem} from "./store/actions";
 import {CollectionProps} from "../../../interfaces/interfaces";
@@ -21,7 +22,9 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
 
     let arrayPath = history.location.pathname.split("/");
     const id = +arrayPath[arrayPath.length - 1];
-    const path = `${uriForCollection}/${arrayPath[1]}/comment/${id}`;
+    const pathComment = `${uriForCollection}/${arrayPath[1]}/comment/${id}`;
+    const pathRating = `${uriForCollection}/${arrayPath[1]}/rating/${id}`;
+
 
     useEffect(() => {
         dispatch(fetchCollectionItem(history.location.pathname));
@@ -38,12 +41,16 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
                             price={data.price}
                             url={data.url}
                             title={data.title}
+                            rating={data.rating}
                         />
                         : <Loader/>
                 }
             </div>
             <div className='collection_page collection-item-comment'>
-                <CommentForm url={path}/>
+                <RatingItemForm url={pathRating}/>
+            </div>
+            <div className='collection_page collection-item-comment'>
+                <CommentForm url={pathComment}/>
                 {
                     data.isFetched && <CommentSection comments={data.comments}/>
                 }

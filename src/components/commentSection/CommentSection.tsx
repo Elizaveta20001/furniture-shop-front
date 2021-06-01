@@ -7,6 +7,7 @@ import './commentSection.css';
 
 
 const CommentSection: React.FC<{comments: Comment[]}> = ({comments}) =>{
+
     return(
         <div>
             <div className="number-of-comments">

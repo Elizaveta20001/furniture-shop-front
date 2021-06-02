@@ -36,6 +36,7 @@ const SearchResultsPage: React.FC = (): JSX.Element => {
                                             price={element.price}
                                             description={element.description}
                                             key={element.id}
+                                            collectionName={element.collectionName}
                                         />
                                     )
                                 }

@@ -8,7 +8,7 @@ import {CatalogPage} from './modules/catalog/mainPage/CatalogPage';
 import CollectionPage from "./modules/catalog/collection/CollectionPage";
 import CollectionItemPage from "./modules/catalog/collectionItemPage/CollectionItemPage";
 import SearchResultsPage from "./modules/searchField/SearchResultsPage";
-import React from "react";
+import PrivateRoute from "./components/privateRoutes/PrivateRoute";
 
 
 interface LoginState {
@@ -36,6 +36,19 @@ export const useRoutes = (isAuthenticated: boolean) => {
             <Route exact path="/catalog">
                 <CatalogPage/>
             </Route>
+
+            <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/cart"
+                exact={true}
+                component={CartPage}
+            />
+            <PrivateRoute
+                isAuthenticated={!isAuthenticated && !isEnter}
+                exact={true}
+                path="/auth"
+                component={AuthPage}
+            />
             <Route exact path="/search-results">
                 <SearchResultsPage/>
             </Route>
@@ -45,18 +58,6 @@ export const useRoutes = (isAuthenticated: boolean) => {
             <Route path="/:collectionName/:id">
                 <CollectionItemPage/>
             </Route>
-            {
-                isAuthenticated &&
-                    <Route path="/cart">
-                        <CartPage />
-                    </Route>
-            }
-            {
-                !isAuthenticated && !isEnter ?
-                    <Route path="/auth">
-                        <AuthPage />
-                    </Route> : null
-            }
 
             <Redirect to="/home"/>
         </Switch>

@@ -1,13 +1,14 @@
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import { AuthPage } from './modules/authorization/AuthPage';
-import { CartPage } from './modules/cart/CartPage';
-import { ContactsPage } from './modules/contacts/ContactsPage';
-import { HomePage } from './modules/home/HomePage';
-import { CatalogPage } from './modules/catalog/mainPage/CatalogPage';
+import {AuthPage} from './modules/authorization/AuthPage';
+import {CartPage} from './modules/cart/CartPage';
+import {ContactsPage} from './modules/contacts/ContactsPage';
+import {HomePage} from './modules/home/HomePage';
+import {CatalogPage} from './modules/catalog/mainPage/CatalogPage';
 import CollectionPage from "./modules/catalog/collection/CollectionPage";
 import CollectionItemPage from "./modules/catalog/collectionItemPage/CollectionItemPage";
 import SearchResultsPage from "./modules/searchField/SearchResultsPage";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 
 interface LoginState {
@@ -26,53 +27,50 @@ export const useRoutes = (isAuthenticated: boolean) => {
     return (
         <Switch>
             <Route exact path="/home">
-                <HomePage />
+                <HomePage/>
             </Route>
             <Route exact path="/contacts">
-                <ContactsPage />
+                <ContactsPage/>
             </Route>
             <Route exact path="/catalog">
-                <CatalogPage />
+                <CatalogPage/>
             </Route>
             <Route exact path="/search-results">
-                <SearchResultsPage />
+                <SearchResultsPage/>
             </Route>
-            <Route exact path="/tables">
+            <Route exact path="/:collectionName">
                 <CollectionPage/>
             </Route>
-            <Route path="/tables/:id">
+            <Route path="/:collectionName/:id">
                 <CollectionItemPage/>
             </Route>
-            <Route exact path="/beds">
-                <CollectionPage/>
-            </Route>
-            <Route path="/beds/:id">
-                <CollectionItemPage/>
-            </Route>
-            <Route exact path="/armchairs">
-                <CollectionPage/>
-            </Route>
-            <Route path="/armchairs/:id">
-                <CollectionItemPage/>
-            </Route>
-            <Route exact path="/sofas">
-                <CollectionPage/>
-            </Route>
-            <Route path="/sofas/:id">
-                <CollectionItemPage/>
-            </Route>
-            {
-                isAuthenticated &&
-                    <Route path="/cart">
-                        <CartPage />
-                    </Route>
-            }
+            {/*{*/}
+            {/*    isAuthenticated &&*/}
+            {/*        <Route path="/cart">*/}
+            {/*            <CartPage />*/}
+            {/*        </Route>*/}
+            {/*}*/}
             {
                 !isAuthenticated && !isEnter ?
                     <Route path="/auth">
                         <AuthPage />
                     </Route> : null
             }
+
+            <PrivateRoute
+                component={CartPage}
+                exact={true}
+                path="/cart"
+                isAuthenticated={isAuthenticated}
+            />
+
+            {/*<PrivateRoute*/}
+            {/*    path="/auth"*/}
+            {/*    Component={AuthPage}*/}
+            {/*    isAuthenticated={!isAuthenticated}*/}
+            {/*/>*/}
+
+
             <Redirect to="/home"/>
         </Switch>
     )

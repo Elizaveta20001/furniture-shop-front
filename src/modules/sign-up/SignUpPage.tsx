@@ -56,7 +56,7 @@ export const SignUpPage: React.FC = () => {
         formData.append("lastName", form.lastName);
 
         try {
-            dispatch(fetchRegin(apiReg, 'POST', formData, {'content-type' : "multipart/form-data"}));
+            dispatch(fetchRegin(apiReg, 'POST', formData, {}));
             dispatch(clearMessage());
         } catch(e){}
     }
@@ -74,11 +74,14 @@ export const SignUpPage: React.FC = () => {
                                     id="firstName"
                                     name="firstName"
                                     type="text"
+                                    className="validate"
+                                    pattern="[A-Za-z]{1,32}"
                                     value={form.firstName}
                                     onChange = {changeHandler}
                                     required
                                 />
-                                <label htmlFor="firstName"></label>
+                                <label htmlFor="first_name"></label>
+                                <div className="helper-text" data-error="wrong" data-success="right"/>
                             </div>
 
                             <div className="input-field">
@@ -87,11 +90,14 @@ export const SignUpPage: React.FC = () => {
                                     id="lastName"
                                     name="lastName"
                                     type="text"
+                                    className="validate"
+                                    pattern="[A-Za-z]{1,32}"
                                     value={form.lastName}
                                     onChange = {changeHandler}
                                     required
                                 />
-                                <label htmlFor="lastName"></label>
+                                <label htmlFor="last_name"></label>
+                                <div className="helper-text" data-error="wrong" data-success="right"/>
                             </div>
 
                             <div className="input-field">
@@ -100,11 +106,13 @@ export const SignUpPage: React.FC = () => {
                                     id="email"
                                     name="email"
                                     type="email"
+                                    className="validate"
                                     value={form.email}
                                     onChange = {changeHandler}
                                     required
                                 />
                                 <label htmlFor="email"></label>
+                                <div className="helper-text" data-error="wrong" data-success="right"/>
                             </div>
 
                             <div className="input-field">
@@ -112,17 +120,31 @@ export const SignUpPage: React.FC = () => {
                                     placeholder="enter password"
                                     id="password"
                                     type="password"
+                                    className="validate"
                                     name="password"
                                     value={form.password}
                                     onChange = {changeHandler}
                                     required
                                 />
                                 <label htmlFor="password"></label>
+                                <div className="helper-text" data-error="wrong" data-success="right"/>
                             </div>
 
-                            <label>
-                                <input type="file" accept="image/*" onChange={fileSelectorHandler} />
-                            </label>
+                                <form action="">
+                                    <div className="file-field input-field">
+                                        <div className="btn file-selector">
+                                            <span>File</span>
+                                            <input type="file" accept="image/*" onChange={fileSelectorHandler} />
+                                        </div>
+                                        <div className="file-path-wrapper file-selector">
+                                            <input className="file-path validate" type="text"/>
+                                        </div>
+                                        <div className="helper-text" data-error="wrong" data-success="right">
+                                            Max image size - 10MB
+                                        </div>
+                                    </div>
+
+                                </form>
 
                             {imagePreview && (
                                 <div>

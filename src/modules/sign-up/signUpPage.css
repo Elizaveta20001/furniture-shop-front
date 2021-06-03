@@ -11,9 +11,52 @@
 }
 
 .preview {
-    width: 30%
+    width: 50%;
 }
 
-.file-selector {
-    height: 10%
+.file-selector-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.file-selector{
+    text-align: center;
+}
+
+.title{
+    align-items: center;
+}
+
+.image-column-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image-button{
+    display: block;
+    position: absolute;
+    top: 225px;
+    left: 325px;
+}
+
+.file-field.input-field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

@@ -26,7 +26,7 @@ function* fetchReginWorker(args: any): any {
     const json = yield call(() => new Promise(res => res(data.json())));
     if(json.message){
         yield put(error(json));
-    }   
+    }
 };
 
 export function* reginWatcher() {

@@ -1,6 +1,7 @@
 import {useSelector} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {AuthPage} from './modules/authorization/AuthPage';
+import {SignUpPage} from "./modules/sign-up/SignUpPage";
 import {CartPage} from './modules/cart/CartPage';
 import {ContactsPage} from './modules/contacts/ContactsPage';
 import {HomePage} from './modules/home/HomePage';
@@ -48,6 +49,12 @@ export const useRoutes = (isAuthenticated: boolean) => {
                 exact={true}
                 path="/auth"
                 component={AuthPage}
+            />
+            <PrivateRoute
+                isAuthenticated={!isAuthenticated && !isEnter}
+                exact={true}
+                path="/sign-up"
+                component={SignUpPage}
             />
             <Route exact path="/search-results">
                 <SearchResultsPage/>

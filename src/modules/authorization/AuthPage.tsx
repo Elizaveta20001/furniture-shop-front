@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import { useMessage } from '../../hooks/message.hook';
+import {useHistory} from "react-router-dom";
 
-import { apiLogin, apiReg } from './constants';
-import { fetchLogin, enter, fetchRegin, clearMessage } from './store/actions';
+import { apiLogin } from './constants';
+import { fetchLogin, enter, clearMessage } from './store/actions';
 
 import "./authPage.css";
+
 
 
 export const AuthPage: React.FC = () => {
     const dispatch = useDispatch();
     const message = useMessage();
+    const history = useHistory();
     const err = useSelector((state: Store) => state.loginReducer.message);
     const [form, setForm] = useState({
         email: '',
@@ -20,23 +23,16 @@ export const AuthPage: React.FC = () => {
     useEffect(() => {
         message(err);
     }, [
-        err, 
-        message, 
+        err,
+        message,
     ])
-    
+
     useEffect(() => {
         window.M.updateTextFields();
     }, [])
 
     const changeHandler = (event: any) => {
         setForm({...form, [event.target.name]: event.target.value});
-    }
-
-    const registaration = () => {
-        try {
-            dispatch(fetchRegin(apiReg, 'POST', form, {}));
-            dispatch(clearMessage());
-        } catch(e){}
     }
 
     const login = () => {
@@ -55,9 +51,9 @@ export const AuthPage: React.FC = () => {
                     <div className="card-content white-text">
                         <div>
                             <div className="input-field">
-                                <input 
-                                    placeholder="enter email" 
-                                    id="email" 
+                                <input
+                                    placeholder="enter email"
+                                    id="email"
                                     name="email"
                                     type="email"
                                     value={form.email}
@@ -68,10 +64,10 @@ export const AuthPage: React.FC = () => {
                             </div>
 
                             <div className="input-field">
-                                <input 
-                                    placeholder="enter password" 
-                                    id="password" 
-                                    type="password" 
+                                <input
+                                    placeholder="enter password"
+                                    id="password"
+                                    type="password"
                                     name="password"
                                     value={form.password}
                                     onChange = {changeHandler}
@@ -84,22 +80,22 @@ export const AuthPage: React.FC = () => {
                     </div>
 
                     <div className="card-action">
-                        <button 
+                        <button
                             className="waves-effect waves-light btn login-button"
                             style={{marginRight:10}}
                             onClick={login}
                         >
                             Sign in
                         </button>
-                        <button 
+                        <button
                             className="waves-effect waves-light btn reg-button"
-                            onClick={registaration}
+                            onClick={() => history.push('/sign-up')}
                         >
                             Sign up
                         </button>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     )
 }

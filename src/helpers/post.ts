@@ -1,13 +1,14 @@
 interface Params {
     url: string;
     method: string;
-    form: string;
+    form: any;
     headers: any;
 }
 
 export const fetchPost = (params: Params) => {
     let {url, method, form, headers} = params;
-    if(form){
+
+    if (form && !headers['Content-Type']) {
         form = JSON.stringify(form);
         headers['Content-Type'] = 'application/json';
     }

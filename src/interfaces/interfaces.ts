@@ -93,7 +93,8 @@ export interface CatalogState {
 declare global {
     interface Store {
         loginReducer: LoginState;
-        catalogReducer: CatalogState
+        catalogReducer: CatalogState;
+        userDataReducer: UserDataState;
     }
 }
 
@@ -121,11 +122,19 @@ export interface SearchResultsState {
     error: string
 }
 
+export interface UserDataState {
+    userData: any,
+    isFetching: boolean,
+    isUpdating: boolean,
+    userError: string
+}
+
 declare global {
     interface Store {
         loginReducer: LoginState;
         catalogReducer: CatalogState;
         cartReducer: CartState;
         searchResultsReducer: SearchResultsState;
+        userDataReducer: UserDataState;
     }
 }

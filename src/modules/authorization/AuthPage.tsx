@@ -45,25 +45,25 @@ export const AuthPage: React.FC = () => {
 
     return (
         <div className="row">
-            <div className="col s6 offset-s3">
-                <h1>Authorization</h1>
+            <div className="col s12">
                 <div className="card form-background">
-                    <div className="card-content white-text">
+                    <div className="card-content">
                         <div>
                             <div className="input-field">
+                                E-mail:
                                 <input
                                     placeholder="enter email"
                                     id="email"
                                     name="email"
                                     type="email"
                                     value={form.email}
-                                    onChange = {changeHandler}
+                                    onChange={changeHandler}
                                     required
                                 />
-                                <label htmlFor="email"></label>
                             </div>
 
                             <div className="input-field">
+                                Password:
                                 <input
                                     placeholder="enter password"
                                     id="password"
@@ -73,7 +73,6 @@ export const AuthPage: React.FC = () => {
                                     onChange = {changeHandler}
                                     required
                                 />
-                                <label htmlFor="password"></label>
                             </div>
 
                         </div>
@@ -87,12 +86,7 @@ export const AuthPage: React.FC = () => {
                         >
                             Sign in
                         </button>
-                        <button
-                            className="waves-effect waves-light btn reg-button"
-                            onClick={() => history.push('/sign-up')}
-                        >
-                            Sign up
-                        </button>
+
                     </div>
                 </div>
             </div>

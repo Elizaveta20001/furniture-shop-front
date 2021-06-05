@@ -9,9 +9,3 @@
 .reg-button{
     background-color: gray !important;
 }
-
-.input-field{
-    font-size: 30px;
-    display: grid;
-    grid-template-columns: 2fr 5fr;
-}

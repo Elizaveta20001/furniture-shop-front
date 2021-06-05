@@ -66,7 +66,6 @@ export const SignUpPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Sign Up</h1>
             <div className="card form-background">
                 <div className="row image-column-container">
                     <div className="col s12 m5">

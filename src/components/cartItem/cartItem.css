@@ -1,13 +1,12 @@
 .cart-item {
     display: grid;
-    width: 1000px;
-    height: 250px;
-    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    width: 100%;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
     grid-column-gap: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     align-items: center;
-    padding-left: 10px;
+    padding: 20px 30px;
     background-color: white;
+    border-bottom-style: groove;
 }
 
 .image-container {
@@ -20,6 +19,10 @@
 
 .cart-item-quantity {
     justify-items: center;
+    text-align: center;
+}
+
+.cart-item-clear {
     text-align: center;
 }
 

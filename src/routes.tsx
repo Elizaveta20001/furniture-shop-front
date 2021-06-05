@@ -1,7 +1,9 @@
 import {useSelector} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {AuthPage} from './modules/authorization/AuthPage';
+import {MainAuthPage} from "./modules/authorization/mainAuthPage/MainAuthPage";
 import {SignUpPage} from "./modules/sign-up/SignUpPage";
+import {MainUserProfilePage} from "./modules/user-profile/mainPage/MainUserProfilePage";
 import {UserProfilePage} from "./modules/user-profile/UserProfilePage";
 import {CartPage} from './modules/cart/CartPage';
 import {ContactsPage} from './modules/contacts/ContactsPage';
@@ -40,7 +42,13 @@ export const useRoutes = (isAuthenticated: boolean) => {
             </Route>
             <PrivateRoute
                 isAuthenticated={isAuthenticated}
-                path="/user-profile"
+                path="/user-profile/"
+                exact={true}
+                component={MainUserProfilePage}
+            />
+            <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/user-profile/personal-data"
                 exact={true}
                 component={UserProfilePage}
             />
@@ -54,6 +62,12 @@ export const useRoutes = (isAuthenticated: boolean) => {
                 isAuthenticated={!isAuthenticated && !isEnter}
                 exact={true}
                 path="/auth"
+                component={MainAuthPage}
+            />
+            <PrivateRoute
+                isAuthenticated={!isAuthenticated && !isEnter}
+                exact={true}
+                path="/sign-in"
                 component={AuthPage}
             />
             <PrivateRoute

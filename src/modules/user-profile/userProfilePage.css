@@ -1,6 +1,8 @@
-.form-background {
-    background-color: white;
+.buttons-container{
+    display: flex;
+    justify-content: flex-end;
 }
+
 
 .login-button{
     background-color: #e7746f !important;
@@ -61,6 +63,12 @@
     justify-content: center;
 }
 
-.with-current-data{
+.input-field-with-note{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
     font-size: 30px;
+}
+
+.helper-text{
+    grid-column: 2/5;
 }

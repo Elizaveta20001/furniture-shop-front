@@ -54,7 +54,7 @@ export const UserProfilePage: React.FC = () => {
         setForm({...userData});
         console.log('form', form);
         setStringifiedForm(JSON.stringify(form));
-        if (!userData.image === undefined) setImagePreview(userData.image)
+        if (userData.image !== undefined) setImagePreview(userData.image)
         else setImagePreview(DefaultImage);
         console.log('imagePreview', imagePreview);
         setDataToSend({

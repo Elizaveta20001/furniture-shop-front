@@ -100,8 +100,6 @@ export const SignUpPage: React.FC = () => {
                                         onChange = {changeHandler}
                                         required
                                     />
-                                    <label htmlFor="first_name">First Name</label>
-                                    <div className="helper-text" data-error="wrong" data-success="right"/>
                                 </div>
 
                                 <div className="input-field">
@@ -116,8 +114,6 @@ export const SignUpPage: React.FC = () => {
                                         onChange = {changeHandler}
                                         required
                                     />
-                                    <label htmlFor="last_name">Last Name</label>
-                                    <div className="helper-text" data-error="wrong" data-success="right"/>
                                 </div>
 
                                 <div className="input-field">
@@ -132,8 +128,6 @@ export const SignUpPage: React.FC = () => {
                                         required
                                     />
                                     <div className="helper-text" data-error="wrong" data-success="right"/>
-                                    <label htmlFor="email">E-mail</label>
-
                                 </div>
 
                                 <div className="input-field">
@@ -147,11 +141,7 @@ export const SignUpPage: React.FC = () => {
                                         onChange = {changeHandler}
                                         required
                                     />
-                                    <label htmlFor="password">Password</label>
-                                    <div className="helper-text" data-error="wrong" data-success="right"/>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>

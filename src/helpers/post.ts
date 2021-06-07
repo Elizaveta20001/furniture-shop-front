@@ -13,7 +13,8 @@ export const fetchPost = (params: Params) => {
     let {url, method, form, headers, userId} = params;
 
     switch (url) {
-        case uriForUser || apiReg: return fetch(url + userId, {method, body: form});
+        case uriForUser: return fetch(url + userId, {method, body: form});
+        case apiReg: return fetch(url, {method, body: form});
         default: {
             if (form) {
                 form = JSON.stringify(form);

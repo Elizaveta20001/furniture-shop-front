@@ -63,12 +63,8 @@
     justify-content: center;
 }
 
-.input-field-with-note{
+.input-field.with-note{
     display: grid;
     grid-template-columns: 2fr 5fr;
     font-size: 30px;
-}
-
-.helper-text{
-    grid-column: 2/5;
 }

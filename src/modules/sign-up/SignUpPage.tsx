@@ -88,7 +88,8 @@ export const SignUpPage: React.FC = () => {
                     <div className="col s12 m7">
                         <div className="card-content">
                             <div className="form-container">
-                                <div className="input-field">
+                                <div className="input-field sign-up">
+                                    First Name:
                                     <input
                                         placeholder="enter first name"
                                         id="firstName"
@@ -102,7 +103,8 @@ export const SignUpPage: React.FC = () => {
                                     />
                                 </div>
 
-                                <div className="input-field">
+                                <div className="input-field sign-up">
+                                    Last name:
                                     <input
                                         placeholder="enter last name"
                                         id="lastName"
@@ -116,7 +118,8 @@ export const SignUpPage: React.FC = () => {
                                     />
                                 </div>
 
-                                <div className="input-field">
+                                <div className="input-field sign-up">
+                                    Email:
                                     <input
                                         placeholder="enter email"
                                         id="email"
@@ -127,10 +130,10 @@ export const SignUpPage: React.FC = () => {
                                         onChange = {changeHandler}
                                         required
                                     />
-                                    <div className="helper-text" data-error="wrong" data-success="right"/>
                                 </div>
 
-                                <div className="input-field">
+                                <div className="input-field sign-up">
+                                    Password:
                                     <input
                                         placeholder="enter password"
                                         id="password"

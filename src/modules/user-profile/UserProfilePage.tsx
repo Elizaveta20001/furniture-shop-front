@@ -52,9 +52,11 @@ export const UserProfilePage: React.FC = () => {
 
     useEffect(() => {
         setForm({...userData});
+        console.log('form', form);
         setStringifiedForm(JSON.stringify(form));
         if (!userData.image === undefined) setImagePreview(userData.image)
         else setImagePreview(DefaultImage);
+        console.log('imagePreview', imagePreview);
         setDataToSend({
             email: '',
             firstName: '',
@@ -120,7 +122,7 @@ export const UserProfilePage: React.FC = () => {
                                                     disabled={!toggledChange}
                                                 />
                                                 <input
-                                                    className="file-path validate file-selector"
+                                                    className="file-path file-selector"
                                                     type="text"
                                                     placeholder="set new profile image"
                                                     disabled
@@ -137,8 +139,7 @@ export const UserProfilePage: React.FC = () => {
                             <div className="col s12 m7">
                                 <div className="card-content">
                                     <div className="form-container">
-                                        <div className="input-field with-current-data">
-                                            <div className="input-field-with-note">
+                                        <div className="input-field with-note">
                                                 First name:
                                                 <input
                                                     placeholder={form.firstName || "enter new first name"}
@@ -152,11 +153,9 @@ export const UserProfilePage: React.FC = () => {
                                                     disabled={!toggledChange}
                                                     required
                                                 />
-                                            </div>
                                         </div>
 
-                                        <div className="input-field with-current-data">
-                                            <div className="input-field-with-note">
+                                        <div className="input-field with-note">
                                                 Last name:
                                                 <input
                                                     placeholder={form.lastName || "enter new last name"}
@@ -170,11 +169,9 @@ export const UserProfilePage: React.FC = () => {
                                                     disabled={!toggledChange}
                                                     required
                                                 />
-                                            </div>
                                         </div>
 
-                                        <div className="input-field">
-                                            <div className="input-field-with-note">
+                                        <div className="input-field with-note">
                                                 E-mail:
                                                 <div>
                                                     <input
@@ -189,7 +186,6 @@ export const UserProfilePage: React.FC = () => {
                                                         required
                                                     />
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

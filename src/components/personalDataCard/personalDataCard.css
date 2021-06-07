@@ -1,0 +1,41 @@
+.image-column-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-field.input-field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview {
+    width: 50%;
+}
+
+.file-selector{
+    text-align: center;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input-field.with-name{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    font-size: 25px;
+}
+
+

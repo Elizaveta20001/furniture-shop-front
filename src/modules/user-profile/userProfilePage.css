@@ -4,11 +4,12 @@
 }
 
 
-.login-button{
+.prior-button{
     background-color: #e7746f !important;
+    margin-left: 1vw;
 }
 
-.reg-button{
+.unprior-button{
     background-color: gray !important;
 }
 

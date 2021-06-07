@@ -57,6 +57,24 @@ export interface Rating{
     value: number
 }
 
+export interface PersonalUserData  {
+    email: string,
+    firstName: string,
+    lastName: string,
+    image: any,
+    password?: string
+}
+
+export interface PersonalDataCardProps {
+    defaultValues?: PersonalUserData,
+    values: PersonalUserData,
+    toggledChange: boolean,
+    changeHandler: (event: any) => void,
+    fileSelectorHandler: (event: any) => void,
+    imagePreview: string,
+    cancelHandler?: (event: any) => void
+}
+
 
 export interface CartItemInterface extends CatalogItem{
     quantity: number

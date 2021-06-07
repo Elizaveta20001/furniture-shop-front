@@ -10,7 +10,7 @@
     background-color: gray !important;
 }
 
-.input-field{
+.input-field.sign-in{
     font-size: 30px;
     display: grid;
     grid-template-columns: 2fr 5fr;

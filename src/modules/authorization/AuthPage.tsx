@@ -49,7 +49,7 @@ export const AuthPage: React.FC = () => {
                 <div className="card form-background">
                     <div className="card-content">
                         <div>
-                            <div className="input-field">
+                            <div className="input-field sign-in">
                                 E-mail:
                                 <input
                                     placeholder="enter email"
@@ -62,7 +62,7 @@ export const AuthPage: React.FC = () => {
                                 />
                             </div>
 
-                            <div className="input-field">
+                            <div className="input-field sign-in">
                                 Password:
                                 <input
                                     placeholder="enter password"

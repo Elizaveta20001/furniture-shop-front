@@ -75,6 +75,19 @@ export interface PersonalDataCardProps {
     cancelHandler?: (event: any) => void
 }
 
+export interface ChangePassUserData  {
+    oldPassword: string,
+    newPassword: string,
+    repeatNewPassword: string
+}
+
+export interface ChangePassCardProps {
+    values: ChangePassUserData,
+    toggledChange: boolean,
+    changeHandler: (event: any) => void,
+    cancelHandler: (event: any) => void
+}
+
 
 export interface CartItemInterface extends CatalogItem{
     quantity: number

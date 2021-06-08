@@ -1,5 +1,5 @@
 import {apiReg} from "../modules/sign-up/constants";
-import {uriForUser} from "../modules/user-profile/constants";
+import {uriForUser, uriForChangePass} from "../modules/user-profile/constants";
 
 interface Params {
     url: string;
@@ -12,7 +12,23 @@ interface Params {
 export const fetchPost = (params: Params) => {
     let {url, method, form, headers, userId} = params;
 
+    console.log('url', url);
+    console.log('method',method);
+    console.log('form',form);
+    console.log('headers',headers);
+    console.log('userId',userId)
+
+
     switch (url) {
+        case uriForChangePass: {
+
+            form = JSON.stringify(form);
+            headers['Content-Type'] = 'application/json';
+
+            console.log('JSONform', form);
+            console.log('headers', headers);
+            return fetch(url + userId, {method, body: form, headers});
+        }
         case uriForUser: return fetch(url + userId, {method, body: form});
         case apiReg: return fetch(url, {method, body: form});
         default: {

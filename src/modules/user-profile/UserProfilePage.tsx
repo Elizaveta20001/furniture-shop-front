@@ -46,6 +46,7 @@ export const UserProfilePage: React.FC = () => {
 
     useEffect(() => {
         window.M.updateTextFields();
+        
     }, [])
 
     useEffect(() => {
@@ -112,7 +113,9 @@ export const UserProfilePage: React.FC = () => {
         <div>
             {isFetching || isUpdating ? <Loader/> : (
                 <div>
-                    <div className="card">
+
+                    <div className="card without-margin-top">
+
                         <PersonalDataCard
                             defaultValues={form}
                             values={dataToSend}

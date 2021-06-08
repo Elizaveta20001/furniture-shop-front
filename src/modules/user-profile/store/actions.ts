@@ -46,3 +46,26 @@ export const updateUserDataFail = (error: Error)=>{
     })
 };
 
+export const updateUserPassword = (url: string, userId: string, method: string, form: any, headers: any) => {
+    return {
+        type: ActionTypes.UPDATE_USER_PASSWORD_START,
+        url,
+        method,
+        form,
+        userId,
+        headers
+    }
+};
+
+export const updateUserPasswordSuccess = ()=>{
+    return({
+        type: ActionTypes.UPDATE_USER_PASSWORD_SUCCESS,
+    })
+};
+
+export const updateUserPasswordFail = (error: Error)=>{
+    return({
+        type: ActionTypes.UPDATE_USER_PASSWORD_FAIL,
+        payload: error.message
+    })
+};

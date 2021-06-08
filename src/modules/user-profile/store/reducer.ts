@@ -52,7 +52,22 @@ export const userDataReducer = (state = INITIAL_STATE, action: any) => {
                 isUpdating: false,
                 userError: action.payload
             }
-
+        case ActionTypes.UPDATE_USER_PASSWORD_START:
+            return {
+                ...state,
+                isUpdating: true,
+            }
+        case ActionTypes.UPDATE_USER_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                isUpdating: false
+            }
+        case ActionTypes.UPDATE_USER_PASSWORD_FAIL:
+            return {
+                ...state,
+                isUpdating: false,
+                userError: action.payload
+            }    
         default:
             return state;
     }

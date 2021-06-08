@@ -1,3 +1,11 @@
 .content{
     margin-top: unset;
 }
+
+.collapsible-body.without-padding{
+    padding: 0px;
+}
+
+.collapsible-header.small-font-size{
+    font-size: 16px;
+}

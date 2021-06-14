@@ -1,18 +1,19 @@
 import { ActionTypes } from "./actionTypes";
 
-
 interface UserDataInterface {
     userData: any,
     isFetching: boolean,
     isUpdating: boolean,
-    userError: string
+    userError: string,
+    message: string
 };
 
 const INITIAL_STATE: UserDataInterface = {
     userData : undefined,
     isFetching: true,
     userError: '',
-    isUpdating: false
+    isUpdating: false,
+    message: ''
 };
 
 export const userDataReducer = (state = INITIAL_STATE, action: any) => {
@@ -26,14 +27,15 @@ export const userDataReducer = (state = INITIAL_STATE, action: any) => {
             return {
                 ...state,
                 userData: action.payload,
-                isFetching: false
+                isFetching: false,
             }
         case ActionTypes.FETCH_USER_DATA_FAIL:
             return {
                 ...state,
                 userData: [],
                 isFetching: false,
-                fetchUserError: action.payload
+                fetchUserError: action.payload,
+                message: action.payload
             }
         case ActionTypes.UPDATE_USER_DATA_START:
             return {
@@ -44,13 +46,15 @@ export const userDataReducer = (state = INITIAL_STATE, action: any) => {
             return {
                 ...state,
                 userData: action.payload,
-                isUpdating: false
+                isUpdating: false,
+                message: "user's data updated successfully"
             }
         case ActionTypes.UPDATE_USER_DATA_FAIL:
             return {
                 ...state,
                 isUpdating: false,
-                userError: action.payload
+                userError: action.payload,
+                message: action.payload
             }
         case ActionTypes.UPDATE_USER_PASSWORD_START:
             return {
@@ -60,14 +64,21 @@ export const userDataReducer = (state = INITIAL_STATE, action: any) => {
         case ActionTypes.UPDATE_USER_PASSWORD_SUCCESS:
             return {
                 ...state,
-                isUpdating: false
+                isUpdating: false,
+                message: "user's password updated successfully"
             }
         case ActionTypes.UPDATE_USER_PASSWORD_FAIL:
             return {
                 ...state,
                 isUpdating: false,
-                userError: action.payload
-            }    
+                userError: action.payload,
+                message: action.payload
+            }
+        case ActionTypes.CLEAR_MESSAGE:
+            return {
+                ...state,
+                message: '',
+            };
         default:
             return state;
     }

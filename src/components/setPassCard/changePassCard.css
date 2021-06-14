@@ -1,0 +1,42 @@
+.image-column-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-field.input-field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview {
+    width: 50%;
+}
+
+.file-selector{
+    text-align: center;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input-field.with-name.change-pass{
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+

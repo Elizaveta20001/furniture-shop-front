@@ -5,21 +5,20 @@ interface Params {
     url: string;
     method: string;
     form: any;
-    headers: any;
     userId: string;
+    token: string;
 }
 
 export const fetchGet = (params: Params) => {
-    let {url, form, userId} = params;
+
+    let {url, form, userId, token} = params;
+    let headers = {
+        'Authorization': `Bearer ${token}`
+    };
 
     switch (url) {
-        case uriForUser: return fetch(url + userId);
-        case uriForSearch: return fetch(url + '?' + new URLSearchParams({...form}));
+        case uriForUser: return fetch(url + userId, {headers});
+        case uriForSearch: return fetch(url + '?' + new URLSearchParams({...form}), {headers});
         default: return null;
     }
-
-
-
-
-
 }

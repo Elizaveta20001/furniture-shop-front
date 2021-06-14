@@ -1,27 +1,24 @@
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import { useMessage } from '../../hooks/message.hook';
 
-import {uriForUser} from "./constants";
-import {fetchUserData, updateUserData} from "./store/actions";
-
-
-import "./userProfilePage.css";
-import DefaultImage from "../../assets/default-profile.png";
-import {Loader} from "../../components/loader/Loader";
-import {PersonalDataCard} from "../../components/personalDataCard/PersonalDataCard";
-import {PersonalUserData} from "../../interfaces/interfaces";
+import {uriForUser} from "../../constants";
+import {fetchUserData, updateUserData, clearMessage} from "../../store/actions";
 
 
-export const UserProfilePage: React.FC = () => {
+import "./basicInfoSubTab.css";
+import DefaultImage from "../../../../assets/default-profile.png";
+import {Loader} from "../../../../components/loader/Loader";
+import {PersonalDataCard} from "../../../../components/personalDataCard/PersonalDataCard";
+import {PersonalUserData} from "../../../../interfaces/interfaces";
+
+
+export const BasicInfoSubTab: React.FC = () => {
     const dispatch = useDispatch();
-    const message = useMessage();
-    const err = useSelector((state: Store) => state.loginReducer.message);
     const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
     const userData  = useSelector((state: Store) => state.userDataReducer.userData);
     const isFetching  = useSelector((state: Store) => state.userDataReducer.isFetching);
     const isUpdating = useSelector((state: Store) => state.userDataReducer.isUpdating);
-    const userError = useSelector((state: Store) => state.userDataReducer.userError);
 
     const defaultUserData: PersonalUserData = {
         email: '',
@@ -38,20 +35,13 @@ export const UserProfilePage: React.FC = () => {
     const [toggledChange, setToggledChange] = useState(false);
 
     useEffect(() => {
-        message(err);
-    }, [
-        err,
-        message,
-    ])
-
-    useEffect(() => {
         window.M.updateTextFields();
-        
+
     }, [])
 
     useEffect(() => {
-        dispatch(fetchUserData(uriForUser, userId));
-    }, [dispatch, userId])
+        dispatch(fetchUserData(uriForUser, userId, token));
+    }, [dispatch, userId, token])
 
     useEffect(() => {
         setForm({...userData});
@@ -87,15 +77,16 @@ export const UserProfilePage: React.FC = () => {
         if (stringifiedDataToSend !== stringifiedDefaultUserData && stringifiedDataToSend !== stringifiedForm) {
             console.log('dataToSend',dataToSend);
 
+
             let formData:any = new FormData();
 
-            formData.append("image", dataToSend.image);
-            formData.append("email", dataToSend.email);
-            formData.append("firstName", dataToSend.firstName);
-            formData.append("lastName", dataToSend.lastName);
+            dataToSend.image ? formData.append("image", dataToSend.image) : formData.append("image", form.image);
+            dataToSend.email ? formData.append("email", dataToSend.email) : formData.append("email", form.email);
+            dataToSend.firstName ? formData.append("firstName", dataToSend.firstName) : formData.append("firstName", form.firstName);
+            dataToSend.lastName ? formData.append("lastName", dataToSend.lastName) : formData.append("lastName", form.lastName);
 
             try {
-                dispatch(updateUserData(uriForUser, userId, 'PUT', formData));
+                dispatch(updateUserData(uriForUser, 'PUT', formData, userId, token));
             }
             catch(e) {
                 console.log('error on userData update:', e);

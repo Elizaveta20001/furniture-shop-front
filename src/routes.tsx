@@ -1,10 +1,10 @@
 import {useSelector} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import {AuthPage} from './modules/authorization/AuthPage';
+import {SignInPage} from './modules/authorization/sign-in/SignInPage';
 import {MainAuthPage} from "./modules/authorization/mainAuthPage/MainAuthPage";
-import {SignUpPage} from "./modules/sign-up/SignUpPage";
+import {SignUpPage} from "./modules/authorization/sign-up/SignUpPage";
 import {MainUserProfilePage} from "./modules/user-profile/mainPage/MainUserProfilePage";
-import {UserProfilePage} from "./modules/user-profile/UserProfilePage";
+import {BasicInfoSubTab} from "./modules/user-profile/personalInfoTab/basicInformation/BasicInfoSubTab";
 import {CartPage} from './modules/cart/CartPage';
 import {ContactsPage} from './modules/contacts/ContactsPage';
 import {HomePage} from './modules/home/HomePage';
@@ -50,7 +50,7 @@ export const useRoutes = (isAuthenticated: boolean) => {
                 isAuthenticated={isAuthenticated}
                 path="/user-profile/personal-data"
                 exact={true}
-                component={UserProfilePage}
+                component={BasicInfoSubTab}
             />
             <PrivateRoute
                 isAuthenticated={isAuthenticated}
@@ -68,7 +68,7 @@ export const useRoutes = (isAuthenticated: boolean) => {
                 isAuthenticated={!isAuthenticated && !isEnter}
                 exact={true}
                 path="/sign-in"
-                component={AuthPage}
+                component={SignInPage}
             />
             <PrivateRoute
                 isAuthenticated={!isAuthenticated && !isEnter}

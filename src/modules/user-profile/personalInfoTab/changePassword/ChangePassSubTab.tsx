@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {uriForChangePass} from "../../constants";
@@ -15,8 +15,8 @@ import "./changePassSubTab.css";
 export const ChangePassSubTab: React.FC = () => {
     const dispatch = useDispatch();
     const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
     const isUpdating = useSelector((state: Store) => state.userDataReducer.isUpdating);
-    const userError = useSelector((state: Store) => state.userDataReducer.userError);
 
     const defaultChangePassData: ChangePassUserData = {
         oldPassword: '',
@@ -24,7 +24,6 @@ export const ChangePassSubTab: React.FC = () => {
         repeatNewPassword: ''
     };
 
-    const stringifiedDefaultUserData = JSON.stringify(defaultChangePassData);
     const [data, setData] = useState<ChangePassUserData>(defaultChangePassData);
     const [toggledChange, setToggledChange] = useState(true);
 
@@ -45,7 +44,7 @@ export const ChangePassSubTab: React.FC = () => {
                 }
 
                 try {
-                    dispatch(updateUserPassword(uriForChangePass, userId, 'PUT', dataToSend, {}));
+                    dispatch(updateUserPassword(uriForChangePass, 'PUT', dataToSend, userId, token));
                     setToggledChange(false);
                 }
                 catch(e) {

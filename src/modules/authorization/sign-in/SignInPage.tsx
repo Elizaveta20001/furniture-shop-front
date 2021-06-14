@@ -1,31 +1,19 @@
 import { useState, useEffect } from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import { useMessage } from '../../hooks/message.hook';
-import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
-import { apiLogin } from './constants';
-import { fetchLogin, enter, clearMessage } from './store/actions';
+import { apiLogin } from '../constants';
+import { fetchLogin, enter, clearMessage } from '../store/actions';
 
-import "./authPage.css";
+import "./signInPage.css";
 
 
 
-export const AuthPage: React.FC = () => {
+export const SignInPage: React.FC = () => {
     const dispatch = useDispatch();
-    const message = useMessage();
-    const history = useHistory();
-    const err = useSelector((state: Store) => state.loginReducer.message);
     const [form, setForm] = useState({
         email: '',
         password: ''
     })
-
-    useEffect(() => {
-        message(err);
-    }, [
-        err,
-        message,
-    ])
 
     useEffect(() => {
         window.M.updateTextFields();

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import { useMessage } from '../../hooks/message.hook';
+import {useDispatch} from "react-redux";
 
-import {apiReg} from "./constants";
-import {clearMessage, fetchRegin} from "../authorization/store/actions";
-import {PersonalUserData} from "../../interfaces/interfaces";
+import {apiReg} from "../constants";
+import {clearMessage, fetchRegin} from "../store/actions";
+import {PersonalUserData} from "../../../interfaces/interfaces";
 
-import {PersonalDataCard} from "../../components/personalDataCard/PersonalDataCard";
+import {PersonalDataCard} from "../../../components/personalDataCard/PersonalDataCard";
 
 import "./signUpPage.css";
 
@@ -14,8 +13,6 @@ import "./signUpPage.css";
 
 export const SignUpPage: React.FC = () => {
     const dispatch = useDispatch();
-    const message = useMessage();
-    const err = useSelector((state: Store) => state.loginReducer.message);
 
     const defaultUserData: PersonalUserData = {
         email: '',
@@ -27,13 +24,6 @@ export const SignUpPage: React.FC = () => {
     const [form, setForm] = useState<PersonalUserData>(defaultUserData);
 
     const [imagePreview, setImagePreview] = useState('');
-
-    useEffect(() => {
-        message(err);
-    }, [
-        err,
-        message,
-    ])
 
     useEffect(() => {
         window.M.updateTextFields();

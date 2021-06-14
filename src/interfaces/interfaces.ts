@@ -157,7 +157,8 @@ export interface UserDataState {
     userData: any,
     isFetching: boolean,
     isUpdating: boolean,
-    userError: string
+    userError: string,
+    message: string,
 }
 
 declare global {

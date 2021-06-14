@@ -1,13 +1,19 @@
 import {useEffect} from "react";
+import {useSelector} from "react-redux";
+import {useMessage} from "../../../hooks/message.hook";
 
-import {UserProfilePage} from "../UserProfilePage";
+import {BasicInfoSubTab} from "../personalInfoTab/basicInformation/BasicInfoSubTab";
 import {CartPage} from "../../cart/CartPage";
 
 import {ChangePassSubTab} from "../personalInfoTab/changePassword/ChangePassSubTab";
 
 import "./mainUserProfilePage.css";
 
+
 export const MainUserProfilePage: React.FC = () => {
+
+    const message = useMessage();
+    const notification = useSelector((state: Store) => state.userDataReducer.message);
 
     useEffect( () => {
         let tabsElems = document.querySelectorAll('.tabs');
@@ -15,6 +21,10 @@ export const MainUserProfilePage: React.FC = () => {
         window.M.Tabs.init(tabsElems);
         window.M.Collapsible.init(collapsibleElems);
     }, [])
+
+    useEffect(() => {
+        message(notification);
+    }, [notification,message])
 
 
     return (
@@ -37,7 +47,7 @@ export const MainUserProfilePage: React.FC = () => {
                         <li className="active">
                             <div className="collapsible-header small-font-size"><i className="material-icons">account_circle</i>Basic information</div>
                             <div className="collapsible-body without-padding">
-                                <UserProfilePage/>
+                                <BasicInfoSubTab/>
                             </div>
                         </li>
                         <li>

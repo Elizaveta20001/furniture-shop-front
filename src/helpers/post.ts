@@ -1,4 +1,4 @@
-import {apiReg} from "../modules/sign-up/constants";
+import {apiReg} from "../modules/authorization/constants";
 import {uriForUser, uriForChangePass} from "../modules/user-profile/constants";
 
 interface Params {
@@ -7,10 +7,11 @@ interface Params {
     form: any;
     headers: any;
     userId: string;
+    token: string;
 }
 
-export const fetchPost = (params: Params) => {
-    let {url, method, form, headers, userId} = params;
+export const fetchPost = async (params: Params) => {
+    let {url, method, form, headers, userId, token} = params;
 
     console.log('url', url);
     console.log('method',method);
@@ -23,15 +24,40 @@ export const fetchPost = (params: Params) => {
         case uriForChangePass: {
 
             form = JSON.stringify(form);
-            headers['Content-Type'] = 'application/json';
 
-            console.log('JSONform', form);
-            console.log('headers', headers);
-            return fetch(url + userId, {method, body: form, headers});
+            const result = await fetch(
+                url + userId,
+                {
+                        method,
+                        body: form,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    }
+            );
+            console.log('result', result);
+            return result;
         }
-        case uriForUser: return fetch(url + userId, {method, body: form});
+        case uriForUser: {
+            console.log('check');
+            console.log('form.image', form.get("image"));
+            console.log('form.firstName', form.get("firstName"));
+            console.log('form.lastName',form.get("lastName"));
+            console.log('form.email', form.get("email"));
+
+            return fetch(
+                url + userId,
+                {
+                        method,
+                        body: form,
+                        headers: {'Authorization': `Bearer ${token}`}
+                    }
+            );
+        }
         case apiReg: return fetch(url, {method, body: form});
         default: {
+            console.log('check 2');
             if (form) {
                 form = JSON.stringify(form);
                 headers['Content-Type'] = 'application/json';

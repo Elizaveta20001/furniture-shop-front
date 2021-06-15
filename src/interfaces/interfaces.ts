@@ -62,7 +62,11 @@ export interface PersonalUserData  {
     firstName: string,
     lastName: string,
     image: any,
-    password?: string
+}
+
+export interface UserPassData  {
+    signUpPassword: string,
+    repeatSignUpPassword: string,
 }
 
 export interface PersonalDataCardProps {
@@ -81,11 +85,22 @@ export interface ChangePassUserData  {
     repeatNewPassword: string
 }
 
+export interface SetPassUserData  {
+    signUpPassword: string,
+    repeatSignUpPassword: string
+}
+
 export interface ChangePassCardProps {
     values: ChangePassUserData,
     toggledChange: boolean,
     changeHandler: (event: any) => void,
     cancelHandler: (event: any) => void
+}
+
+export interface SetPassCardProps {
+    values: SetPassUserData,
+    changeHandler: (event: any) => void,
+    blurHandler: (event: any) => void,
 }
 
 

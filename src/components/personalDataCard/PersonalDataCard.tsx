@@ -25,7 +25,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
             <div className="row image-column-container">
                 <div className="col s12 m5">
                     <div className="card-content">
-                        <form className="image-container" action="#" >
+                        <div className="image-container" >
                             <div className="file-field input-field">
                                 <div className="preview">
                                     <img className="circle z-depth-5" src={imagePreview || DefaultImage} alt="" />
@@ -38,7 +38,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                                     <input
                                         className="file-path file-selector"
                                         type="text"
-                                        placeholder="set new profile image"
+                                        placeholder="set profile image"
                                         disabled
                                     />
                                     <div className="helper-text" data-error="wrong" data-success="right">
@@ -46,7 +46,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                             <div className="input-field with-name">
                                 First Name:
                                 <input
-                                    placeholder={defaultValues?.firstName || "enter new first name"}
+                                    placeholder={defaultValues?.firstName || "enter first name"}
                                     id="firstName"
                                     name="firstName"
                                     type="text"
@@ -73,7 +73,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                             <div className="input-field with-name">
                                 Last name:
                                 <input
-                                    placeholder={defaultValues?.lastName || "enter new last name"}
+                                    placeholder={defaultValues?.lastName || "enter last name"}
                                     id="lastName"
                                     name="lastName"
                                     type="text"
@@ -91,7 +91,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                                 E-mail:
                                 <div>
                                     <input
-                                        placeholder={defaultValues?.email || "enter new email"}
+                                        placeholder={defaultValues?.email || "enter email"}
                                         id="email"
                                         name="email"
                                         type="email"

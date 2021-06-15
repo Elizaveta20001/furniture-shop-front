@@ -36,25 +36,28 @@ export const ChangePassSubTab: React.FC = () => {
         if (
             !!data.newPassword && !!data.oldPassword && !!data.repeatNewPassword
         ) {
-            if (data.newPassword === data.repeatNewPassword) {
+            if (data.newPassword === data.oldPassword) console.log('New and old passwords are the same!');
+            else
+                if (data.newPassword === data.repeatNewPassword) {
 
-                let dataToSend = {
-                    oldPassword: data.oldPassword,
-                    newPassword: data.newPassword
+                    let dataToSend = {
+                        oldPassword: data.oldPassword,
+                        newPassword: data.newPassword
+                    }
+
+                    try {
+                        dispatch(updateUserPassword(uriForChangePass, 'PUT', dataToSend, userId, token));
+                        cancelHandler();
+                    }
+                    catch(e) {
+                        console.log('error on change user password:', e);
+                    }
+
+                }
+                else {
+                    console.log('Passwords doesn\'t compare');
                 }
 
-                try {
-                    dispatch(updateUserPassword(uriForChangePass, 'PUT', dataToSend, userId, token));
-                    setToggledChange(false);
-                }
-                catch(e) {
-                    console.log('error on change user password:', e);
-                }
-
-            }
-            else {
-                console.log('Passwords doesn\'t compare');
-            }
         }
         else {
             console.log('empty data');

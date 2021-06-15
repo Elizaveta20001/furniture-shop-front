@@ -11,8 +11,8 @@ import "./signInPage.css";
 export const SignInPage: React.FC = () => {
     const dispatch = useDispatch();
     const [form, setForm] = useState({
-        email: '',
-        password: ''
+        signInEmail: '',
+        signInPassword: ''
     })
 
     useEffect(() => {
@@ -25,7 +25,17 @@ export const SignInPage: React.FC = () => {
 
     const login = () => {
         try {
-            dispatch(fetchLogin(apiLogin, 'POST', form, {}));
+            dispatch(
+                fetchLogin(
+                    apiLogin,
+                    'POST',
+                    {
+                            email: form.signInEmail,
+                            password: form.signInPassword
+                         },
+                    {}
+                )
+            );
             dispatch(enter(false));
             dispatch(clearMessage());
         } catch(e){}
@@ -41,10 +51,10 @@ export const SignInPage: React.FC = () => {
                                 E-mail:
                                 <input
                                     placeholder="enter email"
-                                    id="email"
-                                    name="email"
+                                    id="signInEmail"
+                                    name="signInEmail"
                                     type="email"
-                                    value={form.email}
+                                    value={form.signInEmail}
                                     onChange={changeHandler}
                                     required
                                 />
@@ -54,10 +64,10 @@ export const SignInPage: React.FC = () => {
                                 Password:
                                 <input
                                     placeholder="enter password"
-                                    id="password"
+                                    id="signInPassword"
                                     type="password"
-                                    name="password"
-                                    value={form.password}
+                                    name="signInPassword"
+                                    value={form.signInPassword}
                                     onChange = {changeHandler}
                                     required
                                 />

@@ -6,24 +6,28 @@ import {SignInPage} from "../sign-in/SignInPage";
 import {SignUpPage} from "../sign-up/SignUpPage";
 
 import "./mainAuthPage.css";
+import {Loader} from "../../../components/loader/Loader";
 
 export const MainAuthPage: React.FC = () => {
     const message = useMessage();
-    const err = useSelector((state: Store) => state.loginReducer.message);
+    const loginNotification = useSelector((state: Store) => state.loginReducer.message);
+    const reginNotification = useSelector((state: Store) => state.reginReducer.message);
+    const isUpToDate = useSelector((state: Store) => state.reginReducer.isUpToDate);
 
     useEffect(() => {
-        message(err);
-    }, [
-        err,
-        message,
-    ])
+        message(loginNotification);
+    }, [loginNotification, message])
+
+    useEffect(() => {
+        message(reginNotification);
+    }, [reginNotification, message])
 
     useEffect(() => {
         window.M.updateTextFields();
         window.M.AutoInit();
         let collapsibleElems = document.querySelectorAll('.collapsible');
         window.M.Collapsible.init(collapsibleElems);
-    }, [])
+    })
 
     return (
         <div className="row">
@@ -40,7 +44,9 @@ export const MainAuthPage: React.FC = () => {
                         <SignInPage/>
                     </div>
                     <div id="cart" className="col s12">
-                        <SignUpPage/>
+                        {
+                            isUpToDate ? <SignUpPage/> : <Loader/>
+                        }
                     </div>
                 </div>
             </div>

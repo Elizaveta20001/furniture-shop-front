@@ -75,8 +75,6 @@ export const BasicInfoSubTab: React.FC = () => {
         const stringifiedDataToSend = JSON.stringify(dataToSend);
 
         if (stringifiedDataToSend !== stringifiedDefaultUserData && stringifiedDataToSend !== stringifiedForm) {
-            console.log('dataToSend',dataToSend);
-
 
             let formData:any = new FormData();
 

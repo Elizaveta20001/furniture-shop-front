@@ -121,6 +121,11 @@ export interface LoginState {
     message: string;
 }
 
+export interface ReginState {
+    isUpToDate: boolean;
+    message: string;
+}
+
 export interface CollectionState {
     items: CatalogItem[],
     title: string
@@ -139,6 +144,7 @@ export interface CatalogState {
 declare global {
     interface Store {
         loginReducer: LoginState;
+        reginReducer: ReginState;
         catalogReducer: CatalogState;
         userDataReducer: UserDataState;
     }
@@ -179,6 +185,7 @@ export interface UserDataState {
 declare global {
     interface Store {
         loginReducer: LoginState;
+        reginReducer: ReginState;
         catalogReducer: CatalogState;
         cartReducer: CartState;
         searchResultsReducer: SearchResultsState;

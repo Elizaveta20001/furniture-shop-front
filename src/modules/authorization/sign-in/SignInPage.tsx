@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {useDispatch} from "react-redux";
 
 import { apiLogin } from '../constants';
-import { fetchLogin, enter, clearMessage } from '../store/actions';
+import {fetchLogin, enter, clearMessage} from '../store/actions';
 
 import "./signInPage.css";
 

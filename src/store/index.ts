@@ -8,6 +8,7 @@ import {loginWatcher} from '../modules/authorization/store/loginSaga';
 import {reginWatcher} from '../modules/authorization/store/reginSaga';
 import {collectionWatcher} from '../modules/catalog/collection/store/collectionSaga';
 import loginReducer from '../modules/authorization/store/loginReducer';
+import reginReducer from "../modules/authorization/store/reginReducer";
 import {userDataWatcher} from "../modules/user-profile/store/saga";
 import {userDataReducer} from "../modules/user-profile/store/reducer";
 import {composeWithDevTools} from 'redux-devtools-extension';
@@ -38,6 +39,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
     loginReducer,
+    reginReducer,
     catalogReducer,
     searchResultsReducer,
     cartReducer,

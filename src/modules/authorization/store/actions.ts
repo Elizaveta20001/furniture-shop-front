@@ -1,4 +1,14 @@
-import {ENTER, ERROR, FETCH_LOGIN, FETCH_REGIN, LOGOUT, SET_LOGIN, CLEAR_MESSAGE} from './keys';
+import {
+    ENTER,
+    ERROR,
+    FETCH_LOGIN,
+    FETCH_REGIN,
+    REGIN_SUCCESS,
+    REGIN_FAILURE,
+    LOGOUT,
+    SET_LOGIN,
+    CLEAR_MESSAGE,
+} from './keys';
 
 interface Form {
     email: string;
@@ -43,3 +53,18 @@ export const fetchRegin = (url: string, method: string, form: any, headers: Head
         headers
     }
 };
+
+export const reginSuccess = (response: any) => {
+    return({
+        type: REGIN_SUCCESS,
+        payload: response
+    })
+};
+
+export const reginFailure = (error: Error) => {
+    return({
+        type: REGIN_FAILURE,
+        payload: error
+    })
+};
+

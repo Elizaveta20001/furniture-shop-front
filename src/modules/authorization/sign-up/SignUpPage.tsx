@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {useDispatch} from "react-redux";
 
 import {apiReg} from "../constants";
-import {clearMessage, fetchRegin} from "../store/actions";
+import {clearMessage, fetchRegin, fetchLogin} from "../store/actions";
 import {PersonalUserData, UserPassData} from "../../../interfaces/interfaces";
 
 import {PersonalDataCard} from "../../../components/personalDataCard/PersonalDataCard";
@@ -12,7 +12,9 @@ import "./signUpPage.css";
 
 
 export const SignUpPage: React.FC = () => {
+
     const dispatch = useDispatch();
+
 
     const defaultUserData: PersonalUserData = {
         email: '',
@@ -45,8 +47,9 @@ export const SignUpPage: React.FC = () => {
 
     const blurPassHandler = (event: any) => {
         if (!!pass.signUpPassword && !!pass.repeatSignUpPassword) {
-            if (pass.signUpPassword === pass.repeatSignUpPassword) console.log("pass != repeatPass");
+            if (pass.signUpPassword !== pass.repeatSignUpPassword) console.log("pass !== repeatPass");
         }
+        else console.log('empty pass fields');
     }
 
     const fileSelectorHandler = (event: any) => {
@@ -65,16 +68,18 @@ export const SignUpPage: React.FC = () => {
 
         formData.append("image", form.image);
         formData.append("email", form.email);
-
         formData.append("firstName", form.firstName);
         formData.append("lastName", form.lastName);
-
         formData.append("password", pass.signUpPassword);
 
         try {
             dispatch(fetchRegin(apiReg, 'POST', formData, {}));
             dispatch(clearMessage());
-        } catch(e){}
+            setPass(defaultUserPassData);
+            setForm(defaultUserData);
+        } catch(e) {
+            console.log('some error with user creation:', e);
+        }
     }
 
     return (

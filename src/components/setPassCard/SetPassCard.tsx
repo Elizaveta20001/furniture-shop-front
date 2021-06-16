@@ -9,7 +9,6 @@ export const SetPassCard: React.FC<SetPassCardProps> = (
 ): JSX.Element => {
 
     return(
-        <form>
             <div className="row">
                 <div className="col s6 offset-s3">
                     <div className="card-content">
@@ -23,6 +22,7 @@ export const SetPassCard: React.FC<SetPassCardProps> = (
                                     name="signUpPassword"
                                     type="password"
                                     className="validate"
+                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
                                     value={values.signUpPassword}
                                     onChange={changeHandler}
                                     onBlur={blurHandler}
@@ -38,6 +38,7 @@ export const SetPassCard: React.FC<SetPassCardProps> = (
                                     name="repeatSignUpPassword"
                                     type="password"
                                     className="validate"
+                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
                                     value={values.repeatSignUpPassword}
                                     onChange={changeHandler}
                                     onBlur={blurHandler}
@@ -48,6 +49,5 @@ export const SetPassCard: React.FC<SetPassCardProps> = (
                     </div>
                 </div>
             </div>
-        </form>
     )
 }

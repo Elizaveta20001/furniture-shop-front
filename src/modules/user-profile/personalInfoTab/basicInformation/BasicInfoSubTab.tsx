@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {uriForUser} from "../../constants";
-import {fetchUserData, updateUserData, clearMessage} from "../../store/actions";
+import {fetchUserData, updateUserData} from "../../store/actions";
 
 
 import "./basicInfoSubTab.css";
@@ -104,44 +104,49 @@ export const BasicInfoSubTab: React.FC = () => {
                 <div>
 
                     <div className="card without-margin-top">
+                        <form onSubmit={submitHandler}>
 
-                        <PersonalDataCard
-                            defaultValues={form}
-                            values={dataToSend}
-                            toggledChange={toggledChange}
-                            changeHandler={changeHandler}
-                            fileSelectorHandler={fileSelectorHandler}
-                            imagePreview={imagePreview}
-                            cancelHandler={cancelHandler}
-                        />
+                            <PersonalDataCard
+                                defaultValues={form}
+                                values={dataToSend}
+                                toggledChange={toggledChange}
+                                changeHandler={changeHandler}
+                                fileSelectorHandler={fileSelectorHandler}
+                                imagePreview={imagePreview}
+                                required={false}
+                            />
 
-                        <div className="card-action buttons-container">
-                            {
-                                !toggledChange ? (
-                                    <button
-                                        className="waves-effect waves-light btn login-button"
-                                        onClick={() => setToggledChange(true)}
-                                    >
-                                        Change data
-                                    </button>
-                                ) : (
-                                    <div>
+                            <div className="card-action buttons-container">
+                                {
+                                    !toggledChange ? (
                                         <button
-                                            className="waves-effect waves-light btn unprior-button"
-                                            onClick={cancelHandler}
+                                            className="waves-effect waves-light btn login-button"
+                                            onClick={() => setToggledChange(true)}
                                         >
-                                            Cancel Changes
+                                            Change data
                                         </button>
-                                        <button
-                                            className="waves-effect waves-light btn prior-button"
-                                            onClick={submitHandler}
-                                        >
-                                            Confirm Changes
-                                        </button>
-                                    </div>
-                                )
-                            }
-                        </div>
+                                    ) : (
+                                        <div>
+                                            <button
+                                                className="waves-effect waves-light btn unprior-button"
+                                                onClick={cancelHandler}
+                                            >
+                                                Cancel Changes
+                                            </button>
+                                            <button
+                                                type="submit"
+                                                className="waves-effect waves-light btn prior-button"
+                                            >
+                                                Confirm Changes
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                            </div>
+
+                        </form>
+
+
 
 
 

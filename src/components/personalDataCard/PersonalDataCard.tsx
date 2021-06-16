@@ -11,7 +11,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
         changeHandler,
         fileSelectorHandler,
         imagePreview,
-        cancelHandler
+        required
     }
 ): JSX.Element => {
 
@@ -21,7 +21,6 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
     }
 
     return(
-        <form onSubmit={cancelHandler}>
             <div className="row image-column-container">
                 <div className="col s12 m5">
                     <div className="card-content">
@@ -66,7 +65,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                                     value={values.firstName}
                                     onChange={changeHandler}
                                     disabled={!toggledChange}
-                                    required
+                                    required={required}
                                 />
                             </div>
 
@@ -83,7 +82,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                                     value={values.lastName}
                                     onChange={changeHandler}
                                     disabled={!toggledChange}
-                                    required
+                                    required={required}
                                 />
                             </div>
 
@@ -96,11 +95,12 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                                         name="email"
                                         type="email"
                                         className="validate"
+                                        pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
                                         style={inputStyle}
                                         value={values.email}
                                         onChange={changeHandler}
                                         disabled={!toggledChange}
-                                        required
+                                        required={required}
                                     />
                                 </div>
                             </div>
@@ -111,6 +111,5 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
 
 
 
-        </form>
     )
 }

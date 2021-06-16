@@ -85,42 +85,47 @@ export const SignUpPage: React.FC = () => {
     return (
         <div className="card">
 
-            <ul className="collapsible without-margin-vertical">
-                <li className="active">
-                    <div className="collapsible-header small-font-size"><i className="material-icons">account_circle</i>Basic information</div>
-                    <div className="collapsible-body without-padding">
-                        <PersonalDataCard
-                            values={form}
-                            toggledChange
-                            changeHandler={changeDataHandler}
-                            fileSelectorHandler={fileSelectorHandler}
-                            imagePreview={imagePreview}
-                        />
-                    </div>
-                </li>
-                <li>
-                    <div className="collapsible-header small-font-size">
-                        <i className="material-icons">vpn_key</i>
-                        Password
-                    </div>
-                    <div className="collapsible-body without-padding">
-                        <SetPassCard
-                            values={pass}
-                            changeHandler={changePassHandler}
-                            blurHandler={blurPassHandler}
-                        />
-                    </div>
-                </li>
-            </ul>
+            <form onSubmit={submitHandler}>
 
-            <div className="card-action buttons-container">
-                <button
-                    className="waves-effect waves-light btn prior-button"
-                    onClick={submitHandler}
-                >
-                    Sign up
-                </button>
-            </div>
+                <ul className="collapsible without-margin-vertical">
+                    <li className="active">
+                        <div className="collapsible-header small-font-size"><i className="material-icons">account_circle</i>Basic information</div>
+                        <div className="collapsible-body without-padding">
+                            <PersonalDataCard
+                                values={form}
+                                toggledChange
+                                changeHandler={changeDataHandler}
+                                fileSelectorHandler={fileSelectorHandler}
+                                imagePreview={imagePreview}
+                                required={true}
+                            />
+                        </div>
+                    </li>
+                    <li>
+                        <div className="collapsible-header small-font-size">
+                            <i className="material-icons">vpn_key</i>
+                            Password
+                        </div>
+                        <div className="collapsible-body without-padding">
+                            <SetPassCard
+                                values={pass}
+                                changeHandler={changePassHandler}
+                                blurHandler={blurPassHandler}
+                            />
+                        </div>
+                    </li>
+                </ul>
+
+                <div className="card-action buttons-container">
+                    <button
+                        className="waves-effect waves-light btn prior-button"
+                        type="submit"
+                    >
+                        Sign up
+                    </button>
+                </div>
+
+            </form>
 
         </div>
     )

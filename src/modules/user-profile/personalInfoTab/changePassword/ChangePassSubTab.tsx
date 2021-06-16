@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {uriForChangePass} from "../../constants";
@@ -10,9 +10,12 @@ import {ChangePassCard} from "../../../../components/changePassCard/ChangePassCa
 
 import "./changePassSubTab.css";
 
-
-
 export const ChangePassSubTab: React.FC = () => {
+
+    const fieldRefs:any = useRef();
+
+    const emailRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/;
+
     const dispatch = useDispatch();
     const userId = useSelector((state: Store) => state.loginReducer.userId);
     const token = useSelector((state: Store) => state.loginReducer.token);
@@ -27,18 +30,68 @@ export const ChangePassSubTab: React.FC = () => {
     const [data, setData] = useState<ChangePassUserData>(defaultChangePassData);
     const [toggledChange, setToggledChange] = useState(true);
 
-    const changeHandler = (event: any) => {
-        setData({...data, [event.target.name]: event.target.value});
+    const registerField = (key:any, ref:any) => {
+        fieldRefs.current = {...fieldRefs.current, [key]: ref}
     }
 
-    const submitHandler = () => {
+    const changeHandler = (event: any) => {
+        setData({...data, [event.target.name]: event.target.value});
+
+     }
+
+    const submitHandler = (event: any) => {
+
+        event.preventDefault();
+
+        let oldPassword = fieldRefs.current.oldPassword.current;
+        let newPassword = fieldRefs.current.newPassword.current;
+        let repeatNewPassword = fieldRefs.current.repeatNewPassword.current;
+
+        console.log('oldPassword',oldPassword.value);
+        console.log('newPassword',newPassword.value);
+        console.log('repeatNewPassword',repeatNewPassword.value);
+
+        oldPassword.setCustomValidity('');
+        oldPassword.reportValidity();
+
+        newPassword.setCustomValidity('');
+        newPassword.reportValidity();
+
+        repeatNewPassword.setCustomValidity('');
+        repeatNewPassword.reportValidity();
 
         if (
-            !!data.newPassword && !!data.oldPassword && !!data.repeatNewPassword
+            !!newPassword.value && !!repeatNewPassword.value && !!oldPassword.value
         ) {
-            if (data.newPassword === data.oldPassword) console.log('New and old passwords are the same!');
-            else
-                if (data.newPassword === data.repeatNewPassword) {
+
+            if (!emailRegExp.test(oldPassword)) {
+                oldPassword.setCustomValidity('');
+                oldPassword.reportValidity();
+            } else if (!emailRegExp.test(newPassword)) {
+                newPassword.setCustomValidity('');
+                newPassword.reportValidity();
+            } else if (!emailRegExp.test(repeatNewPassword)) {
+                repeatNewPassword.setCustomValidity('');
+                repeatNewPassword.reportValidity();
+            } else if (newPassword.value === oldPassword.value) {
+
+                oldPassword.setCustomValidity('New and old passwords are the same!');
+                oldPassword.reportValidity();
+
+                newPassword.setCustomValidity('New and old passwords are the same!');
+                newPassword.reportValidity();
+
+            }
+            else if (newPassword.value !== repeatNewPassword.value) {
+
+                newPassword.setCustomValidity("New password not confirmed");
+                newPassword.reportValidity();
+
+                repeatNewPassword.setCustomValidity("New password not confirmed");
+                repeatNewPassword.reportValidity();
+
+            } else {
+                {
 
                     let dataToSend = {
                         oldPassword: data.oldPassword,
@@ -54,13 +107,7 @@ export const ChangePassSubTab: React.FC = () => {
                     }
 
                 }
-                else {
-                    console.log('Passwords doesn\'t compare');
-                }
-
-        }
-        else {
-            console.log('empty data');
+            }
         }
     }
 
@@ -75,41 +122,42 @@ export const ChangePassSubTab: React.FC = () => {
                 <div>
 
                     <div className="card without-margin-vertical">
+                        <form>
+                            <ChangePassCard
+                                values={data}
+                                toggledChange={toggledChange}
+                                changeHandler={changeHandler}
+                                registerField={registerField}
+                            />
 
-                        <ChangePassCard
-                            values={data}
-                            toggledChange={toggledChange}
-                            changeHandler={changeHandler}
-                            cancelHandler={cancelHandler}
-                        />
-
-                        <div className="card-action buttons-container">
-                            {
-                                !toggledChange ? (
-                                    <button
-                                        className="waves-effect waves-light btn login-button"
-                                        onClick={() => setToggledChange(true)}
-                                    >
-                                        Change password
-                                    </button>
-                                ) : (
-                                    <div>
+                            <div className="card-action buttons-container">
+                                {
+                                    !toggledChange ? (
                                         <button
-                                            className="waves-effect waves-light btn unprior-button"
-                                            onClick={cancelHandler}
+                                            className="waves-effect waves-light btn login-button"
+                                            onClick={() => setToggledChange(true)}
                                         >
-                                            Cancel Changes
+                                            Change password
                                         </button>
-                                        <button
-                                            className="waves-effect waves-light btn prior-button"
-                                            onClick={submitHandler}
-                                        >
-                                            Confirm Changes
-                                        </button>
-                                    </div>
-                                )
-                            }
-                        </div>
+                                    ) : (
+                                        <div>
+                                            <button
+                                                className="waves-effect waves-light btn unprior-button"
+                                                onClick={cancelHandler}
+                                            >
+                                                Cancel Changes
+                                            </button>
+                                            <button
+                                                className="waves-effect waves-light btn prior-button"
+                                                onClick={submitHandler}
+                                            >
+                                                Confirm Changes
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </form>
                     </div>
                 </div>
             )}

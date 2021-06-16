@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {useDispatch} from "react-redux";
 
 import { apiLogin } from '../constants';
-import {fetchLogin, enter, clearMessage} from '../store/actions';
+import {fetchLogin, enter, clearMessage, reginSuccess} from '../store/actions';
 
 import "./signInPage.css";
 
@@ -24,6 +24,7 @@ export const SignInPage: React.FC = () => {
     }
 
     const login = () => {
+        dispatch(reginSuccess("check"))
         try {
             dispatch(
                 fetchLogin(

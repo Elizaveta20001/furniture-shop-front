@@ -76,7 +76,7 @@ export interface PersonalDataCardProps {
     changeHandler: (event: any) => void,
     fileSelectorHandler: (event: any) => void,
     imagePreview: string,
-    cancelHandler?: (event: any) => void
+    required: boolean
 }
 
 export interface ChangePassUserData  {
@@ -90,11 +90,20 @@ export interface SetPassUserData  {
     repeatSignUpPassword: string
 }
 
+export interface TextInputFieldProps {
+    id: string,
+    value: string,
+    toggledChange: boolean,
+    changeHandler: (event: any) => void,
+    registerField: (key:any, ref:any) => void,
+    ref: any
+}
+
 export interface ChangePassCardProps {
     values: ChangePassUserData,
     toggledChange: boolean,
     changeHandler: (event: any) => void,
-    cancelHandler: (event: any) => void
+    registerField: (key:any, ref:any) => void
 }
 
 export interface SetPassCardProps {

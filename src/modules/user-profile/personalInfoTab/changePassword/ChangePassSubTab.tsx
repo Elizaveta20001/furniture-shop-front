@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {uriForChangePass} from "../../constants";
 import {updateUserPassword} from "../../store/actions";
+import {setFieldError} from "../../../../helpers/setFieldError";
+import {passRequirements, passRegExp} from "../../../../helpers/passValidation";
 import {ChangePassUserData} from "../../../../interfaces/interfaces";
 
 import {Loader} from "../../../../components/loader/Loader";
@@ -13,15 +15,6 @@ import "./changePassSubTab.css";
 export const ChangePassSubTab: React.FC = () => {
 
     const fieldRefs:any = useRef();
-
-    const passRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/;
-    const passRequirements =
-        'Password requirements:\n' +
-        'At least 1 Uppercase\n' +
-        'At least 1 Lowercase\n' +
-        'At least 1 Number\n' +
-        'At least 1 Symbol !@#$%^&*_=+-\n' +
-        'Min 8 chars and Max 12 chars';
 
     const dispatch = useDispatch();
     const userId = useSelector((state: Store) => state.loginReducer.userId);
@@ -44,12 +37,6 @@ export const ChangePassSubTab: React.FC = () => {
     const changeHandler = (event: any) => {
         setData({...data, [event.target.name]: event.target.value});
     }
-
-
-     const setFieldError = (field:any, error: string) => {
-         field.setCustomValidity(error);
-         field.reportValidity();
-     }
 
      const validateForm = (oldPassword:any, newPassword:any, repeatNewPassword:any): boolean => {
 

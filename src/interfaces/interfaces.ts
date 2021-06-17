@@ -109,7 +109,7 @@ export interface ChangePassCardProps {
 export interface SetPassCardProps {
     values: SetPassUserData,
     changeHandler: (event: any) => void,
-    blurHandler: (event: any) => void,
+    registerField: (key:any, ref:any) => void
 }
 
 

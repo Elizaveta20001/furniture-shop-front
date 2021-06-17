@@ -22,15 +22,25 @@ export const MainAuthPage: React.FC = () => {
         message(reginNotification);
     }, [reginNotification, message])
 
+    let instance:any;
+
     useEffect(() => {
         window.M.updateTextFields();
         window.M.AutoInit();
-        let collapsibleElems = document.querySelectorAll('.collapsible');
+        let collapsibleElems = document.querySelectorAll('.collapsible.expandable');
         window.M.Collapsible.init(collapsibleElems);
+
     })
+
+    const handleClick = () => {
+        instance = window.M.Collapsible.getInstance(document.querySelector('.collapsible.expandable'));
+        instance.open(1);
+        console.log(instance);
+    }
 
     return (
         <div className="row">
+            <button onClick={handleClick}>Check</button>
             <div className="col s10 offset-s1">
                 <h1>Authorization</h1>
                 <div className="row">

@@ -1,12 +1,19 @@
 import {SetPassCardProps} from "../../interfaces/interfaces";
+import React, {useRef} from "react";
+import {TextInputField} from "../textInputField/TextInputField";
 
 export const SetPassCard: React.FC<SetPassCardProps> = (
     {
         values,
         changeHandler,
-        blurHandler
+        registerField
     }
 ): JSX.Element => {
+
+    const signUpPassRef = useRef(null);
+    const repeatSignUpPassRef = useRef(null);
+
+    const inputRefs = Array.from([signUpPassRef, repeatSignUpPassRef]);
 
     return(
             <div className="row">
@@ -14,37 +21,17 @@ export const SetPassCard: React.FC<SetPassCardProps> = (
                     <div className="card-content">
                         <div className="form-container">
 
-                            <div className="input-field with-name change-pass">
-                                Password:
-                                <input
-                                    placeholder={"enter password"}
-                                    id="signUpPassword"
-                                    name="signUpPassword"
-                                    type="password"
-                                    className="validate"
-                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
-                                    value={values.signUpPassword}
-                                    onChange={changeHandler}
-                                    onBlur={blurHandler}
-                                    required
+                            {Object.entries(values).map(([key, value], index) => (
+                                <TextInputField
+                                    key={key}
+                                    id={key}
+                                    value={value}
+                                    toggledChange={true}
+                                    changeHandler={changeHandler}
+                                    registerField={registerField}
+                                    ref={inputRefs[index]}
                                 />
-                            </div>
-
-                            <div className="input-field with-name change-pass">
-                                Repeat password:
-                                <input
-                                    placeholder={"enter password again"}
-                                    id="repeatSignUpPassword"
-                                    name="repeatSignUpPassword"
-                                    type="password"
-                                    className="validate"
-                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
-                                    value={values.repeatSignUpPassword}
-                                    onChange={changeHandler}
-                                    onBlur={blurHandler}
-                                    required
-                                />
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>

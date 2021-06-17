@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {useDispatch} from "react-redux";
 
 import {apiReg} from "../constants";
-import {clearMessage, fetchRegin, fetchLogin} from "../store/actions";
+import {clearMessage, fetchRegin} from "../store/actions";
+import {setFieldError} from "../../../helpers/setFieldError";
+import {passRegExp, passRequirements} from "../../../helpers/passValidation";
 import {PersonalUserData, UserPassData} from "../../../interfaces/interfaces";
 
 import {PersonalDataCard} from "../../../components/personalDataCard/PersonalDataCard";
@@ -13,8 +15,8 @@ import "./signUpPage.css";
 
 export const SignUpPage: React.FC = () => {
 
+    const fieldRefs:any = useRef();
     const dispatch = useDispatch();
-
 
     const defaultUserData: PersonalUserData = {
         email: '',
@@ -37,19 +39,16 @@ export const SignUpPage: React.FC = () => {
         window.M.updateTextFields();
     }, [])
 
+    const registerField = (key:any, ref:any) => {
+        fieldRefs.current = {...fieldRefs.current, [key]: ref}
+    }
+
     const changeDataHandler = (event: any) => {
         setForm({...form, [event.target.name]: event.target.value});
     }
 
     const changePassHandler = (event: any) => {
         setPass({...pass, [event.target.name]: event.target.value});
-    }
-
-    const blurPassHandler = (event: any) => {
-        if (!!pass.signUpPassword && !!pass.repeatSignUpPassword) {
-            if (pass.signUpPassword !== pass.repeatSignUpPassword) console.log("pass !== repeatPass");
-        }
-        else console.log('empty pass fields');
     }
 
     const fileSelectorHandler = (event: any) => {
@@ -62,24 +61,69 @@ export const SignUpPage: React.FC = () => {
         }
     }
 
-    const submitHandler = () => {
+    const resetPassFormErrors = () => {
 
-        let formData:any = new FormData();
+        let repeatSignUpPassword = fieldRefs.current.repeatSignUpPassword.current;
+        let signUpPassword = fieldRefs.current.signUpPassword.current;
+        setFieldError(signUpPassword,'');
+        setFieldError(repeatSignUpPassword,'');
 
-        formData.append("image", form.image);
-        formData.append("email", form.email);
-        formData.append("firstName", form.firstName);
-        formData.append("lastName", form.lastName);
-        formData.append("password", pass.signUpPassword);
+    }
 
-        try {
+    const validatePassForm = (repeatSignUpPassword:any, signUpPassword:any): boolean => {
+
+        if (!signUpPassword.value) {
+            setFieldError(signUpPassword, 'This field is required');
+            return false;
+        }
+        if (!repeatSignUpPassword.value) {
+            setFieldError(repeatSignUpPassword, 'This field is required');
+            return false;
+        }
+
+        if (!passRegExp.test(signUpPassword.value)) {
+            setFieldError(signUpPassword, passRequirements)
+            return false;
+        }
+        if (!passRegExp.test(repeatSignUpPassword.value)) {
+            setFieldError(repeatSignUpPassword, passRequirements);
+            return false;
+        }
+
+        if (signUpPassword.value !== repeatSignUpPassword.value) {
+            setFieldError(signUpPassword,"New password not confirmed");
+            setFieldError(repeatSignUpPassword,"New password not confirmed");
+            return false;
+        }
+
+        return true;
+
+    }
+
+    const submitHandler = (event: any) => {
+
+        event.preventDefault();
+
+        let repeatSignUpPassword = fieldRefs.current.repeatSignUpPassword.current;
+        let signUpPassword = fieldRefs.current.signUpPassword.current;
+
+        if (validatePassForm(signUpPassword, repeatSignUpPassword)) {
+
+            let formData:any = new FormData();
+
+            formData.append("image", form.image);
+            formData.append("email", form.email);
+            formData.append("firstName", form.firstName);
+            formData.append("lastName", form.lastName);
+            formData.append("password", pass.signUpPassword);
+
             dispatch(fetchRegin(apiReg, 'POST', formData, {}));
             dispatch(clearMessage());
             setPass(defaultUserPassData);
             setForm(defaultUserData);
-        } catch(e) {
-            console.log('some error with user creation:', e);
+
         }
+
     }
 
     return (
@@ -87,8 +131,8 @@ export const SignUpPage: React.FC = () => {
 
             <form onSubmit={submitHandler}>
 
-                <ul className="collapsible without-margin-vertical">
-                    <li className="active">
+                <ul className="collapsible expandable without-margin-vertical">
+                    <li>
                         <div className="collapsible-header small-font-size"><i className="material-icons">account_circle</i>Basic information</div>
                         <div className="collapsible-body without-padding">
                             <PersonalDataCard
@@ -110,7 +154,7 @@ export const SignUpPage: React.FC = () => {
                             <SetPassCard
                                 values={pass}
                                 changeHandler={changePassHandler}
-                                blurHandler={blurPassHandler}
+                                registerField={registerField}
                             />
                         </div>
                     </li>
@@ -120,6 +164,7 @@ export const SignUpPage: React.FC = () => {
                     <button
                         className="waves-effect waves-light btn prior-button"
                         type="submit"
+                        onClick={resetPassFormErrors}
                     >
                         Sign up
                     </button>

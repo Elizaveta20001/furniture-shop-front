@@ -16,26 +16,26 @@ export const TextInputField: React.FC<TextInputFieldProps> = forwardRef(
             boxShadow: "none",
         }
 
+        const dividedLabelText = id.replace(/([a-z])([A-Z])/g, '$1 $2');
+
         useEffect(() => {
             registerField(id, ref);
         }, [registerField, id, ref]);
 
         return(
 
-            <Fragment>
+            <div className="input-field with-name change-pass">
+                {dividedLabelText.charAt(0).toUpperCase() + dividedLabelText.slice(1)}:
                 <input
                     ref={ref}
                     id={id}
                     name={id}
                     type="password"
-                    className="validate"
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
                     style={inputStyle}
                     value={value}
                     onChange={changeHandler}
                     disabled={!toggledChange}
-                    required
                 />
-            </Fragment>
+            </div>
         )
     })

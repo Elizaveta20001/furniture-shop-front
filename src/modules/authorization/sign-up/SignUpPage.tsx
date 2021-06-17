@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {apiReg} from "../constants";
 import {clearMessage, fetchRegin} from "../store/actions";
 import {setFieldError} from "../../../helpers/setFieldError";
-import {passRegExp, passRequirements} from "../../../helpers/passValidation";
+import {emailRegExp, nameRegExp ,passRegExp, passRequirements} from "../../../helpers/validation";
 import {PersonalUserData, UserPassData} from "../../../interfaces/interfaces";
 
 import {PersonalDataCard} from "../../../components/personalDataCard/PersonalDataCard";
@@ -26,8 +26,8 @@ export const SignUpPage: React.FC = () => {
     };
 
     const defaultUserPassData: UserPassData = {
-        signUpPassword: '',
-        repeatSignUpPassword: ''
+        password: '',
+        repeatPassword: ''
     };
 
     const [form, setForm] = useState<PersonalUserData>(defaultUserData);
@@ -38,6 +38,11 @@ export const SignUpPage: React.FC = () => {
     useEffect(() => {
         window.M.updateTextFields();
     }, [])
+
+    const openSignUpSubTab = (tab: number) => {
+        let instance = window.M.Collapsible.getInstance(document.querySelector('.collapsible.expandable'));
+        instance.open(tab);
+    }
 
     const registerField = (key:any, ref:any) => {
         fieldRefs.current = {...fieldRefs.current, [key]: ref}
@@ -63,34 +68,39 @@ export const SignUpPage: React.FC = () => {
 
     const resetPassFormErrors = () => {
 
-        let repeatSignUpPassword = fieldRefs.current.repeatSignUpPassword.current;
-        let signUpPassword = fieldRefs.current.signUpPassword.current;
-        setFieldError(signUpPassword,'');
-        setFieldError(repeatSignUpPassword,'');
+        let repeatPassword = fieldRefs.current.repeatPassword.current;
+        let password = fieldRefs.current.password.current;
+        setFieldError(password,'');
+        setFieldError(repeatPassword,'');
 
     }
 
     const validatePassForm = (repeatSignUpPassword:any, signUpPassword:any): boolean => {
 
         if (!signUpPassword.value) {
+            openSignUpSubTab(1);
             setFieldError(signUpPassword, 'This field is required');
             return false;
         }
         if (!repeatSignUpPassword.value) {
+            openSignUpSubTab(1);
             setFieldError(repeatSignUpPassword, 'This field is required');
             return false;
         }
 
         if (!passRegExp.test(signUpPassword.value)) {
+            openSignUpSubTab(1);
             setFieldError(signUpPassword, passRequirements)
             return false;
         }
         if (!passRegExp.test(repeatSignUpPassword.value)) {
+            openSignUpSubTab(1);
             setFieldError(repeatSignUpPassword, passRequirements);
             return false;
         }
 
         if (signUpPassword.value !== repeatSignUpPassword.value) {
+            openSignUpSubTab(1);
             setFieldError(signUpPassword,"New password not confirmed");
             setFieldError(repeatSignUpPassword,"New password not confirmed");
             return false;
@@ -100,12 +110,33 @@ export const SignUpPage: React.FC = () => {
 
     }
 
+    const validateDataForm = (): boolean => {
+
+        if (!validateField(form.firstName, nameRegExp)
+            || !validateField(form.lastName, nameRegExp)
+            || !validateField(form.email, emailRegExp)) {
+            return false;
+        }
+        return true;
+
+    }
+
+    const validateField = (field: string, regExp: RegExp): boolean => {
+
+        if (!field) return false;
+        if (!regExp.test(field)) return false;
+        return true;
+
+    }
+
     const submitHandler = (event: any) => {
 
         event.preventDefault();
 
-        let repeatSignUpPassword = fieldRefs.current.repeatSignUpPassword.current;
-        let signUpPassword = fieldRefs.current.signUpPassword.current;
+        let repeatSignUpPassword = fieldRefs.current.repeatPassword.current;
+        let signUpPassword = fieldRefs.current.password.current;
+
+
 
         if (validatePassForm(signUpPassword, repeatSignUpPassword)) {
 
@@ -115,7 +146,7 @@ export const SignUpPage: React.FC = () => {
             formData.append("email", form.email);
             formData.append("firstName", form.firstName);
             formData.append("lastName", form.lastName);
-            formData.append("password", pass.signUpPassword);
+            formData.append("password", pass.password);
 
             dispatch(fetchRegin(apiReg, 'POST', formData, {}));
             dispatch(clearMessage());
@@ -126,13 +157,25 @@ export const SignUpPage: React.FC = () => {
 
     }
 
+    const handleSignUpClick = () => {
+
+        resetPassFormErrors();
+
+        let repeatSignUpPassword = fieldRefs.current.repeatPassword.current;
+        let signUpPassword = fieldRefs.current.password.current;
+
+        if (!validatePassForm(signUpPassword, repeatSignUpPassword)) openSignUpSubTab(1)
+        if (!validateDataForm()) openSignUpSubTab(0)
+
+    }
+
     return (
         <div className="card">
 
             <form onSubmit={submitHandler}>
 
                 <ul className="collapsible expandable without-margin-vertical">
-                    <li>
+                    <li className="active">
                         <div className="collapsible-header small-font-size"><i className="material-icons">account_circle</i>Basic information</div>
                         <div className="collapsible-body without-padding">
                             <PersonalDataCard
@@ -164,7 +207,7 @@ export const SignUpPage: React.FC = () => {
                     <button
                         className="waves-effect waves-light btn prior-button"
                         type="submit"
-                        onClick={resetPassFormErrors}
+                        onClick={handleSignUpClick}
                     >
                         Sign up
                     </button>

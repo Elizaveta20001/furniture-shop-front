@@ -12,7 +12,7 @@ export const MainAuthPage: React.FC = () => {
     const message = useMessage();
     const loginNotification = useSelector((state: Store) => state.loginReducer.message);
     const reginNotification = useSelector((state: Store) => state.reginReducer.message);
-    const isUpToDate = useSelector((state: Store) => state.reginReducer.isUpToDate);
+    let isUpToDate = useSelector((state: Store) => state.reginReducer.isUpToDate);
 
     useEffect(() => {
         message(loginNotification);
@@ -22,25 +22,17 @@ export const MainAuthPage: React.FC = () => {
         message(reginNotification);
     }, [reginNotification, message])
 
-    let instance:any;
-
     useEffect(() => {
         window.M.updateTextFields();
         window.M.AutoInit();
         let collapsibleElems = document.querySelectorAll('.collapsible.expandable');
-        window.M.Collapsible.init(collapsibleElems);
-
+        window.M.Collapsible.init(collapsibleElems,{accordion: false});
     })
 
-    const handleClick = () => {
-        instance = window.M.Collapsible.getInstance(document.querySelector('.collapsible.expandable'));
-        instance.open(1);
-        console.log(instance);
-    }
+
 
     return (
         <div className="row">
-            <button onClick={handleClick}>Check</button>
             <div className="col s10 offset-s1">
                 <h1>Authorization</h1>
                 <div className="row">

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {uriForChangePass} from "../../constants";
 import {updateUserPassword} from "../../store/actions";
 import {setFieldError} from "../../../../helpers/setFieldError";
-import {passRequirements, passRegExp} from "../../../../helpers/passValidation";
+import {passRequirements, passRegExp} from "../../../../helpers/validation";
 import {ChangePassUserData} from "../../../../interfaces/interfaces";
 
 import {Loader} from "../../../../components/loader/Loader";

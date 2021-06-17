@@ -65,8 +65,8 @@ export interface PersonalUserData  {
 }
 
 export interface UserPassData  {
-    signUpPassword: string,
-    repeatSignUpPassword: string,
+    password: string,
+    repeatPassword: string,
 }
 
 export interface PersonalDataCardProps {
@@ -86,8 +86,8 @@ export interface ChangePassUserData  {
 }
 
 export interface SetPassUserData  {
-    signUpPassword: string,
-    repeatSignUpPassword: string
+    password: string,
+    repeatPassword: string
 }
 
 export interface TextInputFieldProps {

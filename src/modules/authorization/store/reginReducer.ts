@@ -18,7 +18,13 @@ export default function reginReducer(state = defaultState, action: any) {
                 ...state,
                 isUpToDate: false,
             }
-        case REGIN_SUCCESS || REGIN_FAILURE:
+        case REGIN_SUCCESS:
+            return {
+                ...state,
+                isUpToDate: true,
+                message: action.payload.message,
+            }
+        case REGIN_FAILURE:
             return {
                 ...state,
                 isUpToDate: true,

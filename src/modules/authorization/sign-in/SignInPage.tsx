@@ -23,8 +23,10 @@ export const SignInPage: React.FC = () => {
         setForm({...form, [event.target.name]: event.target.value});
     }
 
-    const login = () => {
-        dispatch(reginSuccess("check"))
+    const login = (event:any) => {
+
+        event.preventDefault();
+
         try {
             dispatch(
                 fetchLogin(
@@ -46,47 +48,53 @@ export const SignInPage: React.FC = () => {
         <div className="row">
             <div className="col s12">
                 <div className="card form-background">
-                    <div className="card-content">
-                        <div>
-                            <div className="input-field sign-in">
-                                E-mail:
-                                <input
-                                    placeholder="enter email"
-                                    id="signInEmail"
-                                    name="signInEmail"
-                                    type="email"
-                                    value={form.signInEmail}
-                                    onChange={changeHandler}
-                                    required
-                                />
-                            </div>
+                    <form onSubmit={login}>
+                        <div className="card-content">
+                            <div>
+                                <div className="input-field sign-in">
+                                    E-mail:
+                                    <input
+                                        placeholder="enter email"
+                                        id="signInEmail"
+                                        name="signInEmail"
+                                        type="email"
+                                        className="validate"
+                                        pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
+                                        value={form.signInEmail}
+                                        onChange={changeHandler}
+                                        required
+                                    />
+                                </div>
 
-                            <div className="input-field sign-in">
-                                Password:
-                                <input
-                                    placeholder="enter password"
-                                    id="signInPassword"
-                                    type="password"
-                                    name="signInPassword"
-                                    value={form.signInPassword}
-                                    onChange = {changeHandler}
-                                    required
-                                />
-                            </div>
+                                <div className="input-field sign-in">
+                                    Password:
+                                    <input
+                                        placeholder="enter password"
+                                        id="signInPassword"
+                                        type="password"
+                                        name="signInPassword"
+                                        className="validate"
+                                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+                                        value={form.signInPassword}
+                                        onChange = {changeHandler}
+                                        required
+                                    />
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="card-action">
-                        <button
-                            className="waves-effect waves-light btn login-button"
-                            style={{marginRight:10}}
-                            onClick={login}
-                        >
-                            Sign in
-                        </button>
+                        <div className="card-action">
+                            <button
+                                className="waves-effect waves-light btn login-button"
+                                style={{marginRight:10}}
+                                type="submit"
+                            >
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
 
-                    </div>
                 </div>
             </div>
         </div>

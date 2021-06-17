@@ -14,7 +14,14 @@ export const ChangePassSubTab: React.FC = () => {
 
     const fieldRefs:any = useRef();
 
-    const emailRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/;
+    const passRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/;
+    const passRequirements =
+        'Password requirements:\n' +
+        'At least 1 Uppercase\n' +
+        'At least 1 Lowercase\n' +
+        'At least 1 Number\n' +
+        'At least 1 Symbol !@#$%^&*_=+-\n' +
+        'Min 8 chars and Max 12 chars';
 
     const dispatch = useDispatch();
     const userId = useSelector((state: Store) => state.loginReducer.userId);
@@ -36,6 +43,55 @@ export const ChangePassSubTab: React.FC = () => {
 
     const changeHandler = (event: any) => {
         setData({...data, [event.target.name]: event.target.value});
+    }
+
+
+     const setFieldError = (field:any, error: string) => {
+         field.setCustomValidity(error);
+         field.reportValidity();
+     }
+
+     const validateForm = (oldPassword:any, newPassword:any, repeatNewPassword:any): boolean => {
+
+        setFieldError(oldPassword,'');
+        setFieldError(newPassword,'');
+        setFieldError(repeatNewPassword,'');
+
+        if (!oldPassword.value) {
+            setFieldError(oldPassword, 'This field is required');
+            return false;
+        }
+         if (!newPassword.value) {
+             setFieldError(newPassword, 'This field is required');
+             return false;
+         }
+         if (!repeatNewPassword.value) {
+             setFieldError(repeatNewPassword, 'This field is required');
+             return false;
+         }
+
+        if (!passRegExp.test(newPassword.value)) {
+            setFieldError(newPassword, passRequirements)
+            return false;
+        }
+        if (!passRegExp.test(repeatNewPassword.value)) {
+            setFieldError(repeatNewPassword, passRequirements);
+            return false;
+        }
+
+         if (newPassword.value === oldPassword.value) {
+             setFieldError(oldPassword,'New and old passwords are the same!');
+             setFieldError(newPassword,'New and old passwords are the same!');
+             return false;
+         }
+
+         if (newPassword.value !== repeatNewPassword.value) {
+             setFieldError(newPassword,"New password not confirmed");
+             setFieldError(repeatNewPassword,"New password not confirmed");
+             return false;
+         }
+
+        return true;
 
      }
 
@@ -47,68 +103,15 @@ export const ChangePassSubTab: React.FC = () => {
         let newPassword = fieldRefs.current.newPassword.current;
         let repeatNewPassword = fieldRefs.current.repeatNewPassword.current;
 
-        console.log('oldPassword',oldPassword.value);
-        console.log('newPassword',newPassword.value);
-        console.log('repeatNewPassword',repeatNewPassword.value);
-
-        oldPassword.setCustomValidity('');
-        oldPassword.reportValidity();
-
-        newPassword.setCustomValidity('');
-        newPassword.reportValidity();
-
-        repeatNewPassword.setCustomValidity('');
-        repeatNewPassword.reportValidity();
-
-        if (
-            !!newPassword.value && !!repeatNewPassword.value && !!oldPassword.value
-        ) {
-
-            if (!emailRegExp.test(oldPassword)) {
-                oldPassword.setCustomValidity('');
-                oldPassword.reportValidity();
-            } else if (!emailRegExp.test(newPassword)) {
-                newPassword.setCustomValidity('');
-                newPassword.reportValidity();
-            } else if (!emailRegExp.test(repeatNewPassword)) {
-                repeatNewPassword.setCustomValidity('');
-                repeatNewPassword.reportValidity();
-            } else if (newPassword.value === oldPassword.value) {
-
-                oldPassword.setCustomValidity('New and old passwords are the same!');
-                oldPassword.reportValidity();
-
-                newPassword.setCustomValidity('New and old passwords are the same!');
-                newPassword.reportValidity();
-
+        if (validateForm(oldPassword, newPassword, repeatNewPassword)) {
+            let dataToSend = {
+                oldPassword: data.oldPassword,
+                newPassword: data.newPassword
             }
-            else if (newPassword.value !== repeatNewPassword.value) {
-
-                newPassword.setCustomValidity("New password not confirmed");
-                newPassword.reportValidity();
-
-                repeatNewPassword.setCustomValidity("New password not confirmed");
-                repeatNewPassword.reportValidity();
-
-            } else {
-                {
-
-                    let dataToSend = {
-                        oldPassword: data.oldPassword,
-                        newPassword: data.newPassword
-                    }
-
-                    try {
-                        dispatch(updateUserPassword(uriForChangePass, 'PUT', dataToSend, userId, token));
-                        cancelHandler();
-                    }
-                    catch(e) {
-                        console.log('error on change user password:', e);
-                    }
-
-                }
-            }
+            dispatch(updateUserPassword(uriForChangePass, 'PUT', dataToSend, userId, token));
+            cancelHandler();
         }
+
     }
 
     const cancelHandler = () => {

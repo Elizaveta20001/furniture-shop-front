@@ -11,6 +11,11 @@
     justify-content: center;
 }
 
+.image{
+    width: 150px;
+    height: 150px;
+}
+
 .file-field.input-field{
     display: flex;
     flex-direction: column;

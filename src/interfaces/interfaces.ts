@@ -54,6 +54,21 @@ export interface Comment{
     createdAt: Date,
     id: string
 }
+export interface userComment{
+    text: string,
+    createdAt: Date,
+    id: string
+}
+
+
+export interface UserComments{
+    comments: userComment[],
+    description: string,
+    price: number,
+    title: string,
+    url: string,
+    id: number
+}
 
 export interface Rating{
     userId: string,
@@ -158,7 +173,7 @@ declare global {
         loginReducer: LoginState;
         reginReducer: ReginState;
         catalogReducer: CatalogState;
-        userDataReducer: UserDataState;
+        userReducer: UserState;
     }
 }
 
@@ -200,7 +215,7 @@ export interface UserDataState {
 }
 
 export interface UserCommentsState {
-    userComments: object[],
+    userComments: UserComments[],
     isFetching: boolean,
     message: string,
 }

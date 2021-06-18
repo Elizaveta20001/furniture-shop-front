@@ -1,13 +1,29 @@
 import { ActionTypes } from "./actionTypes";
+import {userComment, UserComments} from "../../../../interfaces/interfaces";
 
 interface UserCommentsInterface {
-    userComments: object[],
+    userComments: UserComments[],
     isFetching: boolean,
     message: string
 };
 
+const defaultUserComment:userComment = {
+    text: '',
+    createdAt: new Date(),
+    id: ''
+}
+
+const defaultUserCommentsData:UserComments = {
+    comments: [defaultUserComment],
+    description: '',
+    price: 0,
+    title: '',
+    url: '',
+    id: 0
+}
+
 const INITIAL_STATE: UserCommentsInterface = {
-    userComments : [],
+    userComments : [defaultUserCommentsData],
     isFetching: true,
     message: ''
 };

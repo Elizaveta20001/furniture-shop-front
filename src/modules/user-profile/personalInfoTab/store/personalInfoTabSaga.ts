@@ -10,8 +10,8 @@ import {
     updateUserPasswordFail,
     clearMessage
 } from "./actions";
-import { fetchGet } from "../../../helpers/get";
-import { fetchPost } from "../../../helpers/post";
+import { fetchGet } from "../../../../helpers/get";
+import { fetchPost } from "../../../../helpers/post";
 
 const takeEvery: any = Eff.takeEvery;
 

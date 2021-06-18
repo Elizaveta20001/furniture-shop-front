@@ -8,9 +8,19 @@
     margin-top: 10px;
 }
 
-.icon {
+.profile-image {
+    width: 150px;
+    height: 150px;
+    margin: 50px;
+}
+
+.person-icon {
     font-size: 100px;
-    margin-top: 20px;
+}
+
+.email-icon {
+    margin-left: 15px;
+    color: #e7746f;
 }
 
 .comment-data-container {
@@ -21,10 +31,16 @@
     padding: 30px;
 }
 
-.comment-email {
+.comment-name {
     text-align: left;
     font-size: 20px;
     font-weight: bold;
+}
+
+.comment-email {
+    text-align: left;
+    font-weight: bold;
+    color: #e7746f;
 }
 
 .comment-text {

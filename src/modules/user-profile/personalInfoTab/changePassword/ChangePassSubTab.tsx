@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {uriForChangePass} from "../../constants";
-import {updateUserPassword} from "../../store/actions";
+import {updateUserPassword} from "../store/actions";
 import {setFieldError} from "../../../../helpers/setFieldError";
 import {passRequirements, passRegExp} from "../../../../helpers/validation";
 import {ChangePassUserData} from "../../../../interfaces/interfaces";
@@ -19,7 +19,7 @@ export const ChangePassSubTab: React.FC = () => {
     const dispatch = useDispatch();
     const userId = useSelector((state: Store) => state.loginReducer.userId);
     const token = useSelector((state: Store) => state.loginReducer.token);
-    const isUpdating = useSelector((state: Store) => state.userDataReducer.isUpdating);
+    const isUpdating = useSelector((state: Store) => state.userReducer.userDataReducer.isUpdating);
 
     const defaultChangePassData: ChangePassUserData = {
         oldPassword: '',

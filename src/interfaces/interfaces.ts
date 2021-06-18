@@ -47,6 +47,9 @@ export interface CatalogItemPage extends CatalogItem{
 
 export interface Comment{
     email: string,
+    firstName: string,
+    lastName: string,
+    image: string,
     text: string,
     createdAt: Date,
     id: string
@@ -183,11 +186,22 @@ export interface SearchResultsState {
     error: string
 }
 
+export interface UserState {
+    userDataReducer: UserDataState,
+    userCommentsReducer: UserCommentsState,
+}
+
 export interface UserDataState {
     userData: any,
     isFetching: boolean,
     isUpdating: boolean,
     userError: string,
+    message: string,
+}
+
+export interface UserCommentsState {
+    userComments: object[],
+    isFetching: boolean,
     message: string,
 }
 
@@ -198,6 +212,6 @@ declare global {
         catalogReducer: CatalogState;
         cartReducer: CartState;
         searchResultsReducer: SearchResultsState;
-        userDataReducer: UserDataState;
+        userReducer: UserState;
     }
 }

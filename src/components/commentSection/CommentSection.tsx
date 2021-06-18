@@ -20,6 +20,9 @@ const CommentSection: React.FC<{comments: Comment[]}> = ({comments}) =>{
                         text={element.text}
                         createdAt={element.createdAt}
                         email={element.email}
+                        image={element.image}
+                        firstName={element.firstName}
+                        lastName={element.lastName}
                         key={element.id}
                     />)
                     : <h3>Not comment</h3>

@@ -34,10 +34,12 @@ export const MainUserProfilePage: React.FC = () => {
             <div className="row">
                 <div className="col s12">
                     <ul className="tabs">
-                        <li className="tab col s3"><a href="#personal-data">Personal data</a></li>
-                        <li className="tab col s3"><a href="#cart">Cart</a></li>
-                        <li className="tab col s3"><a href="#orders">Orders</a></li>
-                        <li className="tab col s3"><a href="#comments-ratings">Comments & Ratings</a></li>
+                        <li className="tab col s2"><a href="#personal-data">Personal data</a></li>
+                        <li className="tab col s2"><a href="#cart">Cart</a></li>
+                        <li className="tab col s2"><a href="#orders">Orders</a></li>
+                        <li className="tab col s2"><a href="#favorites">Favorites</a></li>
+                        <li className="tab col s2"><a href="#comments">Comments</a></li>
+                        <li className="tab col s2"><a href="#ratings">Ratings</a></li>
                     </ul>
                 </div>
 
@@ -64,9 +66,10 @@ export const MainUserProfilePage: React.FC = () => {
 
                 </div>
                 <div id="cart" className="col s12"><CartPage/></div>
-
                 <div id="orders" className="col s12">Orders history</div>
-                <div id="comments-ratings" className="col s12">Comments & ratings</div>
+                <div id="favorites" className="col s12">Favorites</div>
+                <div id="comments" className="col s12">Comments</div>
+                <div id="ratings" className="col s12">Ratings</div>
             </div>
         </div>
     )

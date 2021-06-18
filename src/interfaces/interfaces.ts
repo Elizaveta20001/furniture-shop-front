@@ -57,6 +57,61 @@ export interface Rating{
     value: number
 }
 
+export interface PersonalUserData  {
+    email: string,
+    firstName: string,
+    lastName: string,
+    image: any,
+}
+
+export interface UserPassData  {
+    password: string,
+    repeatPassword: string,
+}
+
+export interface PersonalDataCardProps {
+    defaultValues?: PersonalUserData,
+    values: PersonalUserData,
+    toggledChange: boolean,
+    changeHandler: (event: any) => void,
+    fileSelectorHandler: (event: any) => void,
+    imagePreview: string,
+    required: boolean
+}
+
+export interface ChangePassUserData  {
+    oldPassword: string,
+    newPassword: string,
+    repeatNewPassword: string
+}
+
+export interface SetPassUserData  {
+    password: string,
+    repeatPassword: string
+}
+
+export interface TextInputFieldProps {
+    id: string,
+    value: string,
+    toggledChange: boolean,
+    changeHandler: (event: any) => void,
+    registerField: (key:any, ref:any) => void,
+    ref: any
+}
+
+export interface ChangePassCardProps {
+    values: ChangePassUserData,
+    toggledChange: boolean,
+    changeHandler: (event: any) => void,
+    registerField: (key:any, ref:any) => void
+}
+
+export interface SetPassCardProps {
+    values: SetPassUserData,
+    changeHandler: (event: any) => void,
+    registerField: (key:any, ref:any) => void
+}
+
 
 export interface CartItemInterface extends CatalogItem{
     quantity: number
@@ -72,6 +127,11 @@ export interface LoginState {
     token: string;
     userId: string;
     isEnter: boolean;
+    message: string;
+}
+
+export interface ReginState {
+    isUpToDate: boolean;
     message: string;
 }
 
@@ -93,7 +153,9 @@ export interface CatalogState {
 declare global {
     interface Store {
         loginReducer: LoginState;
-        catalogReducer: CatalogState
+        reginReducer: ReginState;
+        catalogReducer: CatalogState;
+        userDataReducer: UserDataState;
     }
 }
 
@@ -121,11 +183,21 @@ export interface SearchResultsState {
     error: string
 }
 
+export interface UserDataState {
+    userData: any,
+    isFetching: boolean,
+    isUpdating: boolean,
+    userError: string,
+    message: string,
+}
+
 declare global {
     interface Store {
         loginReducer: LoginState;
+        reginReducer: ReginState;
         catalogReducer: CatalogState;
         cartReducer: CartState;
         searchResultsReducer: SearchResultsState;
+        userDataReducer: UserDataState;
     }
 }

@@ -8,6 +8,9 @@ import {loginWatcher} from '../modules/authorization/store/loginSaga';
 import {reginWatcher} from '../modules/authorization/store/reginSaga';
 import {collectionWatcher} from '../modules/catalog/collection/store/collectionSaga';
 import loginReducer from '../modules/authorization/store/loginReducer';
+import reginReducer from "../modules/authorization/store/reginReducer";
+import {userDataWatcher} from "../modules/user-profile/store/saga";
+import {userDataReducer} from "../modules/user-profile/store/reducer";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {catalogReducer} from '../modules/catalog/store/reducer';
 import {catalogWatcher} from '../modules/catalog/mainPage/store/catalogSaga';
@@ -19,7 +22,16 @@ import {cartWatcher} from "../modules/cart/store/cartSaga";
 
 
 function* rootWatcher() {
-    yield all([loginWatcher(), reginWatcher(), catalogWatcher(), collectionWatcher(), collectionItemWatcher(), searchWatcher(), cartWatcher()]);
+    yield all([
+                        loginWatcher(),
+                        reginWatcher(),
+                        catalogWatcher(),
+                        collectionWatcher(),
+                        collectionItemWatcher(),
+                        searchWatcher(),
+                        cartWatcher(),
+                        userDataWatcher()
+             ]);
 }
 
 
@@ -27,9 +39,11 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
     loginReducer,
+    reginReducer,
     catalogReducer,
     searchResultsReducer,
-    cartReducer
+    cartReducer,
+    userDataReducer
 });
 
 const persistConfig = {

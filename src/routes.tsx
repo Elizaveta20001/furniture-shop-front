@@ -1,6 +1,10 @@
 import {useSelector} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import {AuthPage} from './modules/authorization/AuthPage';
+import {SignInPage} from './modules/authorization/sign-in/SignInPage';
+import {MainAuthPage} from "./modules/authorization/mainAuthPage/MainAuthPage";
+import {SignUpPage} from "./modules/authorization/sign-up/SignUpPage";
+import {MainUserProfilePage} from "./modules/user-profile/mainPage/MainUserProfilePage";
+import {BasicInfoSubTab} from "./modules/user-profile/personalInfoTab/basicInformation/BasicInfoSubTab";
 import {CartPage} from './modules/cart/CartPage';
 import {ContactsPage} from './modules/contacts/ContactsPage';
 import {HomePage} from './modules/home/HomePage';
@@ -36,7 +40,18 @@ export const useRoutes = (isAuthenticated: boolean) => {
             <Route exact path="/catalog">
                 <CatalogPage/>
             </Route>
-
+            <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/user-profile/"
+                exact={true}
+                component={MainUserProfilePage}
+            />
+            <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/user-profile/personal-data"
+                exact={true}
+                component={BasicInfoSubTab}
+            />
             <PrivateRoute
                 isAuthenticated={isAuthenticated}
                 path="/cart"
@@ -47,7 +62,19 @@ export const useRoutes = (isAuthenticated: boolean) => {
                 isAuthenticated={!isAuthenticated && !isEnter}
                 exact={true}
                 path="/auth"
-                component={AuthPage}
+                component={MainAuthPage}
+            />
+            <PrivateRoute
+                isAuthenticated={!isAuthenticated && !isEnter}
+                exact={true}
+                path="/sign-in"
+                component={SignInPage}
+            />
+            <PrivateRoute
+                isAuthenticated={!isAuthenticated && !isEnter}
+                exact={true}
+                path="/sign-up"
+                component={SignUpPage}
             />
             <Route exact path="/search-results">
                 <SearchResultsPage/>

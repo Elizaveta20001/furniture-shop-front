@@ -1,8 +1,19 @@
-import {ENTER, ERROR, FETCH_LOGIN, FETCH_REGIN, LOGOUT, SET_LOGIN, CLEAR_MESSAGE} from './keys';
+import {
+    ENTER,
+    ERROR,
+    FETCH_LOGIN,
+    FETCH_REGIN,
+    REGIN_SUCCESS,
+    REGIN_FAILURE,
+    LOGOUT,
+    SET_LOGIN,
+    CLEAR_MESSAGE,
+} from './keys';
 
 interface Form {
     email: string;
     password: string;
+
 }
 
 interface Payload {
@@ -13,6 +24,7 @@ interface Payload {
 interface Headers {
     token?: string;
     userId?: string;
+    'content-type'?: string;
 }
 
 export const setLogin = (payload: Payload) => ({type: SET_LOGIN, payload});
@@ -32,7 +44,7 @@ export const fetchLogin = (url: string, method: string, form: Form, headers: Hea
     }
 };
 
-export const fetchRegin = (url: string, method: string, form: Form, headers: Headers) => {
+export const fetchRegin = (url: string, method: string, form: any, headers: Headers) => {
     return {
         type: FETCH_REGIN,
         url,
@@ -41,3 +53,18 @@ export const fetchRegin = (url: string, method: string, form: Form, headers: Hea
         headers
     }
 };
+
+export const reginSuccess = (response: any) => {
+    return({
+        type: REGIN_SUCCESS,
+        payload: response
+    })
+};
+
+export const reginFailure = (error: Error) => {
+    return({
+        type: REGIN_FAILURE,
+        payload: error
+    })
+};
+

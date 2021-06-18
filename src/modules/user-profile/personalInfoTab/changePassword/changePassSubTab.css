@@ -1,0 +1,34 @@
+.card.without-margin-vertical{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.buttons-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.prior-button{
+    background-color: #e7746f !important;
+    margin-left: 1vw;
+}
+
+.unprior-button{
+    background-color: gray !important;
+}
+
+.title{
+    align-items: center;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input-field.with-note{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    font-size: 30px;
+}

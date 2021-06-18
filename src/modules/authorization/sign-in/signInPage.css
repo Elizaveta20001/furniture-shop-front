@@ -1,0 +1,17 @@
+.form-background {
+    background-color: white;
+}
+
+.login-button{
+    background-color: #e7746f !important;
+}
+
+.reg-button{
+    background-color: gray !important;
+}
+
+.input-field.sign-in{
+    font-size: 30px;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}

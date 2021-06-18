@@ -36,8 +36,8 @@ export const CartPage: React.FC = () => {
     }
 
     return (
-        <div>
-            <div className="cart-page">
+        <div className="card">
+            <div className="card-content">
                 {
                     data.length === 0 ? <EmptyCart/>
                         : <div>

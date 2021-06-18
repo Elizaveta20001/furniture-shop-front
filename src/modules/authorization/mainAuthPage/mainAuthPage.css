@@ -9,3 +9,11 @@
 .reg-button{
     background-color: gray !important;
 }
+
+.collapsible-body.without-padding{
+    padding: 0px;
+}
+
+.collapsible-header.small-font-size{
+    font-size: 16px;
+}

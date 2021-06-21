@@ -8,7 +8,6 @@ import {
     updateUserDataFail,
     updateUserPasswordSuccess,
     updateUserPasswordFail,
-    clearMessage
 } from "./actions";
 import { fetchGet } from "../../../../helpers/get";
 import { fetchPost } from "../../../../helpers/post";
@@ -42,8 +41,6 @@ export function* updateUserDataWorker(args: any): any {
         yield put(updateUserDataFail(json));
     }
 
-    yield put(clearMessage());
-
 };
 
 export function* updateUserPasswordWorker(args: any): any {
@@ -57,8 +54,6 @@ export function* updateUserPasswordWorker(args: any): any {
         const json = yield call(() => new Promise(res => res(result.json())));
         yield put(updateUserPasswordFail(json));
     }
-
-    yield put(clearMessage());
 
 };
 

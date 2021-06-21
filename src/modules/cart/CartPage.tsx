@@ -8,15 +8,34 @@ import {getTotalPrice, convertDataToSave} from "../../helpers/cart";
 import {removeAllItems} from "./store/actions";
 
 import './cartPage.css';
-import {saveUserOrder} from "../user-profile/ordersTab/store/actions";
+import {clearUserOrdersMessage, saveUserOrder} from "../user-profile/ordersTab/store/actions";
+import {useMessage} from "../../hooks/message.hook";
+import {useEffect} from "react";
 
 
 export const CartPage: React.FC = () => {
     const data = useSelector((state: Store) => state.cartReducer.items);
     const userId = useSelector((state: Store) => state.loginReducer.userId);
     const userToken = useSelector((state: Store) => state.loginReducer.token);
+    const saveOrderNorification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
     const dispatch = useDispatch();
+    const message = useMessage();
     const totalPrice = getTotalPrice(data);
+
+    useEffect(() => {
+        message(saveOrderNorification);
+
+        return () => {
+            dispatch(clearUserOrdersMessage())
+        }
+
+    }, [message, saveOrderNorification])
+
+    useEffect(() => {
+
+    }, [dispatch,data])
+
+    useEffect(() => console.log('saveOrderNorification',saveOrderNorification), [saveOrderNorification])
 
     const onToken = (token: any) => {
         const body = {
@@ -34,7 +53,7 @@ export const CartPage: React.FC = () => {
             body: JSON.stringify(body),
         }).then(() => {
             alert("Success");
-            dispatch(saveUserOrder(convertDataToSave(data), userId, userToken))
+            dispatch(saveUserOrder(convertDataToSave(data), userId, userToken));
             dispatch(removeAllItems());
         }).catch(error => {
             alert(error);

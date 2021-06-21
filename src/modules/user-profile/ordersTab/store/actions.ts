@@ -1,28 +1,27 @@
 import {ActionTypes} from './actionTypes';
 import {Order} from "../../../../interfaces/interfaces";
 
-// export const fetchUserComments = (url: string, userId: string, token: string) => {
-//     return {
-//         type: ActionTypes.FETCH_USER_COMMENTS_START,
-//         url,
-//         userId,
-//         token
-//     }
-// };
-//
-// export const fetchUserCommentsSuccess = (data: string) => {
-//     return({
-//         type: ActionTypes.FETCH_USER_COMMENTS_SUCCESS,
-//         payload: data
-//     })
-// };
-//
-// export const fetchUserCommentsFail = (error: Error) => {
-//     return({
-//         type: ActionTypes.FETCH_USER_COMMENTS_FAIL,
-//         payload: error.message
-//     })
-// };
+export const fetchUserOrders = (userId: string, token: string) => {
+    return {
+        type: ActionTypes.FETCH_USER_ORDERS_START,
+        userId,
+        token
+    }
+};
+
+export const fetchUserOrdersSuccess = (data: string) => {
+    return({
+        type: ActionTypes.FETCH_USER_ORDERS_SUCCESS,
+        payload: data
+    })
+};
+
+export const fetchUserOrdersFail = (error: Error) => {
+    return({
+        type: ActionTypes.FETCH_USER_ORDERS_FAIL,
+        payload: error.message
+    })
+};
 
 export const saveUserOrder = (form: Order, userId: string, token: string) => {
     return {

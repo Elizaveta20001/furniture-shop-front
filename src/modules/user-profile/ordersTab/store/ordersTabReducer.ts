@@ -1,12 +1,12 @@
 import { ActionTypes } from "./actionTypes";
 
-interface UserCommentsInterface {
+interface UserOrdersInterface {
     userOrders: any,
     isFetching: boolean,
     message: string
 };
 
-const INITIAL_STATE: UserCommentsInterface = {
+const INITIAL_STATE: UserOrdersInterface = {
     userOrders : [],
     isFetching: true,
     message: ''
@@ -14,33 +14,33 @@ const INITIAL_STATE: UserCommentsInterface = {
 
 export const userOrdersReducer = (state = INITIAL_STATE, action: any) => {
     switch (action.type) {
-        // case ActionTypes.FETCH_USER_COMMENTS_START:
-        //     return {
-        //         ...state,
-        //         isFetching: true,
-        //     }
-        // case ActionTypes.FETCH_USER_COMMENTS_SUCCESS:
-        //     return {
-        //         ...state,
-        //         userComments: action.payload,
-        //         isFetching: false,
-        //     }
-        // case ActionTypes.FETCH_USER_COMMENTS_FAIL:
-        //     return {
-        //         ...state,
-        //         userComments: [],
-        //         isFetching: false,
-        //         message: action.payload
-        //     }
+        case ActionTypes.FETCH_USER_ORDERS_START:
+            return {
+                ...state,
+                isFetching: true,
+            }
+        case ActionTypes.FETCH_USER_ORDERS_SUCCESS:
+            return {
+                ...state,
+                userOrders: action.payload,
+                isFetching: false,
+            }
+        case ActionTypes.FETCH_USER_ORDERS_FAIL:
+            return {
+                ...state,
+                userOrders: [],
+                isFetching: false,
+                message: action.payload.message
+            }
         case ActionTypes.SAVE_USER_ORDER_SUCCESS:
             return {
                 ...state,
-                message: action.payload,
+                message: action.payload.message,
             }
         case ActionTypes.SAVE_USER_ORDER_FAIL:
             return {
                 ...state,
-                message: action.payload
+                message: action.payload.message
             }
         case ActionTypes.CLEAR_MESSAGE:
             return {

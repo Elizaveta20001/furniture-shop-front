@@ -1,4 +1,4 @@
-import {CartItemInterface} from "../interfaces/interfaces";
+import {CartItemInterface, Order} from "../interfaces/interfaces";
 
 export const addItem = (oldArray: CartItemInterface[], itemToAdd: CartItemInterface): CartItemInterface[] => {
     const filteredArray = oldArray.filter(item => item.id === itemToAdd.id && item.title === itemToAdd.title);
@@ -39,4 +39,15 @@ export const getTotalPrice = (items: CartItemInterface[]): number => {
 
 export const getTotalQuantity = (items: CartItemInterface[]): number => {
     return items.reduce((accumulator, item) => accumulator + item.quantity,0);
+}
+
+export const convertDataToSave = (items: CartItemInterface[]): Order => {
+    return {
+        items: items.map((item) => {
+            return {
+                id: item.id,
+                quantity: item.quantity
+            }
+        })
+    };
 }

@@ -4,14 +4,17 @@ import StripeCheckout from "react-stripe-checkout";
 import CartItem from "../../components/cartItem/CartItem";
 import EmptyCart from "../../components/emptyCart/EmptyCart";
 
-import {getTotalPrice} from "../../helpers/cart";
+import {getTotalPrice, convertDataToSave} from "../../helpers/cart";
 import {removeAllItems} from "./store/actions";
 
 import './cartPage.css';
+import {saveUserOrder} from "../user-profile/ordersTab/store/actions";
 
 
 export const CartPage: React.FC = () => {
     const data = useSelector((state: Store) => state.cartReducer.items);
+    const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const userToken = useSelector((state: Store) => state.loginReducer.token);
     const dispatch = useDispatch();
     const totalPrice = getTotalPrice(data);
 
@@ -21,14 +24,17 @@ export const CartPage: React.FC = () => {
             totalPrice
         }
         const headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
         }
+
         return fetch('/payment', {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(body),
         }).then(() => {
             alert("Success");
+            dispatch(saveUserOrder(convertDataToSave(data), userId, userToken))
             dispatch(removeAllItems());
         }).catch(error => {
             alert(error);
@@ -45,7 +51,7 @@ export const CartPage: React.FC = () => {
                             <h1>Total price: {totalPrice}$</h1>
                             <StripeCheckout
                                 token={onToken}
-                                stripeKey='pk_test_51IuwMwCxpYbk6oLag4BCocz2g5iWFB9pFWdks8nlVGGBcJ9ChqYjlLCfjZw6SEG8LX23NqFr6Bmddv2mgLKzUlw100RdGAAI3x'
+                                stripeKey='pk_test_51J4nhrEW5NP5toW9jnaYnqIu0ThoQtCYn5WSWELZneGmSmi2dxBMtmZzTCQDDTL6vPhWa2MWBoqCW6xumh87CQ7y00P89vFLz8'
                                 amount={totalPrice * 100}
                             >
                                 <button className='waves-effect waves-light btn custom-button'>Pay now</button>

@@ -20,6 +20,7 @@ import {searchWatcher} from '../modules/searchField/store/saga';
 import {searchResultsReducer} from '../modules/searchField/store/reducer';
 import {cartReducer} from "../modules/cart/store/cartReducer";
 import {cartWatcher} from "../modules/cart/store/cartSaga";
+import {userOrdersWatcher} from "../modules/user-profile/ordersTab/store/ordersTabSaga";
 
 
 
@@ -33,7 +34,8 @@ function* rootWatcher() {
                         searchWatcher(),
                         cartWatcher(),
                         userDataWatcher(),
-                        userCommentsWatcher()
+                        userCommentsWatcher(),
+                        userOrdersWatcher(),
              ]);
 }
 

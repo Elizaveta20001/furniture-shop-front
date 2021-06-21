@@ -37,6 +37,21 @@ export interface CatalogItem {
     id: number
 }
 
+export interface Order {
+    items: OrderItem[]
+}
+
+export interface OrderItem {
+    id: number,
+    quantity: number
+}
+
+export interface saveOrderParams {
+    form: Order,
+    userId: string,
+    token: string
+}
+
 export interface CollectionItemCardInterface extends CatalogItem{
     rating: Rating[]
 }

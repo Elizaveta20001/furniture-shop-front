@@ -18,6 +18,7 @@ const App = () => {
   const routes = useRoutes(isAuthenticated);
 
   useEffect(() => {
+
     const data = JSON.parse(localStorage.getItem('userData') as string);
     const freshToken: boolean = !!tokenFromStore;
 

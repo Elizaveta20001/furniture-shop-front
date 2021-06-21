@@ -40,8 +40,15 @@ export const ContactsPage: React.FC = () => {
                     href="https://yandex.by/maps/157/minsk/house/Zk4YcwNkSkUCQFtpfXR5eX9mZQ==/?ll=27.544305%2C53.888351&source=wizgeo&utm_medium=mapframe&utm_source=maps&z=16.55"
                     style={{color: "#eee", fontSize: "12px", position: "absolute", top: "14px"}}>Улица Толстого, 10 —
                     Яндекс.Карты</a>
-                    <iframe src="https://yandex.by/map-widget/v1/-/CCUab6sdDA" width="1000" height="400" frameBorder="1"
-                            allowFullScreen={true} style={{position: "relative"}}></iframe>
+                    <iframe
+                        src="https://yandex.by/map-widget/v1/-/CCUab6sdDA"
+                        width="1000"
+                        height="400"
+                        frameBorder="1"
+                        allowFullScreen={true}
+                        style={{position: "relative"}}
+                        title="map"
+                    ></iframe>
                 </div>
             </div>
         </div>

@@ -63,6 +63,7 @@ export interface userComment{
 
 export interface UserComments{
     comments: userComment[],
+    rating: Rating[],
     description: string,
     price: number,
     title: string,

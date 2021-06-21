@@ -13,10 +13,9 @@ export function* fetchUserCommentsWorker(args: any): any {
 
     const result = yield call(fetchGet, args);
 
-    yield console.log('result', result);
-
     if (result.ok) {
         const response = yield result.json();
+        yield console.log('response', response);
         yield put(fetchUserCommentsSuccess(response));
     }
     else {

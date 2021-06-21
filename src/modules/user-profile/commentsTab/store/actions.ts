@@ -24,3 +24,6 @@ export const fetchUserCommentsFail = (error: Error) => {
 };
 
 export const clearUserCommentsMessage = () => ({type: ActionTypes.CLEAR_MESSAGE});
+
+export const initUserCommentsState = () => ({type: ActionTypes.INIT_STATE});
+

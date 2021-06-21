@@ -1,4 +1,4 @@
-import React, {Fragment, forwardRef, useRef} from "react";
+import React, {forwardRef} from "react";
 import {useEffect} from "react";
 import {TextInputFieldProps} from "../../interfaces/interfaces";
 

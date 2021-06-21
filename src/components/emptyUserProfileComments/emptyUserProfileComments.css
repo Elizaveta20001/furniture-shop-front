@@ -1,0 +1,10 @@
+.empty-cart{
+    height: 500px;
+    width: 1000px;
+    display: grid;
+    grid-template-rows: 2fr 8fr;
+    border: double black;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}

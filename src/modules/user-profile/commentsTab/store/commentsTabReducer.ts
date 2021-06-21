@@ -1,5 +1,5 @@
 import { ActionTypes } from "./actionTypes";
-import {userComment, UserComments} from "../../../../interfaces/interfaces";
+import {UserComments} from "../../../../interfaces/interfaces";
 
 interface UserCommentsInterface {
     userComments: UserComments[],
@@ -7,23 +7,8 @@ interface UserCommentsInterface {
     message: string
 };
 
-const defaultUserComment:userComment = {
-    text: '',
-    createdAt: new Date(),
-    id: ''
-}
-
-const defaultUserCommentsData:UserComments = {
-    comments: [defaultUserComment],
-    description: '',
-    price: 0,
-    title: '',
-    url: '',
-    id: 0
-}
-
 const INITIAL_STATE: UserCommentsInterface = {
-    userComments : [defaultUserCommentsData],
+    userComments : [],
     isFetching: true,
     message: ''
 };
@@ -53,6 +38,8 @@ export const userCommentsReducer = (state = INITIAL_STATE, action: any) => {
                 ...state,
                 message: '',
             };
+        case ActionTypes.INIT_STATE:
+            return INITIAL_STATE;
         default:
             return state;
     }

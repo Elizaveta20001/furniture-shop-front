@@ -12,7 +12,7 @@ const CommentItem: React.FC<Comment> = ({email,firstName, lastName, image, text,
         <div className="comment">
             <div className="profile-image">
                 {
-                    image ? <img className="circle z-depth-5" src={image} /> :
+                    image ? <img className="circle z-depth-5" src={image} alt="" /> :
                         <i className="material-icons dp48 person-icon">person</i>
                 }
             </div>

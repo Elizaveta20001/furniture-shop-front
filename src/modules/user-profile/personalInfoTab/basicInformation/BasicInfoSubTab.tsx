@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {uriForUser} from "../../constants";
-import {fetchUserData, updateUserData} from "../../store/actions";
+import {fetchUserData, updateUserData} from "../store/actions";
 
 
 import "./basicInfoSubTab.css";
@@ -16,9 +16,9 @@ export const BasicInfoSubTab: React.FC = () => {
     const dispatch = useDispatch();
     const userId = useSelector((state: Store) => state.loginReducer.userId);
     const token = useSelector((state: Store) => state.loginReducer.token);
-    const userData  = useSelector((state: Store) => state.userDataReducer.userData);
-    const isFetching  = useSelector((state: Store) => state.userDataReducer.isFetching);
-    const isUpdating = useSelector((state: Store) => state.userDataReducer.isUpdating);
+    const userData  = useSelector((state: Store) => state.userReducer.userDataReducer.userData);
+    const isFetching  = useSelector((state: Store) => state.userReducer.userDataReducer.isFetching);
+    const isUpdating = useSelector((state: Store) => state.userReducer.userDataReducer.isUpdating);
 
     const defaultUserData: PersonalUserData = {
         email: '',

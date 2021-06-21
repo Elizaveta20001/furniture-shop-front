@@ -10,6 +10,7 @@ import './ratingStar.css';
 
 const RatingStar: React.FC<{ url: string, value: number }> = ({url, value}) => {
     const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -19,7 +20,7 @@ const RatingStar: React.FC<{ url: string, value: number }> = ({url, value}) => {
 
     const handleClick = async (event: React.FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        templateFetch(url, {value: value, userId: userId}, refreshData);
+        templateFetch(url, {value: value, userId: userId}, token, refreshData);
     }
 
     return (

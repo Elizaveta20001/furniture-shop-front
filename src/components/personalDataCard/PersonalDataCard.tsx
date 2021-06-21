@@ -27,7 +27,7 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = (
                         <div className="image-container" >
                             <div className="file-field input-field">
                                 <div className="preview">
-                                    <img className="circle z-depth-5" src={imagePreview || DefaultImage} alt="" />
+                                    <img className="circle z-depth-5 image" src={imagePreview || DefaultImage} alt="" />
                                     <input
                                         type="file"
                                         accept="image/*"

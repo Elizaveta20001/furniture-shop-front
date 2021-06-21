@@ -12,6 +12,7 @@ import './commentForm.css';
 const CommentForm: React.FC<CommentFormProps> = ({url}) => {
     const [text, setText] = useState("");
     const user = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -26,7 +27,7 @@ const CommentForm: React.FC<CommentFormProps> = ({url}) => {
             user,
             createdAt: Date()
         };
-        templateFetch(url, data, refreshData);
+        templateFetch(url, data, token, refreshData);
     }
 
 

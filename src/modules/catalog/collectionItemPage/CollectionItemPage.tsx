@@ -8,7 +8,7 @@ import CommentForm from "../../../components/commentForm/CommentForm";
 import CommentSection from "../../../components/commentSection/CommentSection";
 import RatingItemForm from "../../../components/ratingForm/RatingItemForm";
 
-import {fetchCollectionItem} from "./store/actions";
+import {collectionItemClear, fetchCollectionItem} from "./store/actions";
 import {CollectionProps} from "../../../interfaces/interfaces";
 import {uriForCollection} from "../constants";
 
@@ -27,6 +27,7 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
 
 
     useEffect(() => {
+        collectionItemClear();
         dispatch(fetchCollectionItem(history.location.pathname));
     }, [dispatch, history.location.pathname]);
 

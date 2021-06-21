@@ -9,8 +9,9 @@ import {reginWatcher} from '../modules/authorization/store/reginSaga';
 import {collectionWatcher} from '../modules/catalog/collection/store/collectionSaga';
 import loginReducer from '../modules/authorization/store/loginReducer';
 import reginReducer from "../modules/authorization/store/reginReducer";
-import {userDataWatcher} from "../modules/user-profile/store/saga";
-import {userDataReducer} from "../modules/user-profile/store/reducer";
+import {userReducer} from "../modules/user-profile/store/reducer";
+import {userDataWatcher} from "../modules/user-profile/personalInfoTab/store/personalInfoTabSaga";
+import {userCommentsWatcher} from "../modules/user-profile/commentsTab/store/commentsTabSaga";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {catalogReducer} from '../modules/catalog/store/reducer';
 import {catalogWatcher} from '../modules/catalog/mainPage/store/catalogSaga';
@@ -19,6 +20,7 @@ import {searchWatcher} from '../modules/searchField/store/saga';
 import {searchResultsReducer} from '../modules/searchField/store/reducer';
 import {cartReducer} from "../modules/cart/store/cartReducer";
 import {cartWatcher} from "../modules/cart/store/cartSaga";
+
 
 
 function* rootWatcher() {
@@ -30,7 +32,8 @@ function* rootWatcher() {
                         collectionItemWatcher(),
                         searchWatcher(),
                         cartWatcher(),
-                        userDataWatcher()
+                        userDataWatcher(),
+                        userCommentsWatcher()
              ]);
 }
 
@@ -43,7 +46,7 @@ const rootReducer = combineReducers({
     catalogReducer,
     searchResultsReducer,
     cartReducer,
-    userDataReducer
+    userReducer
 });
 
 const persistConfig = {

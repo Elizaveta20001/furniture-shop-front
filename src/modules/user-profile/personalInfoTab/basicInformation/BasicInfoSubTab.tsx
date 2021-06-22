@@ -40,7 +40,7 @@ export const BasicInfoSubTab: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(initUserDataState());
+        initUserDataState();
         dispatch(fetchUserData(uriForUser, userId, token));
     }, [dispatch, userId, token])
 

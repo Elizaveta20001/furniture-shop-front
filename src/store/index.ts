@@ -12,6 +12,7 @@ import reginReducer from "../modules/authorization/store/reginReducer";
 import {userReducer} from "../modules/user-profile/store/reducer";
 import {userDataWatcher} from "../modules/user-profile/personalInfoTab/store/personalInfoTabSaga";
 import {userCommentsWatcher} from "../modules/user-profile/commentsTab/store/commentsTabSaga";
+import {userRatingsWatcher} from "../modules/user-profile/ratingsTab/store/ratingsTabSaga";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {catalogReducer} from '../modules/catalog/store/reducer';
 import {catalogWatcher} from '../modules/catalog/mainPage/store/catalogSaga';
@@ -35,6 +36,7 @@ function* rootWatcher() {
                         cartWatcher(),
                         userDataWatcher(),
                         userCommentsWatcher(),
+                        userRatingsWatcher(),
                         userOrdersWatcher(),
              ]);
 }

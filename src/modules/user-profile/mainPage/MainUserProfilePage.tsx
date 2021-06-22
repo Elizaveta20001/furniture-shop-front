@@ -8,6 +8,7 @@ import {BasicInfoSubTab} from "../personalInfoTab/basicInformation/BasicInfoSubT
 import {ChangePassSubTab} from "../personalInfoTab/changePassword/ChangePassSubTab";
 import {CartPage} from "../../cart/CartPage";
 import {CommentsTab} from "../commentsTab/CommentsTab";
+import {RatingsTab} from "../ratingsTab/RatingsTab";
 import {OrdersTab} from "../ordersTab/OrdersTab";
 
 import "./mainUserProfilePage.css";
@@ -86,7 +87,7 @@ export const MainUserProfilePage: React.FC = () => {
                 <div id="orders" className="col s12"><OrdersTab/></div>
                 <div id="favorites" className="col s12">Favorites</div>
                 <div id="comments" className="col s12"><CommentsTab/></div>
-                <div id="ratings" className="col s12">Ratings</div>
+                <div id="ratings" className="col s12"><RatingsTab/></div>
             </div>
         </div>
     )

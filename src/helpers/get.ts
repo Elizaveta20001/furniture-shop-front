@@ -1,4 +1,4 @@
-import {uriForUser, uriForUserComments} from "../modules/user-profile/constants";
+import {uriForUser, uriForUserComments, uriForUserRatings} from "../modules/user-profile/constants";
 import {uriForSearch} from "../modules/searchField/constants";
 
 interface Params {
@@ -19,6 +19,7 @@ export const fetchGet = (params: Params) => {
     switch (url) {
         case uriForUser: return fetch(url + userId, {headers});
         case uriForUserComments: return fetch(url + userId, {headers});
+        case uriForUserRatings: return fetch(url + userId, {headers});
         case uriForSearch: return fetch(url + '?' + new URLSearchParams({...form}), {headers});
         default: return null;
     }

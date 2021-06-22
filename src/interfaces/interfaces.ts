@@ -241,7 +241,7 @@ export interface UserCommentsState {
 }
 
 export interface UserOrdersState {
-    userOrders: any,
+    userOrders: any[],
     isFetching: boolean,
     message: string,
 }

@@ -1,7 +1,7 @@
 import { ActionTypes } from "./actionTypes";
 
 interface UserOrdersInterface {
-    userOrders: any,
+    userOrders: any[],
     isFetching: boolean,
     message: string
 };
@@ -22,7 +22,7 @@ export const userOrdersReducer = (state = INITIAL_STATE, action: any) => {
         case ActionTypes.FETCH_USER_ORDERS_SUCCESS:
             return {
                 ...state,
-                userOrders: action.payload,
+                userOrders: action.payload.orderHistory,
                 isFetching: false,
             }
         case ActionTypes.FETCH_USER_ORDERS_FAIL:

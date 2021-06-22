@@ -31,12 +31,6 @@ export const CartPage: React.FC = () => {
 
     }, [message, saveOrderNorification])
 
-    useEffect(() => {
-
-    }, [dispatch,data])
-
-    useEffect(() => console.log('saveOrderNorification',saveOrderNorification), [saveOrderNorification])
-
     const onToken = (token: any) => {
         const body = {
             token,

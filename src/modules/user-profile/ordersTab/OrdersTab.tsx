@@ -1,7 +1,12 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import EmptyUserProfileComments from "../../../components/emptyUserProfileComments/EmptyUserProfileComments";
+
 import {fetchUserOrders, initUserOrdersState} from "./store/actions";
+import {getTotalOrderPrice} from "../../../helpers/order";
+import EmptyUserProfileComments from "../../../components/emptyUserProfileComments/EmptyUserProfileComments";
+import OrderItem from "../../../components/orderItem/OrderItem";
+
+import "./ordersTab.css"
 
 export const OrdersTab: React.FC = () => {
 
@@ -19,16 +24,28 @@ export const OrdersTab: React.FC = () => {
     useEffect(() => console.log('userOrders', userOrders), [userOrders]);
 
     return (
-        <div className="card without-margin-top">
+        <div className="card">
             {
                 isFetching || userOrders.length < 1 ? <EmptyUserProfileComments/> :
-                    <div>
-
-                        {/*<UserProfileCommentsSubTab*/}
-                        {/*    comments={userComments}*/}
-                        {/*    user={userData}*/}
-                        {/*/>*/}
-
+                    <div className="card-content">
+                            {
+                                userOrders.map((order:any, index:number) => (
+                                    <div className="user-profile-order" key={index}>
+                                        <div className="user-profile-order-title">
+                                            <h5>Order #{index + 1}</h5>
+                                            <h5>{new Date(order.date).toLocaleString()}</h5>
+                                        </div>
+                                        <div className="user-profile-order-items">
+                                            {
+                                                order.items.map(
+                                                    (item:any, index:number) => <OrderItem key={index} item={item}/>
+                                                )
+                                            }
+                                        </div>
+                                        <h3>Total: ${getTotalOrderPrice(order.items)}</h3>
+                                    </div>
+                                ))
+                            }
                     </div>
 
             }

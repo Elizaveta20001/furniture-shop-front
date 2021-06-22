@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {uriForUser} from "../../constants";
-import {fetchUserData, updateUserData} from "../store/actions";
+import {fetchUserData, initUserDataState, updateUserData} from "../store/actions";
 
 
 import "./basicInfoSubTab.css";
@@ -40,6 +40,7 @@ export const BasicInfoSubTab: React.FC = () => {
     }, [])
 
     useEffect(() => {
+        dispatch(initUserDataState());
         dispatch(fetchUserData(uriForUser, userId, token));
     }, [dispatch, userId, token])
 

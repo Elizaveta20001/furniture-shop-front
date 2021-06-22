@@ -79,6 +79,8 @@ export const userDataReducer = (state = INITIAL_STATE, action: any) => {
                 ...state,
                 message: '',
             };
+        case ActionTypes.INIT_STATE:
+            return INITIAL_STATE;
         default:
             return state;
     }

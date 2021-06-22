@@ -73,3 +73,4 @@ export const updateUserPasswordFail = (error: Error) => {
 };
 
 export const clearMessage = () => ({type: ActionTypes.CLEAR_MESSAGE});
+export const initUserDataState = () => ({type: ActionTypes.INIT_STATE});

@@ -1,20 +1,24 @@
 import {useEffect} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useMessage} from "../../../hooks/message.hook";
 
+import {clearMessage} from "../personalInfoTab/store/actions";
+import {clearUserCommentsMessage} from "../commentsTab/store/actions";
 import {BasicInfoSubTab} from "../personalInfoTab/basicInformation/BasicInfoSubTab";
-import {CartPage} from "../../cart/CartPage";
-
 import {ChangePassSubTab} from "../personalInfoTab/changePassword/ChangePassSubTab";
+import {CartPage} from "../../cart/CartPage";
+import {CommentsTab} from "../commentsTab/CommentsTab";
+import {OrdersTab} from "../ordersTab/OrdersTab";
 
 import "./mainUserProfilePage.css";
-import {CommentsTab} from "../commentsTab/CommentsTab";
 
 
 export const MainUserProfilePage: React.FC = () => {
 
     const message = useMessage();
-    const notification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
+    const dispatch = useDispatch();
+    const userDataNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
+    const userCommentsNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
 
     useEffect( () => {
         let tabsElems = document.querySelectorAll('.tabs');
@@ -24,8 +28,20 @@ export const MainUserProfilePage: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        message(notification);
-    }, [notification,message])
+        message(userDataNotification);
+
+        return () => {
+            dispatch(clearMessage());
+        }
+    }, [dispatch, userDataNotification,message])
+
+    useEffect(() => {
+        message(userCommentsNotification);
+
+        return () => {
+            dispatch(clearUserCommentsMessage());
+        }
+    }, [dispatch, userCommentsNotification,message])
 
 
     return (
@@ -67,7 +83,7 @@ export const MainUserProfilePage: React.FC = () => {
 
                 </div>
                 <div id="cart" className="col s12"><CartPage/></div>
-                <div id="orders" className="col s12">Orders history</div>
+                <div id="orders" className="col s12"><OrdersTab/></div>
                 <div id="favorites" className="col s12">Favorites</div>
                 <div id="comments" className="col s12"><CommentsTab/></div>
                 <div id="ratings" className="col s12">Ratings</div>

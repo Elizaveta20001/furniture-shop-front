@@ -37,6 +37,24 @@ export interface CatalogItem {
     id: number
 }
 
+export interface Order {
+    items: OrderItem[]
+}
+
+export interface OrderItem {
+    id: number,
+    quantity: number
+}
+
+export interface basicUserParams {
+    userId: string,
+    token: string
+}
+
+export interface saveOrderParams extends basicUserParams{
+    form: Order,
+}
+
 export interface CollectionItemCardInterface extends CatalogItem{
     rating: Rating[]
 }
@@ -205,6 +223,7 @@ export interface SearchResultsState {
 export interface UserState {
     userDataReducer: UserDataState,
     userCommentsReducer: UserCommentsState,
+    userOrdersReducer: UserOrdersState
 }
 
 export interface UserDataState {
@@ -217,6 +236,12 @@ export interface UserDataState {
 
 export interface UserCommentsState {
     userComments: UserComments[],
+    isFetching: boolean,
+    message: string,
+}
+
+export interface UserOrdersState {
+    userOrders: any[],
     isFetching: boolean,
     message: string,
 }

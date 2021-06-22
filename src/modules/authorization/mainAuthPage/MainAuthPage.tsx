@@ -1,26 +1,39 @@
 import {  useEffect } from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useMessage } from "../../../hooks/message.hook";
 
+import {clearMessage} from "../store/actions";
 import {SignInPage} from "../sign-in/SignInPage";
 import {SignUpPage} from "../sign-up/SignUpPage";
+import {Loader} from "../../../components/loader/Loader";
 
 import "./mainAuthPage.css";
-import {Loader} from "../../../components/loader/Loader";
+
 
 export const MainAuthPage: React.FC = () => {
     const message = useMessage();
+    const dispatch = useDispatch();
     const loginNotification = useSelector((state: Store) => state.loginReducer.message);
     const reginNotification = useSelector((state: Store) => state.reginReducer.message);
     let isUpToDate = useSelector((state: Store) => state.reginReducer.isUpToDate);
 
     useEffect(() => {
         message(loginNotification);
-    }, [loginNotification, message])
+
+        return () => {
+            dispatch(clearMessage());
+        }
+
+    }, [dispatch, loginNotification, message])
 
     useEffect(() => {
         message(reginNotification);
-    }, [reginNotification, message])
+
+        return () => {
+            dispatch(clearMessage());
+        }
+
+    }, [dispatch, reginNotification, message])
 
     useEffect(() => {
         window.M.updateTextFields();

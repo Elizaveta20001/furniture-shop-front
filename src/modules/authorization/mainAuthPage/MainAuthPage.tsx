@@ -24,7 +24,7 @@ export const MainAuthPage: React.FC = () => {
             dispatch(clearMessage());
         }
 
-    }, [loginNotification, message])
+    }, [dispatch, loginNotification, message])
 
     useEffect(() => {
         message(reginNotification);
@@ -33,7 +33,7 @@ export const MainAuthPage: React.FC = () => {
             dispatch(clearMessage());
         }
 
-    }, [reginNotification, message])
+    }, [dispatch, reginNotification, message])
 
     useEffect(() => {
         window.M.updateTextFields();

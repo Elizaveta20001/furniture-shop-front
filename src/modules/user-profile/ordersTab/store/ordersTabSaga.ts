@@ -2,9 +2,8 @@ import {put, call, all} from 'redux-saga/effects';
 import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
 import {
-    clearUserOrdersMessage,
     fetchUserOrdersFail,
-    fetchUserOrdersSuccess, initUserOrdersState,
+    fetchUserOrdersSuccess,
     saveUserOrderFail,
     saveUserOrderSuccess
 } from "./actions";

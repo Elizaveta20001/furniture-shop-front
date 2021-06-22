@@ -29,7 +29,7 @@ export const CartPage: React.FC = () => {
             dispatch(clearUserOrdersMessage())
         }
 
-    }, [message, saveOrderNorification])
+    }, [dispatch, message, saveOrderNorification])
 
     const onToken = (token: any) => {
         const body = {

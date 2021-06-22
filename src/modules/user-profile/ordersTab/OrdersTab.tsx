@@ -21,8 +21,6 @@ export const OrdersTab: React.FC = () => {
         dispatch(fetchUserOrders(userId,token))
     }, [dispatch, userId, token]);
 
-    useEffect(() => console.log('userOrders', userOrders), [userOrders]);
-
     return (
         <div className="card">
             {

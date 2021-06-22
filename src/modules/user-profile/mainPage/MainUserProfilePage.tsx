@@ -33,7 +33,7 @@ export const MainUserProfilePage: React.FC = () => {
         return () => {
             dispatch(clearMessage());
         }
-    }, [userDataNotification,message])
+    }, [dispatch, userDataNotification,message])
 
     useEffect(() => {
         message(userCommentsNotification);
@@ -41,7 +41,7 @@ export const MainUserProfilePage: React.FC = () => {
         return () => {
             dispatch(clearUserCommentsMessage());
         }
-    }, [userCommentsNotification,message])
+    }, [dispatch, userCommentsNotification,message])
 
 
     return (

@@ -33,7 +33,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
             </div>
             {
                 isAuthenticated ? <h6>You need to login</h6>
-                    : <button className='waves-effect waves-light btn custom-button' onClick={handleClick}> Add to
+                    : <button className='waves-effect waves-light btn custom-collection-item-button' onClick={handleClick}> Add to
                         cart</button>
             }
         </div>

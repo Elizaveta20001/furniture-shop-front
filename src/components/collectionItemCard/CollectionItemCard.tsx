@@ -6,11 +6,14 @@ import {addItemToTheCart} from "../../modules/cart/store/actions";
 import {getRating} from "../../helpers/rating";
 
 import "./colectionItemCard.css";
+import RatingBox from "../ratingBox/RatingBox";
 
 
 const CollectionItemCard = ({title, description, price, url, id, rating}: CollectionItemCardInterface) => {
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
     const dispatch = useDispatch();
+
+    const calculatedRating = getRating(rating)
 
     const handleClick = () => {
         dispatch(addItemToTheCart({
@@ -35,11 +38,12 @@ const CollectionItemCard = ({title, description, price, url, id, rating}: Collec
                     <h6>{description}</h6>
                 </div>
                 <div className='rating'>
-                    <h4>Rating: {getRating(rating)}</h4>
+                    <RatingBox value={calculatedRating}/>
+
                 </div>
                 <div className="container_for_price">
-                    <div className="option">
-                        <h4 >Price: {price}$</h4>
+                    <div className="text">
+                        <h4>Price: ${price}</h4>
                     </div>
                     <div className="option">
                         {

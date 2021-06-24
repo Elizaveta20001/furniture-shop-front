@@ -1,0 +1,27 @@
+:root {
+    --border: 1px solid #393939;
+}
+
+.rating-item {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-column-gap: 10px;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: white;
+    border-bottom: var(--border);
+}
+
+.rating-item:last-child {
+    border-bottom: none;
+}
+
+.rating-item-image-container {
+    background-size: cover;
+}
+
+.rating-item-data {
+    text-align: center;
+}

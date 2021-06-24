@@ -1,0 +1,7 @@
+.rating-item-stars {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

@@ -37,17 +37,19 @@ export const CommentsTab: React.FC = () => {
 
     return (
         <div className="card">
+            <div className="card-content">
                 {
                     isFetching || isUserDataFetching || isUserDataUpdating || userComments?.length < 1 ?
                         <EmptyUserProfileTab
                             text="You haven't left any comments so far"
                             iconName='comment'
                         /> :
-                     <UserProfileCommentsSubTab
-                         comments={userComments}
-                         user={userData}
-                     />
+                        <UserProfileCommentsSubTab
+                            comments={userComments}
+                            user={userData}
+                        />
                 }
+            </div>
         </div>
     )
 }

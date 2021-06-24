@@ -19,12 +19,14 @@ export const OrdersTab: React.FC = () => {
     useEffect(() => {
         initUserOrdersState()
         dispatch(fetchUserOrders(userId,token))
-    }, [dispatch, userId, token]);
+    }, [userId, token]);
+
+    if (isFetching || userOrders?.length < 1) return <EmptyUserProfileComments/>
 
     return (
         <div className="card">
             {
-                isFetching || userOrders.length < 1 ? <EmptyUserProfileComments/> :
+                isFetching || userOrders?.length < 1 ? <EmptyUserProfileComments/> :
                     <div className="card-content">
                             {
                                 userOrders.map((order:any, index:number) => (

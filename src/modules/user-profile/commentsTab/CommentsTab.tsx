@@ -27,10 +27,12 @@ export const CommentsTab: React.FC = () => {
 
     }, [dispatch, userId, token]);
 
+    if (isFetching || isUserDataFetching || isUserDataUpdating || userComments?.length < 1) return <EmptyUserProfileComments/>
+
     return (
         <div className="card">
                 {
-                    isFetching || isUserDataFetching || isUserDataUpdating || userComments.length < 1 ? <EmptyUserProfileComments/> :
+                    isFetching || isUserDataFetching || isUserDataUpdating || userComments?.length < 1 ? <EmptyUserProfileComments/> :
                      <UserProfileCommentsSubTab
                          comments={userComments}
                          user={userData}

@@ -1,18 +1,21 @@
 import {put, call, all} from 'redux-saga/effects';
 import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
+import {LOGOUT} from "../../../authorization/store/keys";
 import {
     fetchUserDataFail,
     fetchUserDataSuccess,
     updateUserDataSuccess,
     updateUserDataFail,
     updateUserPasswordSuccess,
-    updateUserPasswordFail,
+    updateUserPasswordFail, initUserDataState,
 } from "./actions";
 import { fetchGet } from "../../../../helpers/get";
 import { fetchPost } from "../../../../helpers/post";
 
+
 const takeEvery: any = Eff.takeEvery;
+const takeLatest: any = Eff.takeLatest;
 
 export function* fetchUserDataWorker(args: any): any {
 
@@ -57,6 +60,10 @@ export function* updateUserPasswordWorker(args: any): any {
 
 };
 
+export function* clearState(){
+    yield put(initUserDataState());
+}
+
 export function* onFetchUserData() {
     yield takeEvery(ActionTypes.FETCH_USER_DATA_START, fetchUserDataWorker);
 }
@@ -69,10 +76,15 @@ export function* onUpdateUserPassword() {
     yield takeEvery(ActionTypes.UPDATE_USER_PASSWORD_START, updateUserPasswordWorker);
 }
 
+export function* onLogout(){
+    yield takeLatest(LOGOUT,clearState);
+}
+
 export function* userDataWatcher() {
     yield all([
         call(onFetchUserData),
         call(onUpdateUserData),
         call(onUpdateUserPassword),
+        call(onLogout)
     ]);
 }

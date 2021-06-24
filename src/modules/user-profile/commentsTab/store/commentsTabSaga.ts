@@ -1,13 +1,16 @@
-import {put, call} from 'redux-saga/effects';
+import {put, call, all} from 'redux-saga/effects';
 import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
 import {
     fetchUserCommentsSuccess,
     fetchUserCommentsFail,
+    initUserCommentsState
 } from "./actions";
 import { fetchGet } from "../../../../helpers/get";
+import {LOGOUT} from "../../../authorization/store/keys";
 
 const takeEvery: any = Eff.takeEvery;
+const takeLatest: any = Eff.takeLatest;
 
 export function* fetchUserCommentsWorker(args: any): any {
 
@@ -23,6 +26,18 @@ export function* fetchUserCommentsWorker(args: any): any {
     }
 };
 
-export function* userCommentsWatcher() {
+export function* onFetchUserComments() {
     yield takeEvery(ActionTypes.FETCH_USER_COMMENTS_START, fetchUserCommentsWorker);
+}
+
+
+export function* onLogout(){
+    yield takeLatest(LOGOUT,initUserCommentsState);
+}
+
+export function* userCommentsWatcher() {
+    yield all([
+        call(onFetchUserComments),
+        call(onLogout)
+    ]);
 }

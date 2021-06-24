@@ -1,13 +1,15 @@
-import {put, call} from 'redux-saga/effects';
+import {put, call, all} from 'redux-saga/effects';
 import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
 import {
     fetchUserRatingsSuccess,
-    fetchUserRatingsFail
+    fetchUserRatingsFail, initUserRatingsState
 } from "./actions";
 import { fetchGet } from "../../../../helpers/get";
+import {LOGOUT} from "../../../authorization/store/keys";
 
 const takeEvery: any = Eff.takeEvery;
+const takeLatest: any = Eff.takeLatest;
 
 export function* fetchUserRatingsWorker(args: any): any {
 
@@ -23,6 +25,17 @@ export function* fetchUserRatingsWorker(args: any): any {
     }
 };
 
-export function* userRatingsWatcher() {
+export function* onFetchUserRatings() {
     yield takeEvery(ActionTypes.FETCH_USER_RATINGS_START, fetchUserRatingsWorker);
+}
+
+export function* onLogout(){
+    yield takeLatest(LOGOUT,initUserRatingsState);
+}
+
+export function* userRatingsWatcher() {
+    yield all([
+        call(onFetchUserRatings),
+        call(onLogout)
+    ]);
 }

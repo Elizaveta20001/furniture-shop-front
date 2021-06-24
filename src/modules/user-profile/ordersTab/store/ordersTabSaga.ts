@@ -3,14 +3,16 @@ import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
 import {
     fetchUserOrdersFail,
-    fetchUserOrdersSuccess,
+    fetchUserOrdersSuccess, initUserOrdersState,
     saveUserOrderFail,
     saveUserOrderSuccess
 } from "./actions";
 import {fetchOrdersApiCall, saveOrderApiCall} from "../api";
 import {basicUserParams, saveOrderParams} from "../../../../interfaces/interfaces";
+import {LOGOUT} from "../../../authorization/store/keys";
 
 const takeEvery: any = Eff.takeEvery;
+const takeLatest: any = Eff.takeLatest;
 
 export function* saveUserOrderWorker(args:saveOrderParams): any {
 
@@ -50,9 +52,14 @@ export function* onFetchUserOrders() {
     yield takeEvery(ActionTypes.FETCH_USER_ORDERS_START, fetchUserOrdersWorker);
 }
 
+export function* onLogout(){
+    yield takeLatest(LOGOUT,initUserOrdersState);
+}
+
 export function* userOrdersWatcher() {
     yield all([
         call(onSaveUserOrder),
         call(onFetchUserOrders),
+        call(onLogout)
     ]);
 }

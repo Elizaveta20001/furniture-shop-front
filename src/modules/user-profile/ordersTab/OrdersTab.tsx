@@ -18,7 +18,7 @@ export const OrdersTab: React.FC = () => {
 
     useEffect(() => {
         initUserOrdersState()
-        dispatch(fetchUserOrders(userId,token))
+        if (!!userId && !!token) dispatch(fetchUserOrders(userId,token))
     }, [userId, token]);
 
     if (isFetching || userOrders?.length < 1)

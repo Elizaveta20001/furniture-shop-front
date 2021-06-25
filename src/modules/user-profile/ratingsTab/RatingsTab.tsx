@@ -18,7 +18,7 @@ export const RatingsTab: React.FC = () => {
 
     useEffect(() => {
         initUserRatingsState()
-        dispatch(fetchUserRatings(uriForUserRatings,userId,token))
+        if (!!userId && !!token) dispatch(fetchUserRatings(uriForUserRatings,userId,token))
     }, [dispatch, userId, token]);
 
     if (isFetching || userRatings.length < 1)

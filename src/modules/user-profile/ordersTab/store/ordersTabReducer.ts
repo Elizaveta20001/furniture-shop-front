@@ -40,7 +40,7 @@ export const userOrdersReducer = (state = INITIAL_STATE, action: any) => {
         case ActionTypes.SAVE_USER_ORDER_FAIL:
             return {
                 ...state,
-                message: action.payload.message
+                message: action.payload
             }
         case ActionTypes.CLEAR_MESSAGE:
             return {

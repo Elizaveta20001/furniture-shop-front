@@ -33,7 +33,11 @@ export const searchResultsReducer = (state = INITIAL_STATE, action: any) => {
                 isFetching: false,
                 error: action.payload
             }
-
+        case ActionTypes.CLEAR_ERROR:
+            return {
+                ...state,
+                error: ''
+            }
         default:
             return state;
     }

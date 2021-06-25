@@ -1,15 +1,17 @@
 import {useCallback, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import {useMessage} from '../../hooks/message.hook';
 
 import {SearchBar} from '../../modules/searchField/SearchBar';
 import CartItemNumber from "../cartItemNumber/CartItemNumber";
 
+import {clearUserCommentsMessage} from "../../modules/user-profile/commentsTab/store/actions";
+import {clearUserRatingsMessage} from "../../modules/user-profile/ratingsTab/store/actions";
+import {clearUserOrdersMessage} from "../../modules/user-profile/ordersTab/store/actions";
 import {clearMessage, enter, logout} from '../../modules/authorization/store/actions';
-import {useMessage} from '../../hooks/message.hook';
 
 import './navbar.css';
-
 
 interface Props {
     isAuthenticated: boolean
@@ -18,9 +20,41 @@ interface Props {
 
 const Navbar: React.FC<Props> = ({isAuthenticated}) => {
 
+    const dispatch = useDispatch();
     const message = useMessage();
     const err = useSelector((state: Store) => state.loginReducer.message);
-    const dispatch = useDispatch();
+    const userDataNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
+    const userCommentsNotification = useSelector((state: Store) => state.userReducer.userCommentsReducer.message);
+    const userRatingsNotification = useSelector((state: Store) => state.userReducer.userRatingsReducer.message);
+    const userOrdersNotification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
+
+    useEffect(() => {
+        message(userDataNotification);
+        return () => {
+            dispatch(clearMessage());
+        }
+    }, [dispatch, userDataNotification,message]);
+
+    useEffect(() => {
+        message(userCommentsNotification);
+        return () => {
+            dispatch(clearUserCommentsMessage());
+        }
+    }, [dispatch, userCommentsNotification,message])
+
+    useEffect(() => {
+        message(userRatingsNotification);
+        return () => {
+            dispatch(clearUserRatingsMessage());
+        }
+    }, [dispatch, userRatingsNotification,message])
+
+    useEffect(() => {
+        message(userOrdersNotification);
+        return () => {
+            dispatch(clearUserOrdersMessage());
+        }
+    }, [dispatch, userOrdersNotification,message])
 
     useEffect(() => {
         if (err === 'logout') message(err);

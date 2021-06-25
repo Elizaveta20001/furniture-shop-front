@@ -9,6 +9,10 @@ import {fetchCatalog} from "../catalog/mainPage/store/actions";
 import './searchField.css';
 
 export const SearchBar: React.FC = () => {
+
+    const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
+
     const [query, setQuery] = useState('');
     const [isToggled, setToggled] = useState(false);
 
@@ -52,7 +56,15 @@ export const SearchBar: React.FC = () => {
                 }
                 return title;
             });
-        dispatch(fetchSearchItems(uriForSearch, 'GET', {field: query, collectionName}, {}));
+        dispatch(
+            fetchSearchItems(
+                uriForSearch,
+                'GET',
+                {field: query, collectionName},
+                userId,
+                token
+            )
+        );
         resetInputField();
         history.push(`/search-results?${collectionName.toLowerCase()}`);
     }

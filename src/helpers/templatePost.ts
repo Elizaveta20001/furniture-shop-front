@@ -12,9 +12,7 @@ export const templateFetch = (url: string, data: object, token: string, callback
             return {data: data, status: response.status};
     }).then(({data,status}) => {
         alert(data.message);
-        if(status === 200){
-            return callback();
-        }
+        return callback(data, status);
     }).catch(error => {
         return alert(error.message);
     });

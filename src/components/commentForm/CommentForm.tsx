@@ -5,8 +5,10 @@ import {useHistory} from "react-router-dom";
 import {CommentFormProps} from "../../interfaces/interfaces";
 import {templateFetch} from "../../helpers/templatePost";
 import {fetchCollectionItem} from "../../modules/catalog/collectionItemPage/store/actions";
+import {enter, logout} from "../../modules/authorization/store/actions";
 
 import './commentForm.css';
+
 
 
 const CommentForm: React.FC<CommentFormProps> = ({url}) => {
@@ -16,8 +18,14 @@ const CommentForm: React.FC<CommentFormProps> = ({url}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const refreshData = () => {
-        dispatch(fetchCollectionItem(history.location.pathname));
+    const refreshData = (data:any, status:number) => {
+        if(status === 200) dispatch(fetchCollectionItem(history.location.pathname));
+        if (data.message === 'no authorization') {
+            dispatch(logout());
+            localStorage.removeItem('userData');
+            dispatch(enter(true));
+            history.push('/home');
+        }
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

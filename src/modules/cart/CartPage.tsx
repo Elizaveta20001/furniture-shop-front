@@ -11,25 +11,27 @@ import './cartPage.css';
 import {clearUserOrdersMessage, saveUserOrder} from "../user-profile/ordersTab/store/actions";
 import {useMessage} from "../../hooks/message.hook";
 import {useEffect} from "react";
+import {fetchCollectionItem} from "../catalog/collectionItemPage/store/actions";
+import {enter, logout} from "../authorization/store/actions";
 
 
 export const CartPage: React.FC = () => {
     const data = useSelector((state: Store) => state.cartReducer.items);
     const userId = useSelector((state: Store) => state.loginReducer.userId);
     const userToken = useSelector((state: Store) => state.loginReducer.token);
-    const saveOrderNorification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
+    const saveOrderNotification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
     const dispatch = useDispatch();
     const message = useMessage();
     const totalPrice = getTotalPrice(data);
 
     useEffect(() => {
-        message(saveOrderNorification);
+        message(saveOrderNotification);
 
         return () => {
             dispatch(clearUserOrdersMessage())
         }
 
-    }, [dispatch, message, saveOrderNorification])
+    }, [dispatch, message, saveOrderNotification])
 
     const onToken = (token: any) => {
         const body = {
@@ -45,10 +47,21 @@ export const CartPage: React.FC = () => {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(body),
-        }).then(() => {
-            alert("Success");
-            dispatch(saveUserOrder(convertDataToSave(data), userId, userToken));
-            dispatch(removeAllItems());
+        }).then(async(response) => {
+            const data = await response.json();
+            return {response: data, status: response.status};
+        }).then(({response,status}) => {
+            if (status === 200) {
+                alert("Success");
+                dispatch(saveUserOrder(convertDataToSave(data), userId, userToken));
+                dispatch(removeAllItems());
+            }
+            if (response.message === 'no authorization') {
+                alert("Your session has expired. Please, re-authorize");
+                dispatch(logout());
+                localStorage.removeItem('userData');
+                dispatch(enter(true));
+            }
         }).catch(error => {
             alert(error);
         })

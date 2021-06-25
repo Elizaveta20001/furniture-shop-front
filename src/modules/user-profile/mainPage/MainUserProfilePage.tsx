@@ -1,9 +1,5 @@
 import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useMessage} from "../../../hooks/message.hook";
 
-import {clearMessage} from "../personalInfoTab/store/actions";
-import {clearUserCommentsMessage} from "../commentsTab/store/actions";
 import {BasicInfoSubTab} from "../personalInfoTab/basicInformation/BasicInfoSubTab";
 import {ChangePassSubTab} from "../personalInfoTab/changePassword/ChangePassSubTab";
 import {CartPage} from "../../cart/CartPage";
@@ -16,34 +12,12 @@ import "./mainUserProfilePage.css";
 
 export const MainUserProfilePage: React.FC = () => {
 
-    const message = useMessage();
-    const dispatch = useDispatch();
-    const userDataNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
-    const userCommentsNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
-
     useEffect( () => {
         let tabsElems = document.querySelectorAll('.tabs');
         let collapsibleElems = document.querySelectorAll('.collapsible');
         window.M.Tabs.init(tabsElems);
         window.M.Collapsible.init(collapsibleElems);
     }, [])
-
-    useEffect(() => {
-        message(userDataNotification);
-
-        return () => {
-            dispatch(clearMessage());
-        }
-    }, [dispatch, userDataNotification,message])
-
-    useEffect(() => {
-        message(userCommentsNotification);
-
-        return () => {
-            dispatch(clearUserCommentsMessage());
-        }
-    }, [dispatch, userCommentsNotification,message])
-
 
     return (
         <div>
@@ -62,7 +36,6 @@ export const MainUserProfilePage: React.FC = () => {
                 </div>
 
                 <div id="personal-data" className="col s12">
-
                     <ul className="collapsible">
                         <li className="active">
                             <div className="collapsible-header small-font-size"><i className="material-icons">account_circle</i>Basic information</div>
@@ -80,8 +53,6 @@ export const MainUserProfilePage: React.FC = () => {
                             </div>
                         </li>
                     </ul>
-
-
                 </div>
                 <div id="cart" className="col s12"><CartPage/></div>
                 <div id="orders" className="col s12"><OrdersTab/></div>

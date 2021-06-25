@@ -12,7 +12,8 @@ interface Params {
 export const fetchGet = (params: Params) => {
 
     let {url, form, userId, token} = params;
-    let headers = {
+    let headers = {};
+    if (!!token) headers = {
         'Authorization': `Bearer ${token}`
     };
 
@@ -20,7 +21,13 @@ export const fetchGet = (params: Params) => {
         case uriForUser: return fetch(url + userId, {headers});
         case uriForUserComments: return fetch(url + userId, {headers});
         case uriForUserRatings: return fetch(url + userId, {headers});
-        case uriForSearch: return fetch(url + '?' + new URLSearchParams({...form}), {headers});
+        case uriForSearch: {
+            if (!userId) return fetch(url + '?' + new URLSearchParams({...form}), {headers});
+            return fetch(
+                url + '/' + userId + '?' + new URLSearchParams({...form}), {headers}
+            );
+        }
+
         default: return null;
     }
 }

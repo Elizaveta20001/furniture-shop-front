@@ -1,12 +1,13 @@
 import {put, call, all} from 'redux-saga/effects';
 import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
+import {LOGOUT} from "../../../authorization/store/keys";
 import {
     fetchUserRatingsSuccess,
     fetchUserRatingsFail, initUserRatingsState
 } from "./actions";
 import { fetchGet } from "../../../../helpers/get";
-import {LOGOUT} from "../../../authorization/store/keys";
+
 
 const takeEvery: any = Eff.takeEvery;
 const takeLatest: any = Eff.takeLatest;

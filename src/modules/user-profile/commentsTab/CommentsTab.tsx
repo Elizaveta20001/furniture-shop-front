@@ -23,7 +23,7 @@ export const CommentsTab: React.FC = () => {
 
     useEffect(() => {
         initUserCommentsState();
-        dispatch(fetchUserComments(uriForUserComments, userId, token));
+        if (!!userId && !!token) dispatch(fetchUserComments(uriForUserComments, userId, token));
 
     }, [dispatch, userId, token]);
 

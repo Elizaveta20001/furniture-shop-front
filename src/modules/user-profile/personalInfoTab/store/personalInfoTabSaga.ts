@@ -12,10 +12,17 @@ import {
 } from "./actions";
 import { fetchGet } from "../../../../helpers/get";
 import { fetchPost } from "../../../../helpers/post";
+import {enter, logout} from "../../../authorization/store/actions";
 
 
 const takeEvery: any = Eff.takeEvery;
 const takeLatest: any = Eff.takeLatest;
+
+export function* logoutWorker() {
+    yield put(logout());
+    yield localStorage.removeItem('userData');
+    yield put(enter(true));
+}
 
 export function* fetchUserDataWorker(args: any): any {
 
@@ -26,7 +33,8 @@ export function* fetchUserDataWorker(args: any): any {
         yield put(fetchUserDataSuccess(response));
     }
     else {
-        const json = yield call(() => new Promise(res => res(result.json())));
+        const json = yield result.json();
+        if (result.statusText === "Unauthorized") yield logoutWorker();
         yield put(fetchUserDataFail(json));
     }
 };
@@ -40,7 +48,8 @@ export function* updateUserDataWorker(args: any): any {
         yield put(updateUserDataSuccess(response));
     }
     else {
-        const json = yield call(() => new Promise(res => res(result.json())));
+        const json = yield result.json();
+        if (result.statusText === "Unauthorized") yield logoutWorker();
         yield put(updateUserDataFail(json));
     }
 
@@ -54,7 +63,8 @@ export function* updateUserPasswordWorker(args: any): any {
         yield put(updateUserPasswordSuccess());
     }
     else {
-        const json = yield call(() => new Promise(res => res(result.json())));
+        const json = yield result.json();
+        if (result.statusText === "Unauthorized") yield logoutWorker();
         yield put(updateUserPasswordFail(json));
     }
 

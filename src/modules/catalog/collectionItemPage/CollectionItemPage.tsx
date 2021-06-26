@@ -35,7 +35,6 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
         <div className="row">
             <div className="col s10 offset-s1">
                 <div className='card'>
-                    <div className="card-content">
                         {
                             data.isFetched ?
                                 <CollectionItemCard
@@ -48,7 +47,6 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
                                 />
                                 : <Loader/>
                         }
-                    </div>
                 </div>
                 <div className='collection_page collection-item-comment'>
                     <RatingItemForm url={pathRating}/>

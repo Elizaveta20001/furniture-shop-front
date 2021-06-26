@@ -12,6 +12,7 @@ import {clearUserOrdersMessage} from "../../modules/user-profile/ordersTab/store
 import {clearMessage, enter, logout} from '../../modules/authorization/store/actions';
 
 import './navbar.css';
+import {clearUserFavoritesMessage} from "../../modules/user-profile/favoritesTab/store/actions";
 
 interface Props {
     isAuthenticated: boolean
@@ -27,6 +28,7 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     const userCommentsNotification = useSelector((state: Store) => state.userReducer.userCommentsReducer.message);
     const userRatingsNotification = useSelector((state: Store) => state.userReducer.userRatingsReducer.message);
     const userOrdersNotification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
+    const userFavoritesNotification = useSelector((state: Store) => state.userReducer.userFavoritesReducer.message);
 
     useEffect(() => {
         message(userDataNotification);
@@ -55,6 +57,13 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
             dispatch(clearUserOrdersMessage());
         }
     }, [dispatch, userOrdersNotification,message])
+
+    useEffect(() => {
+        message(userFavoritesNotification);
+        return () => {
+            dispatch(clearUserFavoritesMessage());
+        }
+    }, [dispatch, userFavoritesNotification,message])
 
     useEffect(() => {
         if (err === 'logout') message(err);

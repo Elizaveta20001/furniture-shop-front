@@ -10,15 +10,17 @@
 .image_container_for_collection_items {
     background-size: cover;
     height: 1fr;
+    line-height: 80%;
 }
 
 .container_for_collection_item_data {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: space-around;
+    align-content: space-between;
     height: 100%;
     justify-content: center;
+    padding: 5% 5% 5% 0;
 }
 
 .text {
@@ -32,12 +34,26 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 0.01fr;
+    align-items: center;
+}
+
+.collection-item-card-buttons-container {
+    display: flex;
+    flex-direction: row;
+    line-height: 50%;
+    justify-content: flex-end;
 }
 
 .option {
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     text-align: center;
-    justify-content: center;
     align-items: center;
     padding-left: 30px;
 }
@@ -46,4 +62,10 @@
     width: 100%;
     text-align: left;
     padding-left: 30px;
+}
+
+.custom-button.collection-item-card-button{
+    margin-left: 3%;
+    margin-right: 3%;
+    line-height: 36px;
 }

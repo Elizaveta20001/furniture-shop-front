@@ -5,6 +5,7 @@ import {CollectionItemProps} from "../../interfaces/interfaces";
 import {addItemToTheCart} from "../../modules/cart/store/actions";
 
 import "./collectionItem.css";
+import React from "react";
 
 
 
@@ -12,7 +13,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
     const dispatch = useDispatch();
 
-    const handleClick = () => {
+    const handleAddToCart = () => {
         dispatch(addItemToTheCart({
             title,
             price,
@@ -22,20 +23,33 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
         }));
     }
 
+    const handleExpand = () => history.push(`${collectionName}/${id}`)
+
     return (
         <div className="collection_item">
             <div className="background_image">
-                <img alt={title} src={url} onClick={() => history.push(`${collectionName}/${id}`)}/>
+                <img alt={title} src={url} onClick={handleExpand}/>
             </div>
             <div className="data_container">
-                <h6>{title}</h6>
-                <h6>{price}</h6>
+                <h6 className="collection-item-title">{title}</h6>
+                <div className="collection-item-bottom-container">
+                    <h6>${price}</h6>
+                    {
+                        isAuthenticated
+                            ? <button
+                                className='waves-effect waves-light btn custom-collection-item-button'
+                                onClick={handleExpand}>
+                                <i className="material-icons small">chevron_right</i>
+                            </button>
+                            : <button
+                                className='waves-effect waves-light btn custom-collection-item-button'
+                                onClick={handleAddToCart}>
+                                <i className="material-icons small">shopping_cart</i>
+                            </button>
+                    }
+                </div>
             </div>
-            {
-                isAuthenticated ? <h6>You need to login</h6>
-                    : <button className='waves-effect waves-light btn custom-collection-item-button' onClick={handleClick}> Add to
-                        cart</button>
-            }
+
         </div>
     )
 };

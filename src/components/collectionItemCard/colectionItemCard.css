@@ -29,6 +29,11 @@
     text-align: justify;
 }
 
+.btn-flat.expand-text-button{
+    height: 20px;
+    line-height: 5px;
+}
+
 .container_for_price {
     width: 100%;
     display: grid;
@@ -37,7 +42,7 @@
     align-items: center;
 }
 
-.collection-item-card-buttons-container {
+.collection-item-buttons-container {
     display: flex;
     flex-direction: row;
     line-height: 50%;

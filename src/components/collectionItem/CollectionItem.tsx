@@ -1,16 +1,20 @@
-import {withRouter} from "react-router-dom";
+import React from "react";
+
 import {useDispatch, useSelector} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 import {CollectionItemProps} from "../../interfaces/interfaces";
 import {addItemToTheCart} from "../../modules/cart/store/actions";
+import {addToUserFavorites} from "../../modules/user-profile/favoritesTab/store/actions";
 
 import "./collectionItem.css";
-import React from "react";
 
 
 
 const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, description,collectionName, history}) => {
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
+    const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
     const dispatch = useDispatch();
 
     const handleAddToCart = () => {
@@ -21,6 +25,10 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
             id,
             url
         }));
+    }
+
+    const handleAddToFavorites = () => {
+        dispatch(addToUserFavorites(id, userId, token))
     }
 
     const handleExpand = () => history.push(`${collectionName}/${id}`)
@@ -41,11 +49,19 @@ const CollectionItem: React.FC<CollectionItemProps> = ({title, price, url, id, d
                                 onClick={handleExpand}>
                                 <i className="material-icons small">chevron_right</i>
                             </button>
-                            : <button
-                                className='waves-effect waves-light btn custom-collection-item-button'
-                                onClick={handleAddToCart}>
-                                <i className="material-icons small">shopping_cart</i>
-                            </button>
+                            : <div className="collection-item-buttons-container">
+                                <button
+                                    className='waves-effect waves-light btn custom-collection-item-button'
+                                    onClick={handleAddToFavorites}>
+                                    <i className="material-icons small">favorite_border</i>
+                                </button>
+                                <button
+                                    className='waves-effect waves-light btn custom-collection-item-button'
+                                    onClick={handleAddToCart}>
+                                    <i className="material-icons small">shopping_cart</i>
+                                </button>
+                            </div>
+
                     }
                 </div>
             </div>

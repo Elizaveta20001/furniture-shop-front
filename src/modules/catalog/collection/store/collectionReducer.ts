@@ -32,7 +32,12 @@ export const collectionReducer = (state=INITIAL_STATE, action: any) => {
                 title: '',
                 error: action.payload
             }
-            
+        case CollectionActionTypes.CLEAR_ERROR:
+            return {
+                ...state,
+                error: ''
+            }
+
         default:
             return state;
 

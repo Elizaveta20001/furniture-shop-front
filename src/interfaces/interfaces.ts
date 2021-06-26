@@ -59,6 +59,10 @@ export interface basicUserParams {
     token: string
 }
 
+export interface fetchCollectionParams extends basicUserParams {
+    catalogName: string
+}
+
 export interface saveOrderParams extends basicUserParams{
     form: Order,
 }
@@ -185,7 +189,8 @@ export interface ReginState {
 
 export interface CollectionState {
     items: CatalogItem[],
-    title: string
+    title: string,
+    error: string
 }
 
 export interface mainPageCatalogState {

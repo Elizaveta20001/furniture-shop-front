@@ -11,8 +11,10 @@ import {clearUserRatingsMessage} from "../../modules/user-profile/ratingsTab/sto
 import {clearUserOrdersMessage} from "../../modules/user-profile/ordersTab/store/actions";
 import {clearUserFavoritesMessage} from "../../modules/user-profile/favoritesTab/store/actions";
 import {clearMessage, enter, logout} from '../../modules/authorization/store/actions';
+import {clearCollectionError} from "../../modules/catalog/collection/store/actions";
 
 import './navbar.css';
+
 
 
 interface Props {
@@ -25,11 +27,19 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     const dispatch = useDispatch();
     const message = useMessage();
     const err = useSelector((state: Store) => state.loginReducer.message);
+    const fetchCollectionNotification = useSelector((state: Store) => state.catalogReducer.collectionReducer.error);
     const userDataNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
     const userCommentsNotification = useSelector((state: Store) => state.userReducer.userCommentsReducer.message);
     const userRatingsNotification = useSelector((state: Store) => state.userReducer.userRatingsReducer.message);
     const userOrdersNotification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
     const userFavoritesNotification = useSelector((state: Store) => state.userReducer.userFavoritesReducer.message);
+
+    useEffect(() => {
+        message(fetchCollectionNotification);
+        return () => {
+            dispatch(clearCollectionError());
+        }
+    }, [dispatch, fetchCollectionNotification,message]);
 
     useEffect(() => {
         message(userDataNotification);

@@ -16,11 +16,13 @@ const CollectionPage: React.FC<CollectionProps> = ({history}): JSX.Element => {
     title = title.substring(1);
 
     const data = useSelector((state: Store) => state.catalogReducer.collectionReducer.items);
+    const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCollection(title));
-    }, [dispatch, title]);
+        dispatch(fetchCollection(title,userId,token));
+    }, [dispatch, title, userId, token]);
 
     return (
         <div>

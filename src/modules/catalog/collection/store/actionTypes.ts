@@ -3,4 +3,5 @@ export const CollectionActionTypes = {
     FETCH_FAIL: 'FETCH_FAIL',
     FETCH_START: 'FETCH_START',
     CLEAR_DATA: 'CLEAR_DATA',
+    CLEAR_ERROR: 'CLEAR_ERROR'
 }

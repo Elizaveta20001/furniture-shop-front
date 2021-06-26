@@ -15,15 +15,23 @@ export const fetchCollectionFail = (error: Error)=>{
     })
 };
 
-export const fetchCollection = (catalogName: string)=>{
+export const fetchCollection = (catalogName: string, userId: string, token: string)=>{
     return({
         type: CollectionActionTypes.FETCH_START,
-        payload: catalogName
+        catalogName,
+        userId,
+        token
     })
 };
 
 export const clearCollection = () =>{
     return({
         type: CollectionActionTypes.CLEAR_DATA
+    })
+};
+
+export const clearCollectionError = () =>{
+    return({
+        type: CollectionActionTypes.CLEAR_ERROR
     })
 };

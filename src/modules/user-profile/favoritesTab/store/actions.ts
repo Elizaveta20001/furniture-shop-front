@@ -1,27 +1,26 @@
 import {ActionTypes} from './actionTypes';
-import {Order} from "../../../../interfaces/interfaces";
 
-// export const fetchUserFavorites = (userId: string, token: string) => {
-//     return {
-//         type: ActionTypes.FETCH_USER_FAVORITES_START,
-//         userId,
-//         token
-//     }
-// };
-//
-// export const fetchUserFavoritesSuccess = (data: string) => {
-//     return({
-//         type: ActionTypes.FETCH_USER_FAVORITES_SUCCESS,
-//         payload: data
-//     })
-// };
-//
-// export const fetchUserFavoritesFail = (error: Error) => {
-//     return({
-//         type: ActionTypes.FETCH_USER_FAVORITES_FAIL,
-//         payload: error.message
-//     })
-// };
+export const fetchUserFavorites = (userId: string, token: string) => {
+    return {
+        type: ActionTypes.FETCH_USER_FAVORITES_START,
+        userId,
+        token
+    }
+};
+
+export const fetchUserFavoritesSuccess = (data: string) => {
+    return({
+        type: ActionTypes.FETCH_USER_FAVORITES_SUCCESS,
+        payload: data
+    })
+};
+
+export const fetchUserFavoritesFail = (error: Error) => {
+    return({
+        type: ActionTypes.FETCH_USER_FAVORITES_FAIL,
+        payload: error.message
+    })
+};
 
 export const addToUserFavorites = (id: number, userId: string, token: string) => {
     return {

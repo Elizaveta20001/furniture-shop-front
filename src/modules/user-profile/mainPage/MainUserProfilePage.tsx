@@ -6,8 +6,10 @@ import {CartPage} from "../../cart/CartPage";
 import {CommentsTab} from "../commentsTab/CommentsTab";
 import {RatingsTab} from "../ratingsTab/RatingsTab";
 import {OrdersTab} from "../ordersTab/OrdersTab";
+import {FavoritesTab} from "../favoritesTab/FavoritesTab";
 
 import "./mainUserProfilePage.css";
+
 
 
 export const MainUserProfilePage: React.FC = () => {
@@ -56,7 +58,7 @@ export const MainUserProfilePage: React.FC = () => {
                 </div>
                 <div id="cart" className="col s12"><CartPage/></div>
                 <div id="orders" className="col s12"><OrdersTab/></div>
-                <div id="favorites" className="col s12">Favorites</div>
+                <div id="favorites" className="col s12"><FavoritesTab/></div>
                 <div id="comments" className="col s12"><CommentsTab/></div>
                 <div id="ratings" className="col s12"><RatingsTab/></div>
             </div>

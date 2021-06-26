@@ -1,5 +1,5 @@
 import {uriForUser} from "../constants";
-import {addToFavoritesParams} from "../../../interfaces/interfaces";
+import {addToFavoritesParams, basicUserParams} from "../../../interfaces/interfaces";
 
 export const addToFavoritesApiCall = async (params: addToFavoritesParams) => {
     let {id, userId, token} = params;
@@ -17,16 +17,16 @@ export const addToFavoritesApiCall = async (params: addToFavoritesParams) => {
     );
 }
 
-// export const fetchOrdersApiCall = async (params: basicUserParams) => {
-//     let {userId, token} = params;
-//
-//     return fetch(
-//         uriForUser + userId + '/order-history',
-//         {
-//             method: 'GET',
-//             headers: {
-//                 'Authorization': `Bearer ${token}`
-//             }
-//         }
-//     );
-// }
+export const fetchFavoritesApiCall = async (params: basicUserParams) => {
+    let {userId, token} = params;
+
+    return fetch(
+        uriForUser + userId + '/favorites',
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+    );
+}

@@ -2,10 +2,15 @@ import {put, call, all} from 'redux-saga/effects';
 import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
 import {LOGOUT} from "../../../authorization/store/keys";
-import {addToUserFavoritesSuccess, addToUserFavoritesFail, initUserFavoritesState} from "./actions";
+import {
+    addToUserFavoritesSuccess,
+    addToUserFavoritesFail,
+    initUserFavoritesState,
+    fetchUserFavoritesSuccess, fetchUserFavoritesFail
+} from "./actions";
 import {enter, logout} from "../../../authorization/store/actions";
-import {addToFavoritesApiCall} from "../favoriteTabApis";
-import {addToFavoritesParams} from "../../../../interfaces/interfaces";
+import {addToFavoritesApiCall, fetchFavoritesApiCall} from "../favoriteTabApis";
+import {addToFavoritesParams, basicUserParams} from "../../../../interfaces/interfaces";
 
 
 
@@ -34,28 +39,28 @@ export function* addToUserFavoritesWorker(args:addToFavoritesParams): any {
 
 };
 
-// export function* fetchUserOrdersWorker(args:basicUserParams): any {
-//
-//     const result = yield call(fetchOrdersApiCall, args);
-//
-//     if (result.ok) {
-//         const response = yield result.json();
-//         yield put(fetchUserOrdersSuccess(response));
-//     }
-//     else {
-//         const json = yield call(() => new Promise(res => res(result.json())));
-//         yield put(fetchUserOrdersFail(json));
-//     }
-//
-// };
+export function* fetchUserFavoritesWorker(args:basicUserParams): any {
+
+    const result = yield call(fetchFavoritesApiCall, args);
+
+    if (result.ok) {
+        const response = yield result.json();
+        yield put(fetchUserFavoritesSuccess(response));
+    }
+    else {
+        const json = yield result.json();
+        yield put(fetchUserFavoritesFail(json));
+    }
+
+};
 
 export function* onAddToUserFavorites() {
     yield takeEvery(ActionTypes.ADD_TO_USER_FAVORITES_START, addToUserFavoritesWorker);
 }
 
-// export function* onFetchUserOrders() {
-//     yield takeEvery(ActionTypes.FETCH_USER_ORDERS_START, fetchUserOrdersWorker);
-// }
+export function* onFetchUserFavorites() {
+    yield takeEvery(ActionTypes.FETCH_USER_FAVORITES_START, fetchUserFavoritesWorker);
+}
 
 export function* onLogout(){
     yield takeLatest(LOGOUT,initUserFavoritesState);
@@ -64,7 +69,7 @@ export function* onLogout(){
 export function* userFavoritesWatcher() {
     yield all([
         call(onAddToUserFavorites),
-     //   call(onFetchUserOrders),
+        call(onFetchUserFavorites),
         call(onLogout)
     ]);
 }

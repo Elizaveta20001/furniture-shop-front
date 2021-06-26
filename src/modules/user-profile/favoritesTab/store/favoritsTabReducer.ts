@@ -15,24 +15,24 @@ const INITIAL_STATE: UserOrdersInterface = {
 
 export const userFavoritesReducer = (state = INITIAL_STATE, action: any) => {
     switch (action.type) {
-        // case ActionTypes.FETCH_USER_ORDERS_START:
-        //     return {
-        //         ...state,
-        //         isFetching: true,
-        //     }
-        // case ActionTypes.FETCH_USER_ORDERS_SUCCESS:
-        //     return {
-        //         ...state,
-        //         userOrders: action.payload.orderHistory,
-        //         isFetching: false,
-        //     }
-        // case ActionTypes.FETCH_USER_ORDERS_FAIL:
-        //     return {
-        //         ...state,
-        //         userOrders: [],
-        //         isFetching: false,
-        //         message: action.payload.message
-        //     }
+        case ActionTypes.FETCH_USER_FAVORITES_START:
+            return {
+                ...state,
+                isFetching: true,
+            }
+        case ActionTypes.FETCH_USER_FAVORITES_SUCCESS:
+            return {
+                ...state,
+                userFavorites: action.payload,
+                isFetching: false,
+            }
+        case ActionTypes.FETCH_USER_FAVORITES_FAIL:
+            return {
+                ...state,
+                userFavorites: [],
+                isFetching: false,
+                message: action.payload
+            }
         case ActionTypes.ADD_TO_USER_FAVORITES_SUCCESS:
             return {
                 ...state,

@@ -9,10 +9,11 @@ import CartItemNumber from "../cartItemNumber/CartItemNumber";
 import {clearUserCommentsMessage} from "../../modules/user-profile/commentsTab/store/actions";
 import {clearUserRatingsMessage} from "../../modules/user-profile/ratingsTab/store/actions";
 import {clearUserOrdersMessage} from "../../modules/user-profile/ordersTab/store/actions";
+import {clearUserFavoritesMessage} from "../../modules/user-profile/favoritesTab/store/actions";
 import {clearMessage, enter, logout} from '../../modules/authorization/store/actions';
 
 import './navbar.css';
-import {clearUserFavoritesMessage} from "../../modules/user-profile/favoritesTab/store/actions";
+
 
 interface Props {
     isAuthenticated: boolean
@@ -38,28 +39,28 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     }, [dispatch, userDataNotification,message]);
 
     useEffect(() => {
-        message(userCommentsNotification);
+        if (userCommentsNotification !== 'no authorization') message(userCommentsNotification);
         return () => {
             dispatch(clearUserCommentsMessage());
         }
     }, [dispatch, userCommentsNotification,message])
 
     useEffect(() => {
-        message(userRatingsNotification);
+        if (userRatingsNotification !== 'no authorization') message(userRatingsNotification);
         return () => {
             dispatch(clearUserRatingsMessage());
         }
     }, [dispatch, userRatingsNotification,message])
 
     useEffect(() => {
-        message(userOrdersNotification);
+        if (userOrdersNotification !== 'no authorization') message(userOrdersNotification);
         return () => {
             dispatch(clearUserOrdersMessage());
         }
     }, [dispatch, userOrdersNotification,message])
 
     useEffect(() => {
-        message(userFavoritesNotification);
+        if (userFavoritesNotification !== 'no authorization') message(userFavoritesNotification);
         return () => {
             dispatch(clearUserFavoritesMessage());
         }

@@ -6,32 +6,17 @@ import EmptyCart from "../../components/emptyCart/EmptyCart";
 
 import {getTotalPrice, convertDataToSave} from "../../helpers/cart";
 import {removeAllItems} from "./store/actions";
-
-import './cartPage.css';
-import {clearUserOrdersMessage, saveUserOrder} from "../user-profile/ordersTab/store/actions";
-import {useMessage} from "../../hooks/message.hook";
-import {useEffect} from "react";
-import {fetchCollectionItem} from "../catalog/collectionItemPage/store/actions";
+import {fetchUserOrders, saveUserOrder} from "../user-profile/ordersTab/store/actions";
 import {enter, logout} from "../authorization/store/actions";
 
+import './cartPage.css';
 
 export const CartPage: React.FC = () => {
     const data = useSelector((state: Store) => state.cartReducer.items);
     const userId = useSelector((state: Store) => state.loginReducer.userId);
     const userToken = useSelector((state: Store) => state.loginReducer.token);
-    const saveOrderNotification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
     const dispatch = useDispatch();
-    const message = useMessage();
     const totalPrice = getTotalPrice(data);
-
-    useEffect(() => {
-        message(saveOrderNotification);
-
-        return () => {
-            dispatch(clearUserOrdersMessage())
-        }
-
-    }, [dispatch, message, saveOrderNotification])
 
     const onToken = (token: any) => {
         const body = {
@@ -54,6 +39,7 @@ export const CartPage: React.FC = () => {
             if (status === 200) {
                 alert("Success");
                 dispatch(saveUserOrder(convertDataToSave(data), userId, userToken));
+                dispatch(fetchUserOrders(userId, userToken));
                 dispatch(removeAllItems());
             }
             if (response.message === 'no authorization') {
@@ -88,4 +74,3 @@ export const CartPage: React.FC = () => {
         </div>
     )
 }
-;

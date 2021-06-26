@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {fetchUserOrders, initUserOrdersState} from "./store/actions";
 import {getTotalOrderPrice} from "../../../helpers/order";
-import EmptyUserProfileComments from "../../../components/emptyUserProfileComments/EmptyUserProfileComments";
+import EmptyUserProfileTab from "../../../components/emptyUserProfileTab/EmptyUserProfileTab";
 import OrderItem from "../../../components/orderItem/OrderItem";
 
 import "./ordersTab.css"
@@ -18,13 +18,25 @@ export const OrdersTab: React.FC = () => {
 
     useEffect(() => {
         initUserOrdersState()
-        dispatch(fetchUserOrders(userId,token))
-    }, [dispatch, userId, token]);
+        if (!!userId && !!token) dispatch(fetchUserOrders(userId,token))
+    }, [userId, token]);
+
+    if (isFetching || userOrders?.length < 1)
+        return (<div className="card">
+                    <EmptyUserProfileTab
+                        text="You haven't order any items so far"
+                        iconName='account_balance_wallet'
+                    />
+                </div>)
 
     return (
         <div className="card">
             {
-                isFetching || userOrders.length < 1 ? <EmptyUserProfileComments/> :
+                isFetching || userOrders?.length < 1 ?
+                    <EmptyUserProfileTab
+                        text="You haven't order any items so far"
+                        iconName='account_balance_wallet'
+                    /> :
                     <div className="card-content">
                             {
                                 userOrders.map((order:any, index:number) => (

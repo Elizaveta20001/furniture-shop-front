@@ -41,13 +41,13 @@ export const BasicInfoSubTab: React.FC = () => {
 
     useEffect(() => {
         initUserDataState();
-        dispatch(fetchUserData(uriForUser, userId, token));
+        if (!!userId && !!token) dispatch(fetchUserData(uriForUser, userId, token));
     }, [dispatch, userId, token])
 
     useEffect(() => {
         setForm({...userData});
         setStringifiedForm(JSON.stringify(form));
-        if (userData.image !== undefined) setImagePreview(userData.image)
+        if (userData?.image !== undefined) setImagePreview(userData.image)
         else setImagePreview(DefaultImage);
         setDataToSend({
             email: '',
@@ -99,6 +99,10 @@ export const BasicInfoSubTab: React.FC = () => {
         setToggledChange(false);
     }
 
+    if (isFetching || isUpdating) {
+        return <Loader/>
+    }
+
     return (
         <div>
             {isFetching || isUpdating ? <Loader/> : (
@@ -144,14 +148,7 @@ export const BasicInfoSubTab: React.FC = () => {
                                     )
                                 }
                             </div>
-
                         </form>
-
-
-
-
-
-
                     </div>
                 </div>
             )}

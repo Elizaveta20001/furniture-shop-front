@@ -41,7 +41,7 @@ export const saveUserOrderSuccess = (data: string) => {
 
 export const saveUserOrderFail = (error: Error) => {
     return({
-        type: ActionTypes.SAVE_USER_ORDER_START,
+        type: ActionTypes.SAVE_USER_ORDER_FAIL,
         payload: error.message
     })
 };

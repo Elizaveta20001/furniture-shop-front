@@ -29,7 +29,7 @@ img {
     -o-transform: scale(1.05);
 }
 
-.custom-button {
+.custom-collection-item-button {
     position: absolute;
     left: 50px;
     bottom: 0px;

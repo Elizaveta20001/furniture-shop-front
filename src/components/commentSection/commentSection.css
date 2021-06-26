@@ -1,6 +1,10 @@
+.comment-section{
+    display: flex;
+    flex-direction: column;
+}
+
 .number-of-comments{
     text-align: left;
-    width: 1000px;
     border-bottom:1px solid #dee0e3;
     border-bottom-width: medium;
     margin-bottom: 40px;

@@ -3,9 +3,8 @@ import * as Eff from 'redux-saga/effects';
 import {ActionTypes} from './actionTypes';
 import {LOGOUT} from "../../../authorization/store/keys";
 import {
-    fetchUserCommentsSuccess,
-    fetchUserCommentsFail,
-    initUserCommentsState
+    fetchUserRatingsSuccess,
+    fetchUserRatingsFail, initUserRatingsState
 } from "./actions";
 import { fetchGet } from "../../../../helpers/get";
 
@@ -13,32 +12,31 @@ import { fetchGet } from "../../../../helpers/get";
 const takeEvery: any = Eff.takeEvery;
 const takeLatest: any = Eff.takeLatest;
 
-export function* fetchUserCommentsWorker(args: any): any {
+export function* fetchUserRatingsWorker(args: any): any {
 
     const result = yield call(fetchGet, args);
 
     if (result.ok) {
         const response = yield result.json();
-        yield put(fetchUserCommentsSuccess(response));
+        yield put(fetchUserRatingsSuccess(response));
     }
     else {
         const json = yield call(() => new Promise(res => res(result.json())));
-        yield put(fetchUserCommentsFail(json));
+        yield put(fetchUserRatingsFail(json));
     }
 };
 
-export function* onFetchUserComments() {
-    yield takeEvery(ActionTypes.FETCH_USER_COMMENTS_START, fetchUserCommentsWorker);
+export function* onFetchUserRatings() {
+    yield takeEvery(ActionTypes.FETCH_USER_RATINGS_START, fetchUserRatingsWorker);
 }
-
 
 export function* onLogout(){
-    yield takeLatest(LOGOUT,initUserCommentsState);
+    yield takeLatest(LOGOUT,initUserRatingsState);
 }
 
-export function* userCommentsWatcher() {
+export function* userRatingsWatcher() {
     yield all([
-        call(onFetchUserComments),
+        call(onFetchUserRatings),
         call(onLogout)
     ]);
 }

@@ -1,24 +1,18 @@
 import {ActionTypes} from './actionTypes';
 
-// export const fetchSearchItems = (field: string) =>{
-//     return({
-//         type: ActionTypes.FETCH_SEARCH_ITEMS_START,
-//         field
-//     })
-// };
-
 interface Form {
     field: string;
     collectionName: string;
 }
 
-export const fetchSearchItems = (url: string, method: string, form: Form, headers: any) => {
+export const fetchSearchItems = (url: string, method: string, form: Form, userId: string, token: string) => {
     return {
         type: ActionTypes.FETCH_SEARCH_ITEMS_START,
         url,
         method,
         form,
-        headers
+        userId,
+        token
     }
 };
 
@@ -35,4 +29,6 @@ export const fetchSearchItemsFail = (error: Error)=>{
         payload: error.message
     })
 };
+
+export const clearSearchResultsError = () => ({type: ActionTypes.CLEAR_ERROR});
 

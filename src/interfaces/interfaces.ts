@@ -79,19 +79,18 @@ export interface userComment{
 }
 
 
-export interface UserComments{
+export interface UserComments extends CatalogItem{
     comments: userComment[],
     rating: Rating[],
-    description: string,
-    price: number,
-    title: string,
-    url: string,
-    id: number
 }
 
 export interface Rating{
     userId: string,
     value: number
+}
+
+export interface UserRatings extends CatalogItem{
+    rating: Rating[],
 }
 
 export interface PersonalUserData  {
@@ -223,7 +222,8 @@ export interface SearchResultsState {
 export interface UserState {
     userDataReducer: UserDataState,
     userCommentsReducer: UserCommentsState,
-    userOrdersReducer: UserOrdersState
+    userRatingsReducer: UserRatingsState,
+    userOrdersReducer: UserOrdersState,
 }
 
 export interface UserDataState {
@@ -236,6 +236,12 @@ export interface UserDataState {
 
 export interface UserCommentsState {
     userComments: UserComments[],
+    isFetching: boolean,
+    message: string,
+}
+
+export interface UserRatingsState {
+    userRatings: UserRatings[],
     isFetching: boolean,
     message: string,
 }

@@ -1,0 +1,23 @@
+.rating-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.rating-stars {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.rating-star {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-label {
+    padding-left: 2%;
+}

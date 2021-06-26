@@ -32,29 +32,33 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
     }, [dispatch, history.location.pathname]);
 
     return (
-        <div>
-            <div className='collection_page collection-item-data'>
-                {
-                    data.isFetched ?
-                        <CollectionItemCard
-                            id={id}
-                            description={data.description}
-                            price={data.price}
-                            url={data.url}
-                            title={data.title}
-                            rating={data.rating}
-                        />
-                        : <Loader/>
-                }
-            </div>
-            <div className='collection_page collection-item-comment'>
-                <RatingItemForm url={pathRating}/>
-            </div>
-            <div className='collection_page collection-item-comment'>
-                <CommentForm url={pathComment}/>
-                {
-                    data.isFetched && <CommentSection comments={data.comments}/>
-                }
+        <div className="row">
+            <div className="col s10 offset-s1">
+                <div className='card'>
+                    <div className="card-content">
+                        {
+                            data.isFetched ?
+                                <CollectionItemCard
+                                    id={id}
+                                    description={data.description}
+                                    price={data.price}
+                                    url={data.url}
+                                    title={data.title}
+                                    rating={data.rating}
+                                />
+                                : <Loader/>
+                        }
+                    </div>
+                </div>
+                <div className='collection_page collection-item-comment'>
+                    <RatingItemForm url={pathRating}/>
+                </div>
+                <div className='collection_page collection-item-comment'>
+                    <CommentForm url={pathComment}/>
+                    {
+                        data.isFetched && <CommentSection comments={data.comments}/>
+                    }
+                </div>
             </div>
         </div>
     )

@@ -1,9 +1,9 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {uriForUserComments} from "../constants";
 import {fetchUserComments, initUserCommentsState} from "./store/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {UserProfileCommentsSubTab} from "./userProfileCommentsSubTab/UserProfileCommentsSubTab";
-import EmptyUserProfileComments from "../../../components/emptyUserProfileComments/EmptyUserProfileComments";
+import EmptyUserProfileTab from "../../../components/emptyUserProfileTab/EmptyUserProfileTab";
 
 export const CommentsTab: React.FC = () => {
 
@@ -23,19 +23,33 @@ export const CommentsTab: React.FC = () => {
 
     useEffect(() => {
         initUserCommentsState();
-        dispatch(fetchUserComments(uriForUserComments, userId, token));
+        if (!!userId && !!token) dispatch(fetchUserComments(uriForUserComments, userId, token));
 
     }, [dispatch, userId, token]);
 
+    if (isFetching || isUserDataFetching || isUserDataUpdating || userComments?.length < 1)
+        return (<div className="card">
+                    <EmptyUserProfileTab
+                        text="You haven't left any comments so far"
+                        iconName='comment'
+                    />
+                </div>)
+
     return (
         <div className="card">
+            <div className="card-content">
                 {
-                    isFetching || isUserDataFetching || isUserDataUpdating || userComments.length < 1 ? <EmptyUserProfileComments/> :
-                     <UserProfileCommentsSubTab
-                         comments={userComments}
-                         user={userData}
-                     />
+                    isFetching || isUserDataFetching || isUserDataUpdating || userComments?.length < 1 ?
+                        <EmptyUserProfileTab
+                            text="You haven't left any comments so far"
+                            iconName='comment'
+                        /> :
+                        <UserProfileCommentsSubTab
+                            comments={userComments}
+                            user={userData}
+                        />
                 }
+            </div>
         </div>
     )
 }

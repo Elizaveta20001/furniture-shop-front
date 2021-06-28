@@ -22,7 +22,7 @@ import {searchResultsReducer} from '../modules/searchField/store/reducer';
 import {cartReducer} from "../modules/cart/store/cartReducer";
 import {cartWatcher} from "../modules/cart/store/cartSaga";
 import {userOrdersWatcher} from "../modules/user-profile/ordersTab/store/ordersTabSaga";
-
+import {userFavoritesWatcher} from "../modules/user-profile/favoritesTab/store/favoritesTabSaga";
 
 
 function* rootWatcher() {
@@ -38,6 +38,7 @@ function* rootWatcher() {
                         userCommentsWatcher(),
                         userRatingsWatcher(),
                         userOrdersWatcher(),
+                        userFavoritesWatcher()
              ]);
 }
 

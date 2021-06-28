@@ -13,7 +13,12 @@ const RatingItem: React.FC<{ item: any }> = ({item}) => {
             <div className="rating-item-data">
                 <h5>{item.title}</h5>
             </div>
-            <RatingBox value={item.rating[0].value}/>
+            <div className="rating-item-data">
+                <h5>${item.price}</h5>
+            </div>
+            <div className="rating-box-container">
+                <RatingBox value={item.rating[0].value}/>
+            </div>
         </div>
     )
 }

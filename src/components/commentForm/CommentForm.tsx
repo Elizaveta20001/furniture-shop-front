@@ -19,7 +19,7 @@ const CommentForm: React.FC<CommentFormProps> = ({url}) => {
     const history = useHistory();
 
     const refreshData = (data:any, status:number) => {
-        if(status === 200) dispatch(fetchCollectionItem(history.location.pathname));
+        if(status === 200) dispatch(fetchCollectionItem(history.location.pathname, user, token));
         if (data.message === 'no authorization') {
             dispatch(logout());
             localStorage.removeItem('userData');

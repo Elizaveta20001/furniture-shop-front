@@ -1,19 +1,21 @@
 .collection_item {
-    width: 250px;
-    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 87%;
+    height: fit-content;
     border: 4px dot-dash black;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    align-content: center;
-    justify-content: center;
     -moz-transition: all .5s ease-out;
     -o-transition: all .5s ease-out;
     -webkit-transition: all .5s ease-out;
+    padding: 0% 5% 3% 5%;
 }
 
 .background_image {
-    height: 250px;
-    width: 250px;
+    height: 95%;
+    width: 113%;
     cursor: pointer;
 }
 
@@ -30,14 +32,40 @@ img {
 }
 
 .custom-collection-item-button {
-    position: absolute;
-    left: 50px;
-    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5%;
     background-color: #e7746f!important;
+    padding: 0px 5px;
+    height: 90%;
 }
 
 .data_container {
-    height: 50px;
-    width: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    align-content: space-between;
+}
+
+.collection-item-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    height: 50px;
+    width: 100%;
+
+}
+
+.collection-item-bottom-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3%;
 }

@@ -37,6 +37,14 @@ export interface CatalogItem {
     id: number
 }
 
+export interface FavoritesItem {
+    id: number,
+    collectionName: string,
+    title: string,
+    url: string,
+    price: string
+}
+
 export interface Order {
     items: OrderItem[]
 }
@@ -51,8 +59,20 @@ export interface basicUserParams {
     token: string
 }
 
+export interface fetchCollectionParams extends basicUserParams {
+    catalogName: string
+}
+
+export interface fetchCollectionItemParams extends basicUserParams {
+    path: string
+}
+
 export interface saveOrderParams extends basicUserParams{
     form: Order,
+}
+
+export interface addToFavoritesParams extends basicUserParams{
+    id: number
 }
 
 export interface CollectionItemCardInterface extends CatalogItem{
@@ -173,7 +193,8 @@ export interface ReginState {
 
 export interface CollectionState {
     items: CatalogItem[],
-    title: string
+    title: string,
+    error: string
 }
 
 export interface mainPageCatalogState {
@@ -184,6 +205,7 @@ export interface mainPageCatalogState {
 export interface CatalogState {
     collectionReducer: CollectionState,
     mainPageReducer: mainPageCatalogState,
+    collectionItemReducer: CollectionItemState
 }
 
 declare global {
@@ -224,6 +246,7 @@ export interface UserState {
     userCommentsReducer: UserCommentsState,
     userRatingsReducer: UserRatingsState,
     userOrdersReducer: UserOrdersState,
+    userFavoritesReducer: UserFavoritesState,
 }
 
 export interface UserDataState {
@@ -248,6 +271,12 @@ export interface UserRatingsState {
 
 export interface UserOrdersState {
     userOrders: any[],
+    isFetching: boolean,
+    message: string,
+}
+
+export interface UserFavoritesState {
+    userFavorites: FavoritesItem[],
     isFetching: boolean,
     message: string,
 }

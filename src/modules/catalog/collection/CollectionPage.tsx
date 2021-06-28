@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import CollectionItem from "../../../components/collectionItem/CollectionItem";
 import {Loader} from '../../../components/loader/Loader';
 
 import {fetchCollection} from './store/actions';
+import {fetchUserFavorites, initUserFavoritesState} from "../../user-profile/favoritesTab/store/actions";
 import {CollectionProps} from "../../../interfaces/interfaces";
 
 import "./collectionPage.css";
@@ -16,30 +17,71 @@ const CollectionPage: React.FC<CollectionProps> = ({history}): JSX.Element => {
     title = title.substring(1);
 
     const data = useSelector((state: Store) => state.catalogReducer.collectionReducer.items);
+    const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
+    const isNotAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
+    const isFavoritesFetching = useSelector((state: Store) => state.userReducer.userFavoritesReducer.isFetching);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCollection(title));
-    }, [dispatch, title]);
+        dispatch(fetchCollection(title,userId,token));
+    }, [dispatch, title, userId, token]);
+
+    useEffect(() => {
+        if (!isNotAuthenticated) {
+            dispatch(initUserFavoritesState());
+            dispatch(fetchUserFavorites(userId, token));
+        }
+    }, [isNotAuthenticated, userId, token]);
 
     return (
         <div>
             {
                 title ? <h1>{title.toUpperCase()}</h1> : <h1>Not title</h1>
             }
-            <div className="collection_container">
+            <div >
             {
-                data.length === 0 ? <Loader/> : data.map(element =>
-                    <CollectionItem
-                    title={element.title}
-                    id={element.id}
-                    url={element.url}
-                    price={element.price}
-                    description={element.description}
-                    key={element.id}
-                    collectionName={title}
-                    />
-                )
+                data.length === 0
+                    ? <Loader/>
+                    : <div>
+                        {
+                            isNotAuthenticated
+                                ? <div className="collection_container">
+                                    {
+                                        data.map(element =>
+                                            <CollectionItem
+                                                title={element.title}
+                                                id={element.id}
+                                                url={element.url}
+                                                price={element.price}
+                                                description={element.description}
+                                                key={element.id}
+                                                collectionName={title}
+                                            />)
+                                    }
+                                </div>
+                                : <div>
+                                    {
+                                        isFavoritesFetching
+                                            ? <Loader/>
+                                            : <div className="collection_container">
+                                                {
+                                                    data.map(element =>
+                                                        <CollectionItem
+                                                            title={element.title}
+                                                            id={element.id}
+                                                            url={element.url}
+                                                            price={element.price}
+                                                            description={element.description}
+                                                            key={element.id}
+                                                            collectionName={title}
+                                                        />)
+                                                }
+                                            </div>
+                                    }
+                                </div>
+                        }
+                    </div>
             }
             </div>
         </div>

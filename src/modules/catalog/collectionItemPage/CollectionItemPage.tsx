@@ -9,16 +9,22 @@ import CommentSection from "../../../components/commentSection/CommentSection";
 import RatingItemForm from "../../../components/ratingForm/RatingItemForm";
 
 import {collectionItemClear, fetchCollectionItem} from "./store/actions";
+import {fetchUserFavorites, initUserFavoritesState} from "../../user-profile/favoritesTab/store/actions";
 import {CollectionProps} from "../../../interfaces/interfaces";
 import {uriForCollection} from "../constants";
 
 import "./collectionItemPage.css";
 
 
+
 const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
 
     const dispatch = useDispatch();
     const data = useSelector((state: Store) => state.catalogReducer.collectionItemReducer);
+    const isFavoritesFetching = useSelector((state: Store) => state.userReducer.userFavoritesReducer.isFetching);
+    const isNotAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
+    const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
 
     let arrayPath = history.location.pathname.split("/");
     const id = +arrayPath[arrayPath.length - 1];
@@ -28,27 +34,51 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
 
     useEffect(() => {
         collectionItemClear();
-        dispatch(fetchCollectionItem(history.location.pathname));
-    }, [dispatch, history.location.pathname]);
+        dispatch(fetchCollectionItem(history.location.pathname, userId, token));
+    }, [dispatch, history.location.pathname, userId, token]);
+
+    useEffect(() => {
+        if (!isNotAuthenticated) {
+            dispatch(initUserFavoritesState());
+            dispatch(fetchUserFavorites(userId, token));
+        }
+    }, [isNotAuthenticated, userId, token]);
 
     return (
         <div className="row">
             <div className="col s10 offset-s1">
                 <div className='card'>
-                    <div className="card-content">
                         {
                             data.isFetched ?
-                                <CollectionItemCard
-                                    id={id}
-                                    description={data.description}
-                                    price={data.price}
-                                    url={data.url}
-                                    title={data.title}
-                                    rating={data.rating}
-                                />
+                                <div>
+                                    {
+                                        isNotAuthenticated
+                                            ? <CollectionItemCard
+                                                id={id}
+                                                description={data.description}
+                                                price={data.price}
+                                                url={data.url}
+                                                title={data.title}
+                                                rating={data.rating}
+                                            />
+                                            : <div>
+                                                {
+                                                    isFavoritesFetching
+                                                        ? <Loader/>
+                                                        : <CollectionItemCard
+                                                            id={id}
+                                                            description={data.description}
+                                                            price={data.price}
+                                                            url={data.url}
+                                                            title={data.title}
+                                                            rating={data.rating}
+                                                        />
+                                                }
+                                            </div>
+                                    }
+                                </div>
                                 : <Loader/>
                         }
-                    </div>
                 </div>
                 <div className='collection_page collection-item-comment'>
                     <RatingItemForm url={pathRating}/>

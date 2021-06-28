@@ -9,9 +9,13 @@ import CartItemNumber from "../cartItemNumber/CartItemNumber";
 import {clearUserCommentsMessage} from "../../modules/user-profile/commentsTab/store/actions";
 import {clearUserRatingsMessage} from "../../modules/user-profile/ratingsTab/store/actions";
 import {clearUserOrdersMessage} from "../../modules/user-profile/ordersTab/store/actions";
+import {clearUserFavoritesMessage} from "../../modules/user-profile/favoritesTab/store/actions";
 import {clearMessage, enter, logout} from '../../modules/authorization/store/actions';
+import {clearCollectionError} from "../../modules/catalog/collection/store/actions";
+import {clearCollectionItemError} from "../../modules/catalog/collectionItemPage/store/actions";
 
 import './navbar.css';
+
 
 interface Props {
     isAuthenticated: boolean
@@ -23,10 +27,38 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     const dispatch = useDispatch();
     const message = useMessage();
     const err = useSelector((state: Store) => state.loginReducer.message);
+    const fetchCollectionNotification = useSelector((state: Store) => state.catalogReducer.collectionReducer.error);
+    const fetchCollectionItemNotification = useSelector((state: Store) => state.catalogReducer.collectionItemReducer.error);
     const userDataNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
     const userCommentsNotification = useSelector((state: Store) => state.userReducer.userCommentsReducer.message);
     const userRatingsNotification = useSelector((state: Store) => state.userReducer.userRatingsReducer.message);
     const userOrdersNotification = useSelector((state: Store) => state.userReducer.userOrdersReducer.message);
+    const userFavoritesNotification = useSelector((state: Store) => state.userReducer.userFavoritesReducer.message);
+
+    useEffect(() => {
+        window.M.updateTextFields();
+    }, [])
+
+    useEffect(() => {
+        if (err === 'logout') message(err);
+        return () => {
+            dispatch(clearMessage());
+        }
+    }, [err, message])
+
+    useEffect(() => {
+        message(fetchCollectionNotification);
+        return () => {
+            dispatch(clearCollectionError());
+        }
+    }, [dispatch, fetchCollectionNotification,message]);
+
+    useEffect(() => {
+        message(fetchCollectionItemNotification);
+        return () => {
+            dispatch(clearCollectionItemError());
+        }
+    }, [dispatch, fetchCollectionItemNotification,message])
 
     useEffect(() => {
         message(userDataNotification);
@@ -36,37 +68,32 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     }, [dispatch, userDataNotification,message]);
 
     useEffect(() => {
-        message(userCommentsNotification);
+        if (userCommentsNotification !== 'no authorization') message(userCommentsNotification);
         return () => {
             dispatch(clearUserCommentsMessage());
         }
     }, [dispatch, userCommentsNotification,message])
 
     useEffect(() => {
-        message(userRatingsNotification);
+        if (userRatingsNotification !== 'no authorization') message(userRatingsNotification);
         return () => {
             dispatch(clearUserRatingsMessage());
         }
     }, [dispatch, userRatingsNotification,message])
 
     useEffect(() => {
-        message(userOrdersNotification);
+        if (userOrdersNotification !== 'no authorization') message(userOrdersNotification);
         return () => {
             dispatch(clearUserOrdersMessage());
         }
     }, [dispatch, userOrdersNotification,message])
 
     useEffect(() => {
-        if (err === 'logout') message(err);
-    }, [
-        err,
-        message,
-    ])
-
-    useEffect(() => {
-        window.M.updateTextFields();
-    }, [])
-
+        if (userFavoritesNotification !== 'no authorization') message(userFavoritesNotification);
+        return () => {
+            dispatch(clearUserFavoritesMessage());
+        }
+    }, [dispatch, userFavoritesNotification,message])
 
     const logoutHandler = useCallback(() => {
         try {
@@ -81,7 +108,6 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
         dispatch(enter(false));
         dispatch(clearMessage());
     }
-
 
     return (
         <div className="navbar-fixed">

@@ -16,7 +16,7 @@ const RatingStar: React.FC<{ url: string, value: number }> = ({url, value}) => {
     const history = useHistory();
 
     const refreshData = (data:any, status:number) =>{
-        if (status === 200) dispatch(fetchCollectionItem(history.location.pathname));
+        if (status === 200) dispatch(fetchCollectionItem(history.location.pathname, userId, token));
         if (data.message === 'no authorization') {
             dispatch(logout());
             localStorage.removeItem('userData');

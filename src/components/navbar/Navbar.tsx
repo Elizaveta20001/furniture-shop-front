@@ -14,6 +14,7 @@ import {clearMessage, enter, logout} from '../../modules/authorization/store/act
 import {clearCollectionError} from "../../modules/catalog/collection/store/actions";
 
 import './navbar.css';
+import {clearCollectionItemError} from "../../modules/catalog/collectionItemPage/store/actions";
 
 
 
@@ -28,6 +29,7 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     const message = useMessage();
     const err = useSelector((state: Store) => state.loginReducer.message);
     const fetchCollectionNotification = useSelector((state: Store) => state.catalogReducer.collectionReducer.error);
+    const fetchCollectionItemNotification = useSelector((state: Store) => state.catalogReducer.collectionItemReducer.error);
     const userDataNotification = useSelector((state: Store) => state.userReducer.userDataReducer.message);
     const userCommentsNotification = useSelector((state: Store) => state.userReducer.userCommentsReducer.message);
     const userRatingsNotification = useSelector((state: Store) => state.userReducer.userRatingsReducer.message);
@@ -35,11 +37,33 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     const userFavoritesNotification = useSelector((state: Store) => state.userReducer.userFavoritesReducer.message);
 
     useEffect(() => {
+        window.M.updateTextFields();
+    }, [])
+
+    useEffect(() => {
+        if (err === 'logout') message(err);
+        return () => {
+            dispatch(clearMessage());
+        }
+    }, [
+        err,
+        message,
+    ])
+
+    useEffect(() => {
         message(fetchCollectionNotification);
         return () => {
             dispatch(clearCollectionError());
         }
     }, [dispatch, fetchCollectionNotification,message]);
+
+    useEffect(() => {
+        console.log('fetchCollectionItemNotification',fetchCollectionItemNotification)
+        message(fetchCollectionItemNotification);
+        return () => {
+            dispatch(clearCollectionItemError());
+        }
+    }, [dispatch, fetchCollectionItemNotification,message])
 
     useEffect(() => {
         message(userDataNotification);
@@ -76,18 +100,6 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
         }
     }, [dispatch, userFavoritesNotification,message])
 
-    useEffect(() => {
-        if (err === 'logout') message(err);
-    }, [
-        err,
-        message,
-    ])
-
-    useEffect(() => {
-        window.M.updateTextFields();
-    }, [])
-
-
     const logoutHandler = useCallback(() => {
         try {
             dispatch(logout());
@@ -101,7 +113,6 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
         dispatch(enter(false));
         dispatch(clearMessage());
     }
-
 
     return (
         <div className="navbar-fixed">

@@ -50,6 +50,11 @@ export const collectionItemReducer = (state=INITIAL_STATE, action: any)=>{
                 rating: [],
                 isFetched: false
             }
+        case CollectionItemActionTypes.CLEAR_ERROR:
+            return {
+                ...state,
+                error: ''
+            }
         default:
             return state;
     }

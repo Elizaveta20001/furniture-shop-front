@@ -14,14 +14,5 @@ export const fetchCollectionApiCall = async (params: fetchCollectionParams) => {
             }
         }
     );
-
-    return fetch(
-        uriForCollection + '/' + catalogName,
-        {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-    );
+    return fetch(`${uriForCollection}/${catalogName}`)
 }

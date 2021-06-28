@@ -19,6 +19,8 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
 
     const dispatch = useDispatch();
     const data = useSelector((state: Store) => state.catalogReducer.collectionItemReducer);
+    const userId = useSelector((state: Store) => state.loginReducer.userId);
+    const token = useSelector((state: Store) => state.loginReducer.token);
 
     let arrayPath = history.location.pathname.split("/");
     const id = +arrayPath[arrayPath.length - 1];
@@ -28,8 +30,8 @@ const CollectionItemPage: React.FC<CollectionProps> = ({history}) => {
 
     useEffect(() => {
         collectionItemClear();
-        dispatch(fetchCollectionItem(history.location.pathname));
-    }, [dispatch, history.location.pathname]);
+        dispatch(fetchCollectionItem(history.location.pathname, userId, token));
+    }, [dispatch, history.location.pathname, userId, token]);
 
     return (
         <div className="row">

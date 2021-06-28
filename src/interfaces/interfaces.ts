@@ -63,6 +63,10 @@ export interface fetchCollectionParams extends basicUserParams {
     catalogName: string
 }
 
+export interface fetchCollectionItemParams extends basicUserParams {
+    path: string
+}
+
 export interface saveOrderParams extends basicUserParams{
     form: Order,
 }
@@ -201,6 +205,7 @@ export interface mainPageCatalogState {
 export interface CatalogState {
     collectionReducer: CollectionState,
     mainPageReducer: mainPageCatalogState,
+    collectionItemReducer: CollectionItemState
 }
 
 declare global {

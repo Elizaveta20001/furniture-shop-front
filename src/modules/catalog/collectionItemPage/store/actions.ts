@@ -1,10 +1,12 @@
 import {CollectionItemActionTypes} from "./actionTypes";
 
 
-export const fetchCollectionItem = (path: string) => {
+export const fetchCollectionItem = (path: string, userId: string, token: string) => {
     return ({
         type: CollectionItemActionTypes.FETCH_COLLECTION_ITEM_START,
-        payload: path
+        path,
+        userId,
+        token
     })
 };
 
@@ -25,8 +27,14 @@ export const fetchCollectionItemFail = (error: Error) => {
 };
 
 
-export const collectionItemClear = () =>{
+export const collectionItemClear = () => {
     return({
         type: CollectionItemActionTypes.CLEAR_COLLECTION_ITEM_DATA,
+    })
+}
+
+export const clearCollectionItemError = () => {
+    return({
+        type: CollectionItemActionTypes.CLEAR_ERROR,
     })
 }

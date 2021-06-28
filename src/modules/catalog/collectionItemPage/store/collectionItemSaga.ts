@@ -2,7 +2,7 @@ import {put, call} from 'redux-saga/effects';
 import * as Eff from 'redux-saga/effects';
 
 import {CollectionItemActionTypes} from "./actionTypes";
-import {fetchCollectionItemFail, fetchCollectionItemSuccess, collectionItemClear, fetchCollectionItem} from "./actions";
+import {fetchCollectionItemFail, fetchCollectionItemSuccess, collectionItemClear} from "./actions";
 import {enter, logout} from "../../../authorization/store/actions";
 import {fetchCollectionItemParams} from "../../../../interfaces/interfaces";
 import {fetchCollectionItemApiCall} from "../collectionItemPageApis";

@@ -6,7 +6,7 @@ import {
     addToUserFavoritesSuccess,
     addToUserFavoritesFail,
     initUserFavoritesState,
-    fetchUserFavoritesSuccess, fetchUserFavoritesFail
+    fetchUserFavoritesSuccess, fetchUserFavoritesFail, fetchUserFavorites
 } from "./actions";
 import {enter, logout} from "../../../authorization/store/actions";
 import {addToFavoritesApiCall, fetchFavoritesApiCall} from "../favoriteTabApis";
@@ -29,7 +29,9 @@ export function* addToUserFavoritesWorker(args:addToFavoritesParams): any {
 
     if (result.ok) {
         const response = yield result.json();
+        const {userId, token} = args;
         yield put(addToUserFavoritesSuccess(response));
+        yield put(fetchUserFavorites(userId, token))
     }
     else {
         const json = yield result.json();

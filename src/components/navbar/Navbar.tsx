@@ -12,10 +12,9 @@ import {clearUserOrdersMessage} from "../../modules/user-profile/ordersTab/store
 import {clearUserFavoritesMessage} from "../../modules/user-profile/favoritesTab/store/actions";
 import {clearMessage, enter, logout} from '../../modules/authorization/store/actions';
 import {clearCollectionError} from "../../modules/catalog/collection/store/actions";
-
-import './navbar.css';
 import {clearCollectionItemError} from "../../modules/catalog/collectionItemPage/store/actions";
 
+import './navbar.css';
 
 
 interface Props {
@@ -45,10 +44,7 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
         return () => {
             dispatch(clearMessage());
         }
-    }, [
-        err,
-        message,
-    ])
+    }, [err, message])
 
     useEffect(() => {
         message(fetchCollectionNotification);
@@ -58,7 +54,6 @@ const Navbar: React.FC<Props> = ({isAuthenticated}) => {
     }, [dispatch, fetchCollectionNotification,message]);
 
     useEffect(() => {
-        console.log('fetchCollectionItemNotification',fetchCollectionItemNotification)
         message(fetchCollectionItemNotification);
         return () => {
             dispatch(clearCollectionItemError());

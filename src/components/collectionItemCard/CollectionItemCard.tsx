@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {CollectionItemCardInterface} from "../../interfaces/interfaces";
 import {addItemToTheCart} from "../../modules/cart/store/actions";
-import {addToUserFavorites} from "../../modules/user-profile/favoritesTab/store/actions";
+import {addToUserFavorites, fetchUserFavorites} from "../../modules/user-profile/favoritesTab/store/actions";
 import {getRating} from "../../helpers/rating";
 
 import RatingBox from "../ratingBox/RatingBox";
@@ -17,7 +17,9 @@ const CollectionItemCard = ({title, description, price, url, id, rating}: Collec
     const isAuthenticated = useSelector((state: Store) => state.loginReducer.isEnter);
     const userId = useSelector((state: Store) => state.loginReducer.userId);
     const token = useSelector((state: Store) => state.loginReducer.token);
+    const userFavorites = useSelector((state: Store) => state.userReducer.userFavoritesReducer.userFavorites);
     const [isFullDescription, setIsFullDescription] = useState(false);
+    const isFavorite = userFavorites.some(favoritesItem => favoritesItem.id === id);
 
     const dispatch = useDispatch();
 
@@ -33,9 +35,12 @@ const CollectionItemCard = ({title, description, price, url, id, rating}: Collec
         }))
     }
 
-    const handleAddToFavorites = () => {
-        dispatch(addToUserFavorites(id, userId, token))
-    }
+    const handleAddToFavorites = useCallback(
+        () => {
+            dispatch(addToUserFavorites(id, userId, token));
+            dispatch(fetchUserFavorites(userId, token));
+        },[dispatch, id, userId, token]
+    )
 
     const toggleShowDescription = (): any => setIsFullDescription(true);
     const toggleHideDescription = (): any => setIsFullDescription(false);
@@ -98,11 +103,16 @@ const CollectionItemCard = ({title, description, price, url, id, rating}: Collec
                             isAuthenticated ? null
                                 : (
                                     <div className="collection-item-buttons-container">
+
                                         <button
                                             className='waves-effect waves-light btn custom-button collection-item-card-button'
                                             onClick={handleAddToFavorites}
                                         >
-                                            <i className="material-icons small">favorite_border</i>
+                                            {
+                                                isFavorite
+                                                    ? <i className="material-icons small">favorite</i>
+                                                    : <i className="material-icons small">favorite_border</i>
+                                            }
                                         </button>
                                         <button
                                             className='waves-effect waves-light btn custom-button collection-item-card-button'

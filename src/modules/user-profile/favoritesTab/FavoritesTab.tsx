@@ -18,8 +18,6 @@ export const FavoritesTab: React.FC = () => {
         if (!!userId && !!token) dispatch(fetchUserFavorites(userId, token))
     }, [dispatch, userId, token]);
 
-    useEffect(() => console.log('userFavorites',userFavorites), [userFavorites])
-
     if (isFetching || userFavorites.length < 1)
         return (<div className="card">
             <EmptyUserProfileTab

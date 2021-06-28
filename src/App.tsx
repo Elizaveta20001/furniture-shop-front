@@ -19,8 +19,6 @@ const App = () => {
 
   useEffect(() => {
 
-    console.log('userToken', token);
-
     const data = JSON.parse(localStorage.getItem('userData') as string);
     const freshToken: boolean = !!tokenFromStore;
 
